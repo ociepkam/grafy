@@ -1,0 +1,40 @@
+min_training_acc: 0.5
+
+# TIMES
+trial_time: 10
+wait_time: 2
+feedback_time: 2
+
+# VISUAL
+TEXT_SIZE: 32
+FIG_OFFSET: 50
+MATRIX_1_POS: [-150, 0]
+MATRIX_2_POS: [150, 0]
+
+v_size: 8
+v_color: black
+
+k_color: black
+arrow_length : 10
+arrow_width: 10
+arrow_shorter: 10 # make bigger distance between arrow and point
+
+answers_colors: ["red", "blue"]
+randomize_answers_colors: False
+click_show_time: 0.5
+
+# clock
+## show clock n second before trial end
+SHOW_CLOCK: 3
+CLOCK_POS: [0, 350]
+CLOCK_SIZE: 120
+
+# FEEDB
+pos_feedb: Poprawna odpowiedź
+neg_feedb: Niepoprawna odpowiedź
+no_feedb: Nie udzieliłeś odpowiedzi
+
+# OTHER
+exit_key: f7
+train_trials_randomize: False
+exp_trials_randomize: False
