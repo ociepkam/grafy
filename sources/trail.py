@@ -50,8 +50,8 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb):
     acc = {"left": answers["left"] == info["left"][1], "right": answers["right"] == info["right"][1]}
 
     if info["FEED"]:
-        b.mark_answer(info["left"][0], color=answers_colors[0])
-        b.mark_answer(info["left"][1], color=answers_colors[1])
+        b.mark_answer(info["left"][1], color=answers_colors[0])
+        b.mark_answer(info["right"][1], color=answers_colors[1])
         if not click["left"] or not click["right"]:
             feedb["no"].setAutoDraw(True)
         elif acc["left"] and acc["right"]:
