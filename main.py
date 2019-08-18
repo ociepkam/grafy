@@ -4,10 +4,11 @@ from os.path import join
 import csv
 import random
 
+
 from sources.experiment_info import experiment_info
 from sources.load_data import load_config, load_trials, replace_polish
 from sources.screen import get_screen_res, get_frame_rate
-from sources.show_info import show_info
+from sources.show_info import show_info, show_image
 from sources.trail import trial
 
 part_id, part_sex, part_age, date = experiment_info()
@@ -61,24 +62,38 @@ mouse = event.Mouse(visible=True)
 clock_image = visual.ImageStim(win=window, image=join('images', 'clock.png'), interpolate=True,
                                size=config['CLOCK_SIZE'], pos=config['CLOCK_POS'])
 
+mouse_info = visual.ImageStim(win=window, image=join('images', 'mouse_info.PNG'), interpolate=True,
+                               size=130, pos=[-60, -300])
+
+
+
 answers_colors = random.sample(config["answers_colors"], 2) if config["randomize_answers_colors"] \
     else config["answers_colors"]
 
-pos_feedb = visual.TextStim(window, text=replace_polish(config["pos_feedb"]), color='black', height=40, pos=(0, -200))
-neg_feedb = visual.TextStim(window, text=replace_polish(config["neg_feedb"]), color='black', height=40, pos=(0, -200))
-no_feedb = visual.TextStim(window, text=replace_polish(config["no_feedb"]), color='black', height=40, pos=(0, -200))
+
+
+pos_feedb = visual.TextStim(window, text=replace_polish(config["pos_feedb"]), color='black', height=40, pos=(0, -150))
+neg_feedb = visual.TextStim(window, text=replace_polish(config["neg_feedb"]), color='black', height=40, pos=(0, -150))
+no_feedb = visual.TextStim(window, text=replace_polish(config["no_feedb"]), color='black', height=40, pos=(0, -150))
 feedb = {"pos": pos_feedb, "neg": neg_feedb, "no": no_feedb}
 
 # TRAINING
 mean_acc = 0
 while mean_acc < config["min_training_acc"]:
-    show_info(window, join('.', 'messages', "instruction1.txt"), text_size=config['TEXT_SIZE'],
-              screen_width=SCREEN_RES[0], key=config["exit_key"])
-    # show_image(window, 'instruction.png', SCREEN_RES, , key=config["exit_key"])
+    # show_info(window, join('.', 'messages', "instruction1.txt"), text_size=config['TEXT_SIZE'],
+    #           screen_width=SCREEN_RES[0], key=config["exit_key"])
+    show_image(window, 'instruction1.png', SCREEN_RES, key=config["exit_key"])
+    show_image(window, 'instruction2.png', SCREEN_RES, key=config["exit_key"])
+    show_image(window, 'instruction3.png', SCREEN_RES, key=config["exit_key"])
+    show_image(window, 'instruction4.png', SCREEN_RES, key=config["exit_key"])
+    show_image(window, 'instruction5.png', SCREEN_RES, key=config["exit_key"])
     mean_acc = 0
     i = 1
     for info in data_train:
-        answers, rt, acc = trial(window, config, answers_colors, info, mouse, clock_image, feedb)
+        idx_info = visual.TextStim(window, color='black', pos=(300, 250), height=50,
+                                   text=i)
+        answers, rt, acc = trial(window, config, answers_colors, info, mouse,
+                                 clock_image, feedb, mouse_info, idx_info)
 
         RESULTS.append(prepare_result(i, info, answers, rt, acc, "train"))
         i += 1
@@ -87,6 +102,9 @@ while mean_acc < config["min_training_acc"]:
         mean_acc /= (i - 1)
     else:
         break
+    if mean_acc < config["min_training_acc"]:
+        show_info(window, join('.', 'messages', "training_info.txt"),
+                  text_size=config['TEXT_SIZE'],screen_width=SCREEN_RES[0])
 
 # EXPERIMENT
 show_info(window, join('.', 'messages', "instruction2.txt"), text_size=config['TEXT_SIZE'],
@@ -94,7 +112,10 @@ show_info(window, join('.', 'messages', "instruction2.txt"), text_size=config['T
 
 i = 1
 for info in data_exp:
-    answers, rt, acc = trial(window, config, answers_colors, info, mouse, clock_image, feedb)
+    idx_info = visual.TextStim(window, color='black', pos=(300, 250), height=50,
+                               text=i)
+    answers, rt, acc = trial(window, config, answers_colors, info,
+                             mouse, clock_image, feedb, mouse_info, idx_info)
     RESULTS.append(prepare_result(i, info, answers, rt, acc, "exp"))
     i += 1
 

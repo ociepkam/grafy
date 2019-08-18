@@ -51,7 +51,7 @@ def show_info(win, file_name, text_size, screen_width, insert='', key='f7'):
 
 
 def show_image(win, file_name, size, key='f7'):
-    image = visual.ImageStim(win=win, image=os.path.join('messages', file_name), interpolate=True, size=size)
+    image = visual.ImageStim(win=win, image=os.path.join('images', file_name), interpolate=True, size=size)
     image.draw()
     win.flip()
     clicked = event.waitKeys(keyList=[key, 'return', 'space'])

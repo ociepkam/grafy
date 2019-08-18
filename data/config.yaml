@@ -1,31 +1,32 @@
-min_training_acc: 0.5
+show_idx: True
+min_training_acc: 0.4
 
 # TIMES
-trial_time: 10
-wait_time: 2
-feedback_time: 2
+trial_time: 20
+wait_time: 1
+feedback_time: 1.5
 
 # VISUAL
-TEXT_SIZE: 32
-FIG_OFFSET: 50
-MATRIX_1_POS: [-150, 0]
-MATRIX_2_POS: [150, 0]
+TEXT_SIZE: 30
+FIG_OFFSET: 80
+MATRIX_1_POS: [-130, 0]
+MATRIX_2_POS: [130, 0]
 
-v_size: 8
+v_size: 18
 v_color: black
 
 k_color: black
-arrow_length : 10
-arrow_width: 10
-arrow_shorter: 10 # make bigger distance between arrow and point
+arrow_length : 14
+arrow_width: 7
+arrow_shorter: 21 # make bigger distance between arrow and point
 
-answers_colors: ["red", "blue"]
+answers_colors: ["yellow", "blue"]
 randomize_answers_colors: False
 click_show_time: 0.5
 
 # clock
 ## show clock n second before trial end
-SHOW_CLOCK: 3
+SHOW_CLOCK: 5
 CLOCK_POS: [0, 350]
 CLOCK_SIZE: 120
 

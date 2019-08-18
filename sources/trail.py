@@ -5,7 +5,7 @@ from sources.matrix import Matrix
 from sources.check_exit import check_exit
 
 
-def trial(window, config, answers_colors, info, mouse, clock_image, feedb):
+def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse_info, idx_info):
     response_clock = core.Clock()
 
     a = Matrix(win=window, pos=config["MATRIX_1_POS"], config=config, v=info["VA"], k=info["KA"], answers=None)
@@ -16,6 +16,9 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb):
     b.set_auto_draw(True)
     window.callOnFlip(response_clock.reset)
     event.clearEvents()
+    mouse_info.setAutoDraw(True)
+    if config["show_idx"]:
+        idx_info.setAutoDraw(True)
     window.flip()
 
     click = {"left": False, "right": False}
@@ -62,6 +65,8 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb):
         time.sleep(config["feedback_time"])
     a.set_auto_draw(False)
     b.set_auto_draw(False)
+    mouse_info.setAutoDraw(False)
+    idx_info.setAutoDraw(False)
     for k, v in feedb.items():
         v.setAutoDraw(False)
 
