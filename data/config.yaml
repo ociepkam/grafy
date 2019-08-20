@@ -1,10 +1,10 @@
 show_idx: True
-min_training_acc: 0.4
+min_training_acc: 0.7
 
 # TIMES
-trial_time: 20
+trial_time: 22
 wait_time: 1
-feedback_time: 1.5
+feedback_time: 2
 
 # VISUAL
 TEXT_SIZE: 30

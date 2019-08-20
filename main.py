@@ -63,7 +63,7 @@ clock_image = visual.ImageStim(win=window, image=join('images', 'clock.png'), in
                                size=config['CLOCK_SIZE'], pos=config['CLOCK_POS'])
 
 mouse_info = visual.ImageStim(win=window, image=join('images', 'mouse_info.PNG'), interpolate=True,
-                               size=130, pos=[-60, -300])
+                               size=130, pos=[-60, -250])
 
 
 
@@ -72,9 +72,9 @@ answers_colors = random.sample(config["answers_colors"], 2) if config["randomize
 
 
 
-pos_feedb = visual.TextStim(window, text=replace_polish(config["pos_feedb"]), color='black', height=40, pos=(0, -150))
-neg_feedb = visual.TextStim(window, text=replace_polish(config["neg_feedb"]), color='black', height=40, pos=(0, -150))
-no_feedb = visual.TextStim(window, text=replace_polish(config["no_feedb"]), color='black', height=40, pos=(0, -150))
+pos_feedb = visual.TextStim(window, text=replace_polish(config["pos_feedb"]), color='black', height=40, pos=(0, -120))
+neg_feedb = visual.TextStim(window, text=replace_polish(config["neg_feedb"]), color='black', height=40, pos=(0, -120))
+no_feedb = visual.TextStim(window, text=replace_polish(config["no_feedb"]), color='black', height=40, pos=(0, -120))
 feedb = {"pos": pos_feedb, "neg": neg_feedb, "no": no_feedb}
 
 # TRAINING
@@ -90,7 +90,7 @@ while mean_acc < config["min_training_acc"]:
     mean_acc = 0
     i = 1
     for info in data_train:
-        idx_info = visual.TextStim(window, color='black', pos=(300, 250), height=50,
+        idx_info = visual.TextStim(window, color='black', pos=(500, 400), height=50,
                                    text=i)
         answers, rt, acc = trial(window, config, answers_colors, info, mouse,
                                  clock_image, feedb, mouse_info, idx_info)
@@ -112,7 +112,7 @@ show_info(window, join('.', 'messages', "instruction2.txt"), text_size=config['T
 
 i = 1
 for info in data_exp:
-    idx_info = visual.TextStim(window, color='black', pos=(300, 250), height=50,
+    idx_info = visual.TextStim(window, color='black', pos=(500, 400), height=50,
                                text=i)
     answers, rt, acc = trial(window, config, answers_colors, info,
                              mouse, clock_image, feedb, mouse_info, idx_info)
