@@ -17,7 +17,7 @@ RAND = str(random.randint(100, 999))
 # logging.LogFile(join('.', 'results', 'logging', NAME + '_' + RAND + '.log'), level=logging.INFO)
 
 RESULTS = list()
-RESULTS.append(['IDX', "NR", 'EXPERIMENTAL', "FEED",
+RESULTS.append(['IDX', "NR", 'EXPERIMENT', "FEED",
                 "LEFT_ANS", "RIGHT_ANS",
                 'LEFT_ACC', "RIGHT_ACC", "ACC",
                 "LEFT_RT", "RIGHT_RT", 'RT',
@@ -55,6 +55,7 @@ if config["exp_trials_randomize"]:
     random.shuffle(data_exp)
 
 SCREEN_RES = get_screen_res()
+print(SCREEN_RES)
 window = visual.Window(SCREEN_RES, fullscr=True, monitor='testMonitor', units='pix', color='Gainsboro')
 FRAMES_PER_SEC = get_frame_rate(window)
 mouse = event.Mouse(visible=True)

@@ -12,6 +12,7 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
     a.mark_answer(v_nr=info["left"][0], color=answers_colors[0])
     a.mark_answer(v_nr=info["right"][0], color=answers_colors[1])
     b = Matrix(win=window, pos=config["MATRIX_2_POS"], config=config, v=info["VB"], k=info["KB"], answers=None)
+    press_space_msg = visual.TextStim(window, text=u'Przyci\u015Bnij spacje', color='red', height=40, pos=(0, -400))
     a.set_auto_draw(True)
     b.set_auto_draw(True)
     window.callOnFlip(response_clock.reset)
@@ -62,11 +63,19 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
         else:
             feedb["neg"].setAutoDraw(True)
         window.flip()
+
+    if config["feedback_time"] > 0:
         time.sleep(config["feedback_time"])
+    elif config["feedback_time"] == -1:
+        press_space_msg.setAutoDraw(True)
+        window.flip()
+        event.waitKeys(keyList=['f7', 'space'])
+
     a.set_auto_draw(False)
     b.set_auto_draw(False)
     mouse_info.setAutoDraw(False)
     idx_info.setAutoDraw(False)
+    press_space_msg.setAutoDraw(False)
     for k, v in feedb.items():
         v.setAutoDraw(False)
 

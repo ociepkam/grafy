@@ -4,7 +4,7 @@ min_training_acc: 0.7
 # TIMES
 trial_time: 22
 wait_time: 1
-feedback_time: 2
+feedback_time: -1
 
 # VISUAL
 TEXT_SIZE: 30
