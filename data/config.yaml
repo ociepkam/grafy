@@ -3,7 +3,7 @@ min_training_acc: 0.7
 
 # TIMES
 trial_time: 22
-wait_time: 1
+wait_time: 1.5
 feedback_time: -1
 
 # VISUAL

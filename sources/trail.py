@@ -64,12 +64,12 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
             feedb["neg"].setAutoDraw(True)
         window.flip()
 
-    if config["feedback_time"] > 0:
-        time.sleep(config["feedback_time"])
-    elif config["feedback_time"] == -1:
-        press_space_msg.setAutoDraw(True)
-        window.flip()
-        event.waitKeys(keyList=['f7', 'space'])
+        if config["feedback_time"] > 0:
+            time.sleep(config["feedback_time"])
+        elif config["feedback_time"] == -1:
+            press_space_msg.setAutoDraw(True)
+            window.flip()
+            event.waitKeys(keyList=['f7', 'space'])
 
     a.set_auto_draw(False)
     b.set_auto_draw(False)
