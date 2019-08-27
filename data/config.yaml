@@ -31,8 +31,8 @@ CLOCK_POS: [0, 350]
 CLOCK_SIZE: 120
 
 # FEEDB
-pos_feedb: Poprawna odpowiedź
-neg_feedb: Niepoprawna odpowiedź
+pos_feedb: Odpowiedziałeś poprawnie
+neg_feedb: Odpowiedziałeś niepoprawnie. Poprawna odpowiedź jest wyświetlona powyżej.
 no_feedb: Nie udzieliłeś odpowiedzi
 
 # OTHER

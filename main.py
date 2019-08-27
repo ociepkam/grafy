@@ -73,9 +73,9 @@ answers_colors = random.sample(config["answers_colors"], 2) if config["randomize
 
 
 
-pos_feedb = visual.TextStim(window, text=replace_polish(config["pos_feedb"]), color='black', height=40, pos=(0, -120))
-neg_feedb = visual.TextStim(window, text=replace_polish(config["neg_feedb"]), color='black', height=40, pos=(0, -120))
-no_feedb = visual.TextStim(window, text=replace_polish(config["no_feedb"]), color='black', height=40, pos=(0, -120))
+pos_feedb = visual.TextStim(window, text=replace_polish(config["pos_feedb"]), color='black', height=25, pos=(0, -120))
+neg_feedb = visual.TextStim(window, text=replace_polish(config["neg_feedb"]), color='black', height=25, pos=(0, -120))
+no_feedb = visual.TextStim(window, text=replace_polish(config["no_feedb"]), color='black', height=25, pos=(0, -120))
 feedb = {"pos": pos_feedb, "neg": neg_feedb, "no": no_feedb}
 
 # TRAINING
