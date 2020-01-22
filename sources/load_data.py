@@ -6,7 +6,7 @@ import ast
 
 def load_config():
     try:
-        with open(join("data", "config.yaml")) as yaml_file:
+        with open("config.yaml") as yaml_file:
             doc = yaml.load(yaml_file, Loader=yaml.FullLoader)
         return doc
     except:
@@ -26,13 +26,13 @@ def load_trials(file_name="items.csv"):
                     header = row
                 else:
                     data_row = {k: v for k, v in zip(header, row)}
-                    for k in ["NR", "FEED", "TREN", "NV", "NK", "Dwustronna", "TYP"]:
+                    for k in ["NR", "FEED", "TRAIN", "NV", "NE", "Bidirectional", "Type"]:
                         data_row[k] = int(data_row[k])
                     for k in ["VA", "VB", "left", "right"]:
                         data_row[k] = [int(elem) for elem in data_row[k].split(",")]
-                    for k in ["KA", "KB"]:
+                    for k in ["EA", "EB"]:
                         data_row[k] = ast.literal_eval(data_row[k])
-                    if data_row["TREN"] == 1:
+                    if data_row["TRAIN"] == 1:
                         data_train.append(data_row)
                     else:
                         data_exp.append(data_row)
@@ -41,7 +41,6 @@ def load_trials(file_name="items.csv"):
         raise Exception("Can't load file with items: " + file_name)
 
 
-# Ę, Ł, Ń doesn't work
 def replace_polish(text):
     letters = {"Ĺ»": "Ż", "Ã": "Ó", "Ă“": "Ł", "Ä†": "Ć", "Ä": "Ę", "Ĺš": "Ś", "Ä„": "Ą", "Ĺą": "Ź", "Å": "Ń",
                "ĹĽ": "ż", "Ã³": "ó", "Ĺ‚": "ł", "Ä‡": "ć", "Ä™": "ę", "Ĺ›": "ś", "Ä…": "ą", "Ĺş": "ź", "Ĺ„": "ń"}

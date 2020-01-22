@@ -3,7 +3,7 @@ from sources.arrow import Arrow
 
 
 class Matrix:
-    def __init__(self, win, pos, config, v, k, answers):
+    def __init__(self, win, pos, config, v, e, answers):
         self.v = []
         self.k = []
         self.pos = pos
@@ -12,8 +12,8 @@ class Matrix:
             point = visual.Circle(win, radius=config["v_size"], lineColor=config["v_color"],
                                   fillColor=config["v_color"], pos=self.set_pos(pos, elem, config))
             self.v.append([elem, point])
-        for elem in k:
-            arrow = Arrow(win=win, color=config["k_color"],
+        for elem in e:
+            arrow = Arrow(win=win, color=config["arrow_color"],
                           arrow_length=config["arrow_length"],
                           arrow_width=config["arrow_width"],
                           start=self.set_pos(pos, elem[0], config),

@@ -1,0 +1,46 @@
+
+min_training_acc: 0.3 # min accuracy needed to pass the training
+max_training_attempts: 5
+
+# Trial time in seconds
+trial_time: 22
+wait_time: 1.5
+feedback_time: -1  # -1 = press space to continue
+
+# VISUAL
+TEXT_SIZE: 30
+show_idx: True # show trials index
+
+#Graphs position
+FIG_OFFSET: 80
+MATRIX_1_POS: [-130, 0]
+MATRIX_2_POS: [130, 0]
+
+# vertices/circles
+v_size: 18
+v_color: black
+
+# edges/arrows
+arrow_color: black
+arrow_length : 14
+arrow_width: 7
+arrow_shorter: 21 # make larger distance between arrows and circles
+
+answers_colors: ["yellow", "blue"]
+randomize_answers_colors: False
+click_show_time: 0.5
+
+# show clock n second before trial end:
+SHOW_CLOCK: 5
+CLOCK_POS: [0, 350]
+CLOCK_SIZE: 120
+
+# FEEDB
+pos_feedb: Your answer was correct
+neg_feedb: Your answer was incorrect. The correct answer is presented above.
+no_feedb: No answer
+
+# OTHER
+exit_key: f7
+train_trials_randomize: False
+exp_trials_randomize: False

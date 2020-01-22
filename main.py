@@ -4,9 +4,8 @@ from os.path import join
 import csv
 import random
 
-
 from sources.experiment_info import experiment_info
-from sources.load_data import load_config, load_trials, replace_polish
+from sources.load_data import load_config, load_trials
 from sources.screen import get_screen_res, get_frame_rate
 from sources.show_info import show_info, show_image
 from sources.trail import trial
@@ -14,37 +13,34 @@ from sources.trail import trial
 part_id, part_sex, part_age, date = experiment_info()
 NAME = "{}_{}_{}".format(part_id, part_sex[:1], part_age)
 RAND = str(random.randint(100, 999))
-# logging.LogFile(join('.', 'results', 'logging', NAME + '_' + RAND + '.log'), level=logging.INFO)
 
 RESULTS = list()
-RESULTS.append(['IDX', "NR", 'EXPERIMENT', "FEED",
+RESULTS.append(["NR", 'EXPERIMENT', "FEED",
                 "LEFT_ANS", "RIGHT_ANS",
                 'LEFT_ACC', "RIGHT_ACC", "ACC",
                 "LEFT_RT", "RIGHT_RT", 'RT',
-                "VA", "KA", "VB", "KB", "left", "right", "NV", "NK", "Dwustronna", "TYP", "Koment"])
+                "VA", "EA", "VB", "EB", "left", "right", "NV", "NE", "Bidirectional", "Type"])
 
 
 @atexit.register
 def save_beh():
-    # logging.flush()
-    with open(join('results', 'behavioral', 'beh_{}_{}.csv'.format(NAME, RAND)), 'w') as f:
+    with open(join('results', '{}_{}.csv'.format(NAME, RAND)), 'w') as f:
         beh_writer = csv.writer(f)
         beh_writer.writerows(RESULTS)
 
 
 def prepare_result(i, info, answers, rt, acc, exp):
-    #      'IDX', "NR"  'EXPERIMENTAL', "FEED",
-    return [i, info["NR"], exp, info["FEED"],
+    return [i, exp, info["FEED"],
             # "LEFT_ANS", "RIGHT_ANS",
             answers["left"], answers["right"],
             # 'LEFT_ACC', "RIGHT_ACC", "ACC",
             acc["left"], acc["right"], acc["left"] and acc["right"],
             # "LEFT_RT", "RIGHT_RT", 'RT',
             rt["left"], rt["right"], max(rt["left"], rt["right"]) if rt["left"] and rt["right"] else None,
-            # "VA", "KA", "VB", "KB", "left", "right",
-            info["VA"], info["KA"], info["VB"], info["KB"], info["left"], info["right"],
-            # "NV", "NK" "Dwustronna", "TYP", "Koment"
-            info["NV"], info["NK"], info["Dwustronna"], info["TYP"], info["Koment"]]
+            # "VA", "EA", "VB", "EB", "left", "right",
+            info["VA"], info["EA"], info["VB"], info["EB"], info["left"], info["right"],
+            # "NV", "NE" "Dwustronna", "Type",
+            info["NV"], info["NE"], info["Bidirectional"], info["Type"]]
 
 
 config = load_config()
@@ -55,7 +51,7 @@ if config["exp_trials_randomize"]:
     random.shuffle(data_exp)
 
 SCREEN_RES = get_screen_res()
-print(SCREEN_RES)
+
 window = visual.Window(SCREEN_RES, fullscr=True, monitor='testMonitor', units='pix', color='Gainsboro')
 FRAMES_PER_SEC = get_frame_rate(window)
 mouse = event.Mouse(visible=True)
@@ -66,21 +62,19 @@ clock_image = visual.ImageStim(win=window, image=join('images', 'clock.png'), in
 mouse_info = visual.ImageStim(win=window, image=join('images', 'mouse_info.PNG'), interpolate=True,
                                size=130, pos=[-60, -250])
 
-
-
 answers_colors = random.sample(config["answers_colors"], 2) if config["randomize_answers_colors"] \
     else config["answers_colors"]
 
-
-
-pos_feedb = visual.TextStim(window, text=replace_polish(config["pos_feedb"]), color='black', height=25, pos=(0, -120))
-neg_feedb = visual.TextStim(window, text=replace_polish(config["neg_feedb"]), color='black', height=25, pos=(0, -120))
-no_feedb = visual.TextStim(window, text=replace_polish(config["no_feedb"]), color='black', height=25, pos=(0, -120))
+pos_feedb = visual.TextStim(window, text=(config["pos_feedb"]), color='black', height=25, pos=(0, -120))
+neg_feedb = visual.TextStim(window, text=(config["neg_feedb"]), color='black', height=25, pos=(0, -120))
+no_feedb = visual.TextStim(window, text=(config["no_feedb"]), color='black', height=25, pos=(0, -120))
 feedb = {"pos": pos_feedb, "neg": neg_feedb, "no": no_feedb}
 
 # TRAINING
 mean_acc = 0
+training_nr = 0
 while mean_acc < config["min_training_acc"]:
+    # INSTRUCTIONS:
     # show_info(window, join('.', 'messages', "instruction1.txt"), text_size=config['TEXT_SIZE'],
     #           screen_width=SCREEN_RES[0], key=config["exit_key"])
     show_image(window, 'instruction1.png', SCREEN_RES, key=config["exit_key"])
@@ -88,8 +82,10 @@ while mean_acc < config["min_training_acc"]:
     show_image(window, 'instruction3.png', SCREEN_RES, key=config["exit_key"])
     show_image(window, 'instruction4.png', SCREEN_RES, key=config["exit_key"])
     show_image(window, 'instruction5.png', SCREEN_RES, key=config["exit_key"])
+
     mean_acc = 0
     i = 1
+    training_nr += 1
     for info in data_train:
         idx_info = visual.TextStim(window, color='black', pos=(500, 400), height=50,
                                    text=i)
@@ -103,6 +99,9 @@ while mean_acc < config["min_training_acc"]:
         mean_acc /= (i - 1)
     else:
         break
+    if mean_acc < config["min_training_acc"] and training_nr == config['max_training_attempts']:
+        show_info(window, join('.', 'messages', "end.txt"), text_size=config['TEXT_SIZE'], screen_width=SCREEN_RES[0])
+        exit(1)
     if mean_acc < config["min_training_acc"]:
         show_info(window, join('.', 'messages', "training_info.txt"),
                   text_size=config['TEXT_SIZE'],screen_width=SCREEN_RES[0])
