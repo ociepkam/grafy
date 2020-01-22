@@ -82,5 +82,4 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
     window.flip()
     time.sleep(config["wait_time"])
 
-
     return answers, rt, acc
