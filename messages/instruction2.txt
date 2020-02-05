@@ -1,6 +1,7 @@
-﻿You've completed the training.
+﻿Teraz rozpocznie się właściwe zadanie.
+Nie będziesz już otrzymywać informacji o poprawności odpowiedzi.
+Do rozwiązania będziesz miał 44 przykłady, postaraj się poprawnie rozwiązać ich jak najwięcej.
 
-Now the proper test starts.
-Remember, only your accuracy matters, the speed on the task does not.
+W zadaniu liczy się wyłącznie Twoja poprawność, szybkość odpowiedzi nie ma żadnego znaczenia.
 
-Press space.
+Przyciśnij spację by rozpocząć.

@@ -3,7 +3,7 @@ min_training_acc: 0.3 # min accuracy needed to pass the training
 max_training_attempts: 5
 
 # Trial time in seconds
-trial_time: 22
+trial_time: 25
 wait_time: 1.5
 feedback_time: -1  # -1 = press space to continue
 
@@ -35,10 +35,12 @@ SHOW_CLOCK: 5
 CLOCK_POS: [0, 350]
 CLOCK_SIZE: 120
 
-# FEEDB
-pos_feedb: Your answer was correct
-neg_feedb: Your answer was incorrect. The correct answer is presented above.
-no_feedb: No answer
+# FEEDB  # text
+pos_feedb: Odpowiedziałeś poprawnie
+neg_feedb: Odpowiedziałeś niepoprawnie. Poprawna odpowiedź jest wyświetlona powyżej.
+no_feedb: Nie udzieliłeś odpowiedzi
+
+press_space: Przyciśnij spację
 
 # OTHER
 exit_key: f7

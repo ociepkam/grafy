@@ -26,7 +26,7 @@ def load_trials(file_name="items.csv"):
                     header = row
                 else:
                     data_row = {k: v for k, v in zip(header, row)}
-                    for k in ["NR", "FEED", "TRAIN", "NV", "NE", "Bidirectional", "Type"]:
+                    for k in ["NR", "FEED", "TRAIN", "NV", "NE"]:
                         data_row[k] = int(data_row[k])
                     for k in ["VA", "VB", "left", "right"]:
                         data_row[k] = [int(elem) for elem in data_row[k].split(",")]

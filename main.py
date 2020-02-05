@@ -5,7 +5,7 @@ import csv
 import random
 
 from sources.experiment_info import experiment_info
-from sources.load_data import load_config, load_trials
+from sources.load_data import load_config, load_trials, replace_polish
 from sources.screen import get_screen_res, get_frame_rate
 from sources.show_info import show_info, show_image
 from sources.trail import trial
@@ -65,9 +65,9 @@ mouse_info = visual.ImageStim(win=window, image=join('images', 'mouse_info.PNG')
 answers_colors = random.sample(config["answers_colors"], 2) if config["randomize_answers_colors"] \
     else config["answers_colors"]
 
-pos_feedb = visual.TextStim(window, text=(config["pos_feedb"]), color='black', height=25, pos=(0, -120))
-neg_feedb = visual.TextStim(window, text=(config["neg_feedb"]), color='black', height=25, pos=(0, -120))
-no_feedb = visual.TextStim(window, text=(config["no_feedb"]), color='black', height=25, pos=(0, -120))
+pos_feedb = visual.TextStim(window, text=replace_polish(config["pos_feedb"]), color='black', height=25, pos=(0, -120))
+neg_feedb = visual.TextStim(window, text=replace_polish(config["neg_feedb"]), color='black', height=25, pos=(0, -120))
+no_feedb = visual.TextStim(window, text=replace_polish(config["no_feedb"]), color='black', height=25, pos=(0, -120))
 feedb = {"pos": pos_feedb, "neg": neg_feedb, "no": no_feedb}
 
 # TRAINING

@@ -3,6 +3,7 @@ from psychopy import event, core, visual
 
 from sources.matrix import Matrix
 from sources.check_exit import check_exit
+from sources.load_data import replace_polish
 
 
 def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse_info, idx_info):
@@ -12,7 +13,7 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
     a.mark_answer(v_nr=info["left"][0], color=answers_colors[0])
     a.mark_answer(v_nr=info["right"][0], color=answers_colors[1])
     b = Matrix(win=window, pos=config["MATRIX_2_POS"], config=config, v=info["VB"], e=info["EB"], answers=None)
-    press_space_msg = visual.TextStim(window, text=u'Press space', color='red', height=25, pos=(0, -400))  # Przyci\u015Bnij spacje
+    press_space_msg = visual.TextStim(window, text=replace_polish(config["press_space"]), color='red', height=25, pos=(0, -400))
     a.set_auto_draw(True)
     b.set_auto_draw(True)
     window.callOnFlip(response_clock.reset)
