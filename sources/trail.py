@@ -5,12 +5,23 @@ from psychopy import event, core, visual
 from sources.matrix import Matrix
 from sources.check_exit import check_exit
 from sources.load_data import replace_polish
+from sources.matrix_operations import rotate_matrices_in_trial, mirror_matrices_in_trial
 
 
 def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse_info, idx_info):
     response_clock = core.Clock()
 
-    if random.choice([True, False]):
+    if info["Random_rotation/symmetry"] == '1':
+        while True:
+            for matrix in ["A", "B"]:
+                if random.choice([True, False]):
+                    rotate_matrices_in_trial(info, matrix)
+                else:
+                    mirror_matrices_in_trial(info, matrix)
+            if info["VA"] != info["VB"] or info["EA"] != info["EB"]:
+                break
+
+    if info["Random_order"] != '1' or random.choice([True, False]):
         a = Matrix(win=window, pos=config["MATRIX_1_POS"], config=config, v=info["VA"], e=info["EA"], answers=None)
         b = Matrix(win=window, pos=config["MATRIX_2_POS"], config=config, v=info["VB"], e=info["EB"], answers=None)
     else:
