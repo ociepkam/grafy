@@ -45,4 +45,4 @@ press_space: Przyciśnij spację
 # OTHER
 exit_key: f7
 train_trials_randomize: False
-exp_trials_randomize: False
+exp_trials_randomize: True
