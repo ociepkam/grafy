@@ -26,7 +26,7 @@ def load_trials(file_name="items.csv"):
                     header = row
                 else:
                     data_row = {k: v for k, v in zip(header, row)}
-                    for k in ["NR", "FEED", "TRAIN", "NV", "NE"]:
+                    for k in ["NR", "FEED", "TRAIN", "NV", "NE", "Block"]:
                         data_row[k] = int(data_row[k])
                     for k in ["VA", "VB", "left", "right"]:
                         data_row[k] = [int(elem) for elem in data_row[k].split(",")]
@@ -36,6 +36,8 @@ def load_trials(file_name="items.csv"):
                         data_train.append(data_row)
                     else:
                         data_exp.append(data_row)
+        block_nr = set([info["Block"] for info in data_exp])
+        data_exp = [[info for info in data_exp if info["Block"] == i] for i in block_nr]
         return data_train, data_exp
     except:
         raise Exception("Can't load file with items: " + file_name)
