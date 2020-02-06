@@ -48,7 +48,8 @@ data_train, data_exp = load_trials()
 if config["train_trials_randomize"]:
     random.shuffle(data_train)
 if config["exp_trials_randomize"]:
-    random.shuffle(data_exp)
+    for block in data_exp:
+        random.shuffle(block)
 
 SCREEN_RES = get_screen_res()
 
@@ -111,13 +112,14 @@ show_info(window, join('.', 'messages', "instruction2.txt"), text_size=config['T
           screen_width=SCREEN_RES[0], key=config["exit_key"])
 
 i = 1
-for info in data_exp:
-    idx_info = visual.TextStim(window, color='black', pos=(500, 400), height=50,
-                               text=i)
-    answers, rt, acc = trial(window, config, answers_colors, info,
-                             mouse, clock_image, feedb, mouse_info, idx_info)
-    RESULTS.append(prepare_result(i, info, answers, rt, acc, "exp"))
-    i += 1
+for c, block in enumerate(data_exp):
+    for info in block:
+        idx_info = visual.TextStim(window, color='black', pos=(500, 400), height=50,
+                                   text=i)
+        answers, rt, acc = trial(window, config, answers_colors, info,
+                                 mouse, clock_image, feedb, mouse_info, idx_info)
+        RESULTS.append(prepare_result(i, info, answers, rt, acc, "exp"))
+        i += 1
 
-show_info(window, join('.', 'messages', "end.txt"), text_size=config['TEXT_SIZE'],
-          screen_width=SCREEN_RES[0], key=config["exit_key"])
+    show_info(window, join('.', 'messages', "break{}.txt".format(c+1)), text_size=config['TEXT_SIZE'],
+              screen_width=SCREEN_RES[0], key=config["exit_key"])
