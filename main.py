@@ -15,11 +15,12 @@ NAME = "{}_{}_{}".format(part_id, part_sex[:1], part_age)
 RAND = str(random.randint(100, 999))
 
 RESULTS = list()
-RESULTS.append(["NR", 'EXPERIMENT', "FEED",
+RESULTS.append(["ORDER", "NR", 'EXPERIMENT', "FEED",
                 "LEFT_ANS", "RIGHT_ANS",
                 'LEFT_ACC', "RIGHT_ACC", "ACC",
                 "LEFT_RT", "RIGHT_RT", 'RT',
-                "VA", "EA", "VB", "EB", "left", "right", "NV", "NE", "Bidirectional", "Type"])
+                "VA", "EA", "VB", "EB", "left", "right", "NV", "NE", "Bidirectional", "Type",
+                "Crossed_edges", "Block", "A_to_B_relation"])
 
 
 @atexit.register
@@ -29,8 +30,8 @@ def save_beh():
         beh_writer.writerows(RESULTS)
 
 
-def prepare_result(i, info, answers, rt, acc, exp):
-    return [i, exp, info["FEED"],
+def prepare_result(i, info, answers, rt, acc, exp, A_to_B_relation):
+    return [i, info["NR"], exp, info["FEED"],
             # "LEFT_ANS", "RIGHT_ANS",
             answers["left"], answers["right"],
             # 'LEFT_ACC', "RIGHT_ACC", "ACC",
@@ -40,7 +41,8 @@ def prepare_result(i, info, answers, rt, acc, exp):
             # "VA", "EA", "VB", "EB", "left", "right",
             info["VA"], info["EA"], info["VB"], info["EB"], info["left"], info["right"],
             # "NV", "NE" "Dwustronna", "Type",
-            info["NV"], info["NE"], info["Bidirectional"], info["Type"]]
+            info["NV"], info["NE"], info["Bidirectional"], info["Type"],
+            info["Crossed_edges"], info["Block"], A_to_B_relation]
 
 
 config = load_config()
@@ -90,10 +92,10 @@ while mean_acc < config["min_training_acc"]:
     for info in data_train:
         idx_info = visual.TextStim(window, color='black', pos=(500, 400), height=50,
                                    text=i)
-        answers, rt, acc = trial(window, config, answers_colors, info, mouse,
+        answers, rt, acc, A_to_B_relation = trial(window, config, answers_colors, info, mouse,
                                  clock_image, feedb, mouse_info, idx_info)
 
-        RESULTS.append(prepare_result(i, info, answers, rt, acc, "train"))
+        RESULTS.append(prepare_result(i, info, answers, rt, acc, "train", A_to_B_relation))
         i += 1
         mean_acc += 1 if acc["left"] and acc["right"] else 0
     if i > 1:
@@ -105,7 +107,7 @@ while mean_acc < config["min_training_acc"]:
         exit(1)
     if mean_acc < config["min_training_acc"]:
         show_info(window, join('.', 'messages', "training_info.txt"),
-                  text_size=config['TEXT_SIZE'],screen_width=SCREEN_RES[0])
+                  text_size=config['TEXT_SIZE'], screen_width=SCREEN_RES[0])
 
 # EXPERIMENT
 show_info(window, join('.', 'messages', "instruction2.txt"), text_size=config['TEXT_SIZE'],
@@ -116,9 +118,9 @@ for c, block in enumerate(data_exp):
     for info in block:
         idx_info = visual.TextStim(window, color='black', pos=(500, 400), height=50,
                                    text=i)
-        answers, rt, acc = trial(window, config, answers_colors, info,
+        answers, rt, acc, A_to_B_relation = trial(window, config, answers_colors, info,
                                  mouse, clock_image, feedb, mouse_info, idx_info)
-        RESULTS.append(prepare_result(i, info, answers, rt, acc, "exp"))
+        RESULTS.append(prepare_result(i, info, answers, rt, acc, "exp", A_to_B_relation))
         i += 1
 
     show_info(window, join('.', 'messages', "break{}.txt".format(c+1)), text_size=config['TEXT_SIZE'],

@@ -11,14 +11,28 @@ from sources.matrix_operations import rotate_matrices_in_trial, mirror_matrices_
 def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse_info, idx_info):
     response_clock = core.Clock()
 
+    A_to_B_relation = None
+
     if info["Random_rotation/symmetry"] == '1':
         while True:
             for matrix in ["A", "B"]:
                 if random.choice([True, False]):
                     rotate_matrices_in_trial(info, matrix)
+                    if matrix == "A":
+                        transformation_A = "ROTATION"
+                    else:
+                        transformation_B = "ROTATION"
                 else:
                     mirror_matrices_in_trial(info, matrix)
+                    if matrix == "A":
+                        transformation_A = "MIRROR"
+                    else:
+                        transformation_B = "MIRROR"
             if info["VA"] != info["VB"] or info["EA"] != info["EB"]:
+                if transformation_A == transformation_B:
+                    A_to_B_relation = "ROTATION"
+                else:
+                    A_to_B_relation = "MIRROR"
                 break
 
     if info["Random_order"] != '1' or random.choice([True, False]):
@@ -32,7 +46,8 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
 
     a.mark_answer(v_nr=info["left"][0], color=answers_colors[0])
     a.mark_answer(v_nr=info["right"][0], color=answers_colors[1])
-    press_space_msg = visual.TextStim(window, text=replace_polish(config["press_space"]), color='red', height=25, pos=(0, -400))
+    press_space_msg = visual.TextStim(window, text=replace_polish(config["press_space"]), color='red',
+                                      height=25, pos=(0, -400))
     a.set_auto_draw(True)
     b.set_auto_draw(True)
     window.callOnFlip(response_clock.reset)
@@ -102,4 +117,4 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
     window.flip()
     time.sleep(config["wait_time"])
 
-    return answers, rt, acc
+    return answers, rt, acc, A_to_B_relation
