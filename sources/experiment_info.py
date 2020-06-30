@@ -13,8 +13,8 @@ def experiment_info():
     my_dlg = gui.Dlg(title="GRAPHS")
     my_dlg.addText('Subject info:')
     my_dlg.addField('ID:')
-    my_dlg.addField('Age:')
-    my_dlg.addField('Sex:', choices=['M', "F"])
+    my_dlg.addField('Wiek:')
+    my_dlg.addField('Plec:', choices=['M', "K"])
 
     my_dlg.show()
     if not my_dlg.OK:
