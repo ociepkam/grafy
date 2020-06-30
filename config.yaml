@@ -1,9 +1,9 @@
 
-min_training_acc: 0.3 # min accuracy needed to pass the training
+min_training_acc: 0.55 # min accuracy needed to pass the training
 max_training_attempts: 5
 
 # Trial time in seconds
-trial_time: 25
+trial_time: 24
 wait_time: 1.5
 feedback_time: -1  # -1 = press space to continue
 
@@ -31,14 +31,14 @@ randomize_answers_colors: False
 click_show_time: 0.5
 
 # show clock n second before trial end:
-SHOW_CLOCK: 5
+SHOW_CLOCK: 4
 CLOCK_POS: [0, 350]
 CLOCK_SIZE: 120
 
 # FEEDB  # text
 pos_feedb: Odpowiedziałeś poprawnie
-neg_feedb: Odpowiedziałeś niepoprawnie. Poprawna odpowiedź jest wyświetlona powyżej.
-no_feedb: Nie udzieliłeś odpowiedzi
+neg_feedb: Odpowiedziałeś niepoprawnie. Poprawna odpowiedź jest wyświetlona powyżej. Przeanalizuj ją.
+no_feedb: Nie udzieliłeś odpowiedzi. Poprawna odpowiedź jest wyświetlona powyżej. Przeanalizuj ją.
 
 press_space: Przyciśnij spację
 

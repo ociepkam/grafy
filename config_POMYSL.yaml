@@ -1,0 +1,59 @@
+# Import trials:
+trials: items.csv     # Name of the file from which to import the list of predefined trials (the file should be in /data folder)
+
+#Randomization
+train_trials_randomize: False # DO USUNIĘCIA !
+exp_trials_randomize: False  # random order of experimental trials: False/True
+
+randomize_graphs_position: False     # show the two graphs in random positions (left/right): False/True
+random_rotation/symmetry: False   # randomly rotate or reflect in symmetrical axis each of the two graphs: False/True
+
+# Trial time in seconds
+trial_time: 22
+click_show_time: 0.5  # DO ZMIANY? TERAZ DOPÓKI NIE MINIE TEN CZAS NIE DA SIĘ OZNACZYĆ NASTĘPNEGO, !
+
+wait_time: 1.5  # time between trials
+feedback_time: -1   # -1 = press space to continue
+
+#Training:
+min_training_acc: 0.3 # min accuracy needed to pass the training, if 0 no correct answers are needed to procede to experiment
+max_training_attempts: 5 # number of training attempts after which the task ends
+
+
+# EXIT KEY
+exit_key: f7
+
+# VISUAL
+TEXT_SIZE: 30
+show_idx: True # show index/number of trial
+
+#Graphs position
+MATRIX_1_POS: [-130, 0]     # position of the left graph relative to the screen center in x and y axis [0,0]
+MATRIX_2_POS: [130, 0]      # position of the right graph relative to the screen center in x and y axis [0,0]
+
+# vertices/circles
+FIG_OFFSET: 80   # offset between vertices
+v_size: 18
+v_color: black
+
+answers_colors: ["yellow", "blue"]  # colors of the target vertices
+randomize_answers_colors: False
+
+# edges/arrows
+arrow_color: black
+arrow_length : 14
+arrow_width: 7
+arrow_shorter: 21 # makes larger distance between arrows and circles
+
+# show clock icon (reminder of short time left) n seconds before trial end:
+SHOW_CLOCK: 5   # if 0 no clock is showed
+CLOCK_POS: [0, 350]
+CLOCK_SIZE: 120
+
+# Feedback text
+pos_feedb: Your answer was correct
+neg_feedb: Your answer was incorrect. The correct answer is presented above.
+no_feedb: No answer
+press_space: Press space
+
+

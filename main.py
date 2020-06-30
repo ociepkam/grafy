@@ -1,5 +1,5 @@
 import atexit
-from psychopy import visual, event  # , logging
+from psychopy import visual, event, core # , logging
 from os.path import join
 import csv
 import random
@@ -73,6 +73,10 @@ neg_feedb = visual.TextStim(window, text=replace_polish(config["neg_feedb"]), co
 no_feedb = visual.TextStim(window, text=replace_polish(config["no_feedb"]), color='black', height=25, pos=(0, -120))
 feedb = {"pos": pos_feedb, "neg": neg_feedb, "no": no_feedb}
 
+break_time = visual.TextStim(window, text=replace_polish("Masz pół minuty przerwy. Nie odchodź od komputera"),
+                          color='black', height=config['TEXT_SIZE'], pos=(0, 0))
+
+
 # TRAINING
 mean_acc = 0
 training_nr = 0
@@ -123,5 +127,16 @@ for c, block in enumerate(data_exp):
         RESULTS.append(prepare_result(i, info, answers, rt, acc, "exp", A_to_B_relation))
         i += 1
 
-    show_info(window, join('.', 'messages', "break{}.txt".format(c+1)), text_size=config['TEXT_SIZE'],
-              screen_width=SCREEN_RES[0], key=config["exit_key"])
+    if c + 1 == 3:
+        show_info(window, join('.', 'messages', "end.txt"), text_size=config['TEXT_SIZE'], screen_width=SCREEN_RES[0])
+    if i == 27:
+        timer = core.CountdownTimer(30)
+        while timer.getTime() > 0:
+            break_time.setAutoDraw(True)
+            window.flip()
+            # show_info(window, join('.', 'messages', "break1.txt"), text_size=config['TEXT_SIZE'],
+            #       screen_width=SCREEN_RES[0], key=config["exit_key"])
+        break_time.setAutoDraw(False)
+        show_info(window, join('.', 'messages', "break2.txt"), text_size=config['TEXT_SIZE']+10,
+              screen_width=SCREEN_RES[0], key=config["exit_key"], color = 'green')
+
