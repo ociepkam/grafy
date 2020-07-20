@@ -1,0 +1,48 @@
+
+min_training_acc: 0.55 # min accuracy needed to pass the training
+max_training_attempts: 5
+
+# Trial time in seconds
+trial_time: 24
+wait_time: 1.5
+feedback_time: -1  # -1 = press space to continue
+
+# VISUAL
+TEXT_SIZE: 30
+show_idx: True # show trials index
+
+#Graphs position
+FIG_OFFSET: 70
+MATRIX_1_POS: [-100, 0]
+MATRIX_2_POS: [100, 0]
+
+# vertices/circles
+v_size: 15
+v_color: black
+
+# edges/arrows
+arrow_color: black
+arrow_length : 12
+arrow_width: 7
+arrow_shorter: 19 # make larger distance between arrows and circles
+
+answers_colors: ["yellow", "blue"]
+randomize_answers_colors: False
+click_show_time: 0.5
+
+# show clock n second before trial end:
+SHOW_CLOCK: 4
+CLOCK_POS: [0, 350]
+CLOCK_SIZE: 120
+
+# FEEDB  # text
+pos_feedb: Odpowiedziałeś poprawnie
+neg_feedb: Odpowiedziałeś niepoprawnie. Poprawna odpowiedź jest wyświetlona powyżej. Przeanalizuj ją.
+no_feedb: Nie udzieliłeś odpowiedzi. Poprawna odpowiedź jest wyświetlona powyżej. Przeanalizuj ją.
+
+press_space: Przyciśnij spację
+
+# OTHER
+exit_key: f7
+train_trials_randomize: False
+exp_trials_randomize: True
