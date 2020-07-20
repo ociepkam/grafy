@@ -1,3 +1,3 @@
-﻿Niestety nie udało Ci się osiągnąć wymaganej poprawności w treningu by przejść dalej.
+You did't reach the accuracy needed to pass the training.
 
-By ponownie zapoznać się z instrukcją i przejść trening, naciśnij spację.
+Please start again. Press space.

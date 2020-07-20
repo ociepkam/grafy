@@ -1,6 +1,0 @@
-﻿You've completed the training.
-
-Now the proper test starts.
-Remember, only your accuracy matters, the speed on the task does not.
-
-Press space.

@@ -1,48 +1,60 @@
+# Import set of trials from file (see READ_ME.pdf for the description of predefined experiments to choose from):
+trials: items.csv     # Name of the file from which to import the set of trials (the file should be in: /trials)
 
-min_training_acc: 0.55 # min accuracy needed to pass the training
-max_training_attempts: 5
+#Randomization
+random_trials_order: False  # random order of experiment trials: False/True;
+
+random_graphs_position: False     # show graphs in random positions (left/right): False/True
+random_rotation/symmetry: False   # randomly rotate or reflect in symmetrical axis each of the two graphs: False/True
 
 # Trial time in seconds
-trial_time: 24
-wait_time: 1.5
-feedback_time: -1  # -1 = press space to continue
+trial_time: 24        # max trial time
+click_show_time: 0.5  # time to show the left/right color after clicking on a vertex
+
+wait_time: 1.5  # time between trials
+feedback_time: -1   # time to show feedback; -1 = press space to continue
+
+#Training:
+min_training_acc: 0.3 # min accuracy needed to pass the training, if 0, no correct answers are needed to procede to experiment
+max_training_attempts: 5 # number of failed training attempts allowed after which the task ends
+
+# Break
+break_after_n_trials: 0   # 0 = no break. Set the number of trials after which a break screen shows
+# to set the text on the break screen, modify messages/break.txt file
+
+# EXIT KEY
+exit_key: f7
 
 # VISUAL
 TEXT_SIZE: 30
-show_idx: True # show trials index
+show_idx: True # show index/number of a trial
 
 #Graphs position
-FIG_OFFSET: 80
-MATRIX_1_POS: [-130, 0]
-MATRIX_2_POS: [130, 0]
+MATRIX_1_POS: [-130, 0]   # position of the left graph relative to the screen center in x and y axis [0,0]
+MATRIX_2_POS: [130, 0]    # position of the right graph relative to the screen center in x and y axis [0,0]
 
 # vertices/circles
+FIG_OFFSET: 80   # offset between vertices
 v_size: 18
 v_color: black
 
+answers_colors: ["yellow", "blue"]  # colors of the target vertices
+
 # edges/arrows
 arrow_color: black
-arrow_length : 14
-arrow_width: 7
-arrow_shorter: 21 # make larger distance between arrows and circles
+arrow_length : 14 #
+arrow_width: 7    #
+arrow_shorter: 21 # makes larger distance between arrows and vertices
 
-answers_colors: ["yellow", "blue"]
-randomize_answers_colors: False
-click_show_time: 0.5
-
-# show clock n second before trial end:
-SHOW_CLOCK: 4
+# show clock icon (reminder of short time left) n seconds before trial end:
+SHOW_CLOCK: 5   # if 0, no clock is showed
 CLOCK_POS: [0, 350]
 CLOCK_SIZE: 120
 
-# FEEDB  # text
-pos_feedb: Odpowiedziałeś poprawnie
-neg_feedb: Odpowiedziałeś niepoprawnie. Poprawna odpowiedź jest wyświetlona powyżej. Przeanalizuj ją.
-no_feedb: Nie udzieliłeś odpowiedzi. Poprawna odpowiedź jest wyświetlona powyżej. Przeanalizuj ją.
+# Feedback text
+pos_feedb: Your answer was correct
+neg_feedb: Your answer was incorrect. The correct answer is presented above.
+no_feedb: No answer
+press_space: Press space
 
-press_space: Przyciśnij spację
 
-# OTHER
-exit_key: f7
-train_trials_randomize: False
-exp_trials_randomize: True

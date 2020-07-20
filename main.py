@@ -8,7 +8,7 @@ from sources.experiment_info import experiment_info
 from sources.load_data import load_config, load_trials, replace_polish
 from sources.screen import get_screen_res, get_frame_rate
 from sources.show_info import show_info, show_image
-from sources.trail import trial
+from sources.trial import trial
 
 part_id, part_sex, part_age, date = experiment_info()
 NAME = "{}_{}_{}".format(part_id, part_sex[:1], part_age)
@@ -40,18 +40,14 @@ def prepare_result(i, info, answers, rt, acc, exp, A_to_B_relation):
             rt["left"], rt["right"], max(rt["left"], rt["right"]) if rt["left"] and rt["right"] else None,
             # "VA", "EA", "VB", "EB", "left", "right",
             info["VA"], info["EA"], info["VB"], info["EB"], info["left"], info["right"],
-            # "NV", "NE" "Dwustronna", "Type",
+            # "NV", "NE" "Bidirectional", "Type",
             info["NV"], info["NE"], info["Bidirectional"], info["Type"],
             info["Crossed_edges"], info["Block"], A_to_B_relation]
 
 
 config = load_config()
-data_train, data_exp = load_trials()
-if config["train_trials_randomize"]:
-    random.shuffle(data_train)
-if config["exp_trials_randomize"]:
-    for block in data_exp:
-        random.shuffle(block)
+file_name = config['trials']
+data_train, data_exp = load_trials(file_name)
 
 SCREEN_RES = get_screen_res()
 
@@ -65,8 +61,7 @@ clock_image = visual.ImageStim(win=window, image=join('images', 'clock.png'), in
 mouse_info = visual.ImageStim(win=window, image=join('images', 'mouse_info.PNG'), interpolate=True,
                                size=130, pos=[-60, -250])
 
-answers_colors = random.sample(config["answers_colors"], 2) if config["randomize_answers_colors"] \
-    else config["answers_colors"]
+answers_colors = config["answers_colors"]
 
 pos_feedb = visual.TextStim(window, text=replace_polish(config["pos_feedb"]), color='black', height=25, pos=(0, -120))
 neg_feedb = visual.TextStim(window, text=replace_polish(config["neg_feedb"]), color='black', height=25, pos=(0, -120))
@@ -81,6 +76,7 @@ break_time = visual.TextStim(window, text=replace_polish("Masz pół minuty prze
 mean_acc = 0
 training_nr = 0
 while mean_acc < config["min_training_acc"]:
+
     # INSTRUCTIONS:
     # show_info(window, join('.', 'messages', "instruction1.txt"), text_size=config['TEXT_SIZE'],
     #           screen_width=SCREEN_RES[0], key=config["exit_key"])
@@ -127,15 +123,8 @@ for c, block in enumerate(data_exp):
         RESULTS.append(prepare_result(i, info, answers, rt, acc, "exp", A_to_B_relation))
         i += 1
 
-        if i == 27:
-            timer = core.CountdownTimer(30)
-            while timer.getTime() > 0:
-                break_time.setAutoDraw(True)
-                window.flip()
-                # show_info(window, join('.', 'messages', "break1.txt"), text_size=config['TEXT_SIZE'],
-                #       screen_width=SCREEN_RES[0], key=config["exit_key"])
-            break_time.setAutoDraw(False)
-            show_info(window, join('.', 'messages', "break2.txt"), text_size=config['TEXT_SIZE'] + 25,
+        if i == config['break_after_n_trials']:
+            show_info(window, join('.', 'messages', "break.txt"), text_size=config['TEXT_SIZE'] + 25,
                       screen_width=SCREEN_RES[0], key=config["exit_key"], color='green')
 
     if c + 1 == 3:

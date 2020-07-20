@@ -1,13 +1,5 @@
-﻿Teraz rozpocznie się właściwe zadanie.
-Do rozwiązania będziesz miał 54 przykłady. Potrwa to około 15 minut.
-W trakcie będzie jedna krótka przerwa.
+﻿You've completed the training.
 
-Nie będziesz już otrzymywać informacji o poprawności odpowiedzi.
+Now the proper test starts.
 
-Wiele przykładów w tym zadaniu będzie trudnych i jest całkowicie normalne,
-jeśli nie będziesz w stanie znaleźć poprawnej odpowiedzi. Nie przejmuj się tym!
-Staraj się robić zadanie jak najlepiej potrafisz.
-
-Pamiętaj, w zadaniu liczy się wyłącznie Twoja poprawność, szybkość udzielania odpowiedzi nie ma żadnego znaczenia.
-
-Przyciśnij spację by rozpocząć.
+Press space.

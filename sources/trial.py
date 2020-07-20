@@ -12,8 +12,7 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
     response_clock = core.Clock()
 
     A_to_B_relation = None
-
-    if info["Random_rotation/symmetry"] == '1':
+    if config["random_rotation/symmetry"]:
         while True:
             for matrix in ["A", "B"]:
                 if random.choice([True, False]):
@@ -35,7 +34,7 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
                     A_to_B_relation = "MIRROR"
                 break
 
-    if info["Random_order"] != '1' or random.choice([True, False]):
+    if config["random_graphs_position"] != '1' or random.choice([True, False]):
         a = Matrix(win=window, pos=config["MATRIX_1_POS"], config=config, v=info["VA"], e=info["EA"], answers=None)
         b = Matrix(win=window, pos=config["MATRIX_2_POS"], config=config, v=info["VB"], e=info["EB"], answers=None)
     else:

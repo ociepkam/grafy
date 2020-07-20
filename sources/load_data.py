@@ -13,8 +13,8 @@ def load_config():
         raise Exception("Can't load config file")
 
 
-def load_trials(file_name="items.csv"):
-    file_path = join("data", file_name)
+def load_trials(file_name):
+    file_path = join("trials", file_name)
     try:
         with open(file_path) as f:
             reader = csv.reader(f, delimiter=';')

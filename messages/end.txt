@@ -1,2 +1,3 @@
-Koniec zadania
-Dziękujemy
+You've finished the task. Thank you.
+
+Press space
