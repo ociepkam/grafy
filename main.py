@@ -49,6 +49,10 @@ config = load_config()
 file_name = config['trials']
 data_train, data_exp = load_trials(file_name)
 
+if config["random_trials_order"]:
+    for block in data_exp:
+        random.shuffle(block)
+
 SCREEN_RES = get_screen_res()
 
 window = visual.Window(SCREEN_RES, fullscr=True, monitor='testMonitor', units='pix', color='Gainsboro')
