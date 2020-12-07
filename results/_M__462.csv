@@ -1,2 +1,0 @@
-ORDER,NR,EXPERIMENT,FEED,LEFT_ANS,RIGHT_ANS,LEFT_ACC,RIGHT_ACC,ACC,LEFT_RT,RIGHT_RT,RT,VA,EA,VB,EB,left,right,NV,NE,Bidirectional,Type,Crossed_edges,Block,A_to_B_relation
-1,1,train,1,0,3,True,True,True,0.9348353000241332,2.4503269999986514,2.4503269999986514,"[0, 3]","[(3, 0)]","[0, 3]","[(0, 3)]","[3, 0]","[0, 3]",2,1,0,,,0,
