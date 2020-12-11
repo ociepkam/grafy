@@ -138,11 +138,11 @@ def page_1():
     insert_text(text="Required training accuracy:", column=0, row=4, sticky="W", win=window)
     training_accuracy = insert_entry(column=2, row=4, width=5, sticky="W", win=window)
 
-    insert_text(text="Select predefined attempts:", column=0, row=5, sticky="W", win=window)
+    insert_text(text="Max. training attempts:", column=0, row=5, sticky="W", win=window)
     training_attempts = insert_entry(column=2, row=5, width=5, sticky="W", win=window)
 
-    insert_text(text="Feedback:", column=0, row=6, sticky="W", win=window)
-    feedback, feedback_var = insert_checkbutton(text="", column=2, row=6, sticky="W", win=window)
+    #insert_text(text="aa:", column=0, row=6, sticky="W", win=window)
+    feedback, feedback_var = insert_checkbutton(text="Feedback", column=0, row=6, sticky="W", win=window)
 
     # -------------- Experimental session -------------- #
 
@@ -174,15 +174,15 @@ def page_1():
     no_of_edges = insert_text(text="No. of edges:", column=3, row=14, columnspan=3, sticky="W", win=window)
     edges_3, edges_3_var = insert_checkbutton(text="3", column=3, row=15, columnspan=1, sticky="W",
                                               win=window, command=calcutale_n_of_trials)
-    edges_4, edges_4_var = insert_checkbutton(text="4", column=3, row=15, columnspan=2, sticky="E",
+    edges_4, edges_4_var = insert_checkbutton(text="4", column=3, row=15, columnspan=2, sticky="",
                                               win=window, command=calcutale_n_of_trials)
-    edges_5, edges_5_var = insert_checkbutton(text="5", column=3, row=15, columnspan=3, sticky="E",
+    edges_5, edges_5_var = insert_checkbutton(text="5", column=3, row=15, columnspan=3, sticky="",
                                               win=window, command=calcutale_n_of_trials)
 
     insert_text(text="", column=0, row=16, size=1, win=window)
 
     crossed_edges = insert_text(text="Crossed edges:", column=3, row=17, columnspan=3, sticky="W", win=window)
-    graphs_with_crossed, graphs_with_crossed_var = insert_checkbutton(text="Graphs with crossed", column=3, row=18,
+    graphs_with_crossed, graphs_with_crossed_var = insert_checkbutton(text="Graphs with crossed edges", column=3, row=18,
                                                                       columnspan=3, sticky="W", win=window,
                                                                       command=calcutale_n_of_trials)
     graphs_without_crossed_edges, graphs_without_crossed_edges_var = insert_checkbutton(text="Graphs without crossed edges",
