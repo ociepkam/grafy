@@ -102,7 +102,10 @@ while mean_acc < config["min_training_acc"]:
 
         RESULTS.append(prepare_result(i, info, answers, rt, acc, "train"))
         i += 1
-        mean_acc += 1 if acc["left"] and acc["right"] else 0
+        if not config["only_one_target"]:
+            mean_acc += 1 if acc["left"] and acc["right"] else 0
+        else:
+            mean_acc += 1 if acc["left"] else 0
     if i > 1:
         mean_acc /= (i - 1)
     else:
