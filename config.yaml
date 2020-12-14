@@ -37,6 +37,8 @@ FIG_OFFSET: 80   # offset between vertices
 v_size: 18
 v_color: black
 
+#TARGETS
+only_one_target: False
 answers_colors: ["yellow", "blue"]  # colors of the target vertices
 
 # edges/arrows
