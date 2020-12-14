@@ -15,6 +15,7 @@ def load_config():
 
 def load_trials(file_name):
     file_path = join("trials", file_name)
+    print(file_path)
     try:
         with open(file_path) as f:
             reader = csv.reader(f, delimiter=';')

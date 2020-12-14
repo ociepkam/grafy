@@ -1,14 +1,10 @@
 # Import set of trials from file (see READ_ME.pdf for the description of predefined experiments to choose from):
-training_trials:  aaaa.csv
-experiment_trials: bbbb.csv     # Name of the file from which to import the set of trials (the file should be in: /trials)
+trials: tests\test_44_trials.csv     # Name of the file from which to import the set of trials (the file should be in: /trials)
 
 #Randomization
 random_trials_order: True  # random order of experiment trials: False/True;
-
 random_graphs_position: False     # show graphs in random positions (left/right): False/True
 random_rotation/symmetry: False   # randomly rotate or reflect in symmetrical axis each of the two graphs: False/True
-
-only_one_target: False
 
 # Trial time in seconds
 trial_time: 24        # max trial time
