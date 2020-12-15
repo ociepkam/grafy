@@ -88,7 +88,7 @@ def page_1():
         else:
             t_per_cell = None
 
-        if session_type.get() not in [1, 2]:
+        if session_type.get() not in [0, 1]:
             messagebox.showerror(message="You have to choose \"Predefined test\" or \"Randomized experiment\".")
             return None
 

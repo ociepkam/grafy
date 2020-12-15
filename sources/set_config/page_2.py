@@ -222,7 +222,7 @@ def page_2():
     show_clock()
 
     insert_text(text="", column=0, row=29, size=12, win=window)
-    insert_button(text="  Next  ", column=3, row=30, command=alerts, size=12, win=window, columnspan=1, sticky="W")
+    insert_button(text="  Next  ", column=0, row=30, command=alerts, size=12, win=window, columnspan=6)
 
     window.mainloop()
     return information
