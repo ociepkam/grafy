@@ -18,6 +18,8 @@ def try_convert_to_int(value, text):
 
 
 def try_in_range(value, text, v_min=None, v_max=None):
+    if value is None:
+        return False
     if v_min is not None and value < v_min:
         messagebox.showerror(message="{} can't be lower than {}".format(text, v_min))
         return False

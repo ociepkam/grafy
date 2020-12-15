@@ -51,26 +51,20 @@ def page_1():
 
     def alerts():
         global information, session_type
-        # Training
+        # ----------------- Training ----------------- #
         if training_session_var.get() == 1:
             if not try_combobox(predefined_training, "predefined training"):
                 return None
-
             tr_acc = try_convert_to_float(training_accuracy.get(), "Required training accuracy")
-            if tr_acc is None:
-                return None
             if not try_in_range(tr_acc, "Required training accuracy", v_min=0, v_max=1):
                 return None
-
             tr_attempts = try_convert_to_int(training_attempts.get(), "Training attempts")
-            if tr_attempts is None:
-                return None
             if not try_in_range(tr_attempts, "Training attempts", v_min=0):
                 return None
         else:
             tr_acc = None
             tr_attempts = None
-        # Experiment
+        # ---------------- Experiment ---------------- #
         if session_type.get() == 0:
             if not try_combobox(predefined_test_list, "predefined test"):
                 return None
@@ -82,8 +76,6 @@ def page_1():
             if not try_any([direct_var.get(), mixed_var.get(), indirect_var.get()], "Types of target vertices"):
                 return None
             t_per_cell = try_convert_to_int(trials_per_cell.get(), "'No. of trials per cell attempts")
-            if t_per_cell is None:
-                return None
             if not try_in_range(t_per_cell, "Training 'No. of trials per cell", v_min=1):
                 return None
         else:

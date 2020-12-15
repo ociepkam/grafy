@@ -40,13 +40,9 @@ def page_2():
             return None
         # ---------------- Trial time ---------------- #
         tr_time = try_convert_to_float(trial_time.get(), "Trial time")
-        if tr_time is None:
-            return None
         if not try_in_range(tr_time, "Trial time", v_min=0):
             return None
         br_time = try_convert_to_float(break_time.get(), "Break time")
-        if br_time is None:
-            return None
         if not try_in_range(br_time, "Break time", v_min=0):
             return None
         # ---------------- Trial info ---------------- #
@@ -58,9 +54,7 @@ def page_2():
             tr_number_position_y = try_convert_to_int(trial_number_position_y.get(), "Trial number y position")
             if tr_number_position_y is None:
                 return None
-            tr_number_size = try_convert_to_int(trial_number_size.get(), "Trial number x position")
-            if tr_number_size is None:
-                return None
+            tr_number_size = try_convert_to_int(trial_number_size.get(), "Number size")
             if not try_in_range(tr_number_size, "Number size", v_min=0):
                 return None
         else:
@@ -77,8 +71,6 @@ def page_2():
             if mouse_position_y is None:
                 return None
             mouse_size = try_convert_to_int(mouse_buttons_size.get(), "Mouse buttons size")
-            if mouse_size is None:
-                return None
             if not try_in_range(mouse_size, "Mouse buttons size", v_min=0):
                 return None
         else:
@@ -89,8 +81,6 @@ def page_2():
         # Clock
         if show_clock_icon_var.get():
             cl_time = try_convert_to_float(clock_time.get(), "Clock time")
-            if cl_time is None:
-                return None
             if not try_in_range(cl_time, "Clock time", v_min=0):
                 return None
             cl_position_x = try_convert_to_int(clock_position_x.get(), "Clock time x position")
@@ -100,8 +90,6 @@ def page_2():
             if cl_position_y is None:
                 return None
             cl_size = try_convert_to_int(clock_size.get(), "Clock size")
-            if cl_size is None:
-                return None
             if not try_in_range(cl_size, "Clock size", v_min=0):
                 return None
         else:
@@ -157,8 +145,7 @@ def page_2():
                                           sticky="W", columnspan=6)
     right_button_color = insert_button(text="Choose color", column=0, row=3, command=choose_right_color, size=12,
                                        win=window, columnspan=6)
-    orig_button_background = left_button_color['background']
-    orig_button_foreground = left_button_color['foreground']
+
     # ---------------- Trial time ---------------- #
     insert_text(text="Trial time", column=0, row=4, size=14, columnspan=6, win=window)
     insert_text(text="Trial time limit (sec):", column=0, row=5, win=window, sticky="W", columnspan=3)
@@ -213,7 +200,9 @@ def page_2():
     show_clock()
 
     insert_text(text="", column=0, row=29, size=12, win=window)
-    insert_button(text="  Next  ", column=0, row=30, command=alerts, size=12, win=window, columnspan=6)
+    next_button = insert_button(text="  Next  ", column=0, row=30, command=alerts, size=12, win=window, columnspan=6)
+    orig_button_background = next_button['background']
+    orig_button_foreground = next_button['foreground']
 
     window.mainloop()
     return information
