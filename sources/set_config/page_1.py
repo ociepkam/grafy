@@ -1,6 +1,7 @@
-from tkinter import IntVar, messagebox, END, StringVar
+from tkinter import IntVar, END, StringVar
 from tkinter.ttk import Separator
 from sources.set_config.tkinter_elements import *
+from sources.set_config.utils import *
 
 
 def page_1():
@@ -63,73 +64,55 @@ def page_1():
         global information, session_type
         # Training
         if training_session_var.get() == 1:
-            if predefined_training.get() == "":
-                messagebox.showerror(message="You have to choose predefined training.")
+            if not try_combobox(predefined_training, "predefined training"):
                 return None
 
-            try:
-                temp = float(training_accuracy.get())
-            except ValueError:
-                messagebox.showerror(message='Required training accuracy has to be a number')
+            tr_acc = try_convert_to_float(training_accuracy.get(), "Required training accuracy")
+            if tr_acc is None:
                 return None
-            if not 0 <= temp <= 1:
-                messagebox.showerror(message='Required training accuracy has to be in range [0, 1]')
+            if not try_in_range(tr_acc, "Required training accuracy", v_min=0, v_max=1):
                 return None
 
-            try:
-                temp = int(training_attempts.get())
-            except ValueError:
-                messagebox.showerror(message='Required training accuracy has to be an integer')
+            tr_attempts = try_convert_to_int(training_attempts.get(), "Training attempts")
+            if tr_attempts is None:
                 return None
-            if temp < 0:
-                messagebox.showerror(message='Required training accuracy can\'t be a negative number')
-                return None
-        # Experiment
-        if session_type.get() == 1:
-            if predefined_test_list.get() == "":
-                messagebox.showerror(message="You have to choose predefined test.")
-                return None
-        elif session_type.get() == 2:
-            if not any([edges_3_var.get(), edges_4_var.get(), edges_5_var.get()]):
-                messagebox.showerror(message="Choose at least one of \"No. of edges\"")
-                return None
-            if not any([graphs_with_crossed_var.get(), graphs_without_crossed_edges_var.get()]):
-                messagebox.showerror(message="Choose at least on of \"Crossed edges\"")
-                return None
-            if not any([direct_var.get(), mixed_var.get(), indirect_var.get()]):
-                messagebox.showerror(message="Choose at least one of \"Types of target vertices\"")
-                return None
-            try:
-                temp = int(trials_per_cell.get())
-            except ValueError:
-                messagebox.showerror(message='No. of trials per cell has to be an integer')
-                return None
-            if temp <= 0:
-                messagebox.showerror(message='No. of trials per cell has to be a positive number')
+            if not try_in_range(tr_attempts, "Training attempts", v_min=0):
                 return None
         else:
+            tr_acc = None
+            tr_attempts = None
+        # Experiment
+        if session_type.get() == 1:
+            if not try_combobox(predefined_test_list, "predefined test"):
+                return None
+        if session_type.get() == 2:
+            if not try_any([edges_3_var.get(), edges_4_var.get(), edges_5_var.get()], "No. of edges"):
+                return None
+            if not try_any([graphs_with_crossed_var.get(), graphs_without_crossed_edges_var.get()], "Crossed edges"):
+                return None
+            if not try_any([direct_var.get(), mixed_var.get(), indirect_var.get()], "Types of target vertices"):
+                return None
+
+            t_per_cell = try_convert_to_int(trials_per_cell.get(), "'No. of trials per cell attempts")
+            if t_per_cell is None:
+                return None
+            if not try_in_range(t_per_cell, "Training 'No. of trials per cell", v_min=1):
+                return None
+        else:
+            t_per_cell = None
+
+        if session_type.get() not in [1, 2]:
             messagebox.showerror(message="You have to choose \"Predefined test\" or \"Randomized experiment\".")
             return None
 
         sess_type = "Predefined test" if session_type == 1 else "Randomized experiment"
-        try:
-            tr_acc = float(training_accuracy.get())
-        except ValueError:
-            tr_acc = ""
-        try:
-            tr_atemp = int(training_attempts.get())
-        except ValueError:
-            tr_atemp = ""
-        try:
-            t_per_cell = int(trials_per_cell.get())
-        except ValueError:
-            t_per_cell = ""
+
         information = {
             # Training
             "training_session": training_session_var.get(),
             "predefined_training": predefined_training.get(),
             "training_accuracy": tr_acc,
-            "training_attempts": tr_atemp,
+            "training_attempts": tr_attempts,
             "feedback_var": feedback_var.get(),
             # Session type
             "session_type": sess_type,
@@ -208,8 +191,8 @@ def page_1():
     insert_text(text="", column=0, row=16, size=1, win=window)
 
     crossed_edges = insert_text(text="Crossed edges:", column=3, row=17, columnspan=3, sticky="W", win=window)
-    graphs_with_crossed, graphs_with_crossed_var = insert_checkbutton(text="Graphs with crossed edges", column=3, row=18,
-                                                                      columnspan=3, sticky="W", win=window,
+    graphs_with_crossed, graphs_with_crossed_var = insert_checkbutton(text="Graphs with crossed edges", column=3,
+                                                                      row=18, columnspan=3, sticky="W", win=window,
                                                                       command=calculate_n_of_trials)
     graphs_without_crossed_edges, graphs_without_crossed_edges_var = \
         insert_checkbutton(text="Graphs without crossed edges", column=3, row=19, columnspan=3,
