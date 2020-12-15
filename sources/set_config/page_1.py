@@ -2,6 +2,7 @@ from tkinter import IntVar, END, StringVar
 from tkinter.ttk import Separator
 from sources.set_config.tkinter_elements import *
 from sources.set_config.utils import *
+from sources.set_config.alerts import *
 
 
 def page_1():

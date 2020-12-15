@@ -1,7 +1,7 @@
 from tkinter.ttk import Separator
 from sources.set_config.tkinter_elements import *
 from sources.set_config.utils import *
-from tkinter import colorchooser
+from sources.set_config.alerts import *
 
 
 def page_2():
@@ -9,15 +9,6 @@ def page_2():
         right_button_color['background'] = orig_button_background
         right_button_color['foreground'] = orig_button_foreground
         show_on_off([right_button_color_text, right_button_color], one_target_var, ["normal", "disable"])
-
-    def choose_button_color(button, title):
-        color_code = colorchooser.askcolor(title=title)
-        button['background'] = color_code[1]
-        if sum(color_code[0]) < 100:
-            button['foreground'] = 'white'
-        else:
-            button['foreground'] = 'black'
-        return color_code[1]
 
     def choose_left_color():
         return choose_button_color(left_button_color, title="Choose left button color")
