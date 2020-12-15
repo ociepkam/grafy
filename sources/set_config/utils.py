@@ -31,3 +31,17 @@ def try_in_range(value, text, v_min=None, v_max=None):
         messagebox.showerror(message="{} can't be higher than {}".format(text, v_max))
         return False
     return True
+
+
+def try_combobox(value, text):
+    if value.get() == "":
+        messagebox.showerror(message="You have to choose {}.".format(text))
+        return False
+    return True
+
+
+def try_button_color(button, origin, text):
+    if button["background"] == origin:
+        messagebox.showerror(message="You have to choose {} background color".format(text))
+        return False
+    return True

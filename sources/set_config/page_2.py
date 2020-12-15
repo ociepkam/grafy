@@ -1,11 +1,29 @@
 from tkinter.ttk import Separator
 from sources.set_config.tkinter_elements import *
-from sources.set_config.utils import show_on_off, try_convert_to_float, try_convert_to_int, try_in_range
+from sources.set_config.utils import *
+from tkinter import colorchooser
 
 
 def page_2():
     def one_target():
-        show_on_off([right_button_color], one_target_var, ["normal", "disable"])
+        right_button_color['background'] = orig_button_background
+        right_button_color['foreground'] = orig_button_foreground
+        show_on_off([right_button_color_text, right_button_color], one_target_var, ["normal", "disable"])
+
+    def choose_button_color(button, title):
+        color_code = colorchooser.askcolor(title=title)
+        button['background'] = color_code[1]
+        if sum(color_code[0]) < 100:
+            button['foreground'] = 'white'
+        else:
+            button['foreground'] = 'black'
+        return color_code[1]
+
+    def choose_left_color():
+        return choose_button_color(left_button_color, title="Choose left button color")
+
+    def choose_right_color():
+        return choose_button_color(right_button_color, title="Choose right button color")
 
     def show_number():
         elements = [trial_number_position_x_text, trial_number_position_x, trial_number_position_y_text,
@@ -25,6 +43,10 @@ def page_2():
     def alerts():
         global information
         # ------------------ Target ------------------ #
+        if not try_button_color(left_button_color, orig_button_background, "left button"):
+            return None
+        if not one_target_var.get() and not try_button_color(right_button_color, orig_button_background, "right button"):
+            return None
         # ---------------- Trial time ---------------- #
         tr_time = try_convert_to_float(trial_time.get(), "Trial time")
         if tr_time is None:
@@ -100,6 +122,8 @@ def page_2():
         information = {
             # Target
             "one_target": one_target_var.get(),
+            "left_button_color": left_button_color['background'],
+            "right_button_color": left_button_color['background'],
             # Trial time
             "trial_time": tr_time,
             "break_time": br_time,
@@ -125,6 +149,7 @@ def page_2():
 
     global information
     information = None
+
     window = create_window("Set config", 550, 680)
 
     # ------------------ Target ------------------ #
@@ -135,9 +160,14 @@ def page_2():
     _, one_target_var = insert_checkbutton(text="Use only one target", column=0, row=1, win=window,
                                            command=one_target, sticky="W", columnspan=6)
     insert_text(text="Left button target color:", column=0, row=2, win=window, sticky="W", columnspan=6)
-    right_button_color = insert_text(text="Right button target color:", column=0, row=3, win=window,
-                                     sticky="W", columnspan=6)
-
+    left_button_color = insert_button(text="Choose color", column=0, row=2, command=choose_left_color, size=12,
+                                      win=window, columnspan=6)
+    right_button_color_text = insert_text(text="Right button target color:", column=0, row=3, win=window,
+                                          sticky="W", columnspan=6)
+    right_button_color = insert_button(text="Choose color", column=0, row=3, command=choose_right_color, size=12,
+                                       win=window, columnspan=6)
+    orig_button_background = left_button_color['background']
+    orig_button_foreground = left_button_color['foreground']
     # ---------------- Trial time ---------------- #
     insert_text(text="Trial time", column=0, row=4, size=14, columnspan=6, win=window)
     insert_text(text="Trial time limit (sec):", column=0, row=5, win=window, sticky="W", columnspan=3)
