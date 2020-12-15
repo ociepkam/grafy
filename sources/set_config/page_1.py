@@ -9,35 +9,23 @@ def page_1():
     information = None
     window = create_window("Set config", 550, 680)
     session_type = IntVar()
+    session_type.set(-1)
 
     def training():
-        if training_session_var.get() == 1:
-            state = "normal"
-            predefined_training.config(state="readonly")
-        else:
-            state = "disabled"
-            predefined_training.config(state="disabled")
-        for temp in [predefined_training_text, training_accuracy_text, training_accuracy,
-                     training_attempts_text, training_attempts, feedback_text, feedback]:
-            temp.configure(state=state)
+        elements = [predefined_training_text, training_accuracy_text, training_accuracy,
+                    training_attempts_text, training_attempts, feedback_text, feedback]
+        show_on_off(elements, training_session_var, ["disabled", "normal"])
+        show_on_off([predefined_training], training_session_var, ["disabled", "readonly"])
 
     def session():
-        if session_type.get() == 1:
-            state_list = ["normal", "disabled"]
-        elif session_type.get() == 2:
-            state_list = ["disabled", "normal"]
-        else:
-            raise Exception("Problem with session radiobutton")
+        elements_left = [randomize_trials_order, randomize_graphs]
+        elements_right = [choose_factor_levels, no_of_edges, edges_3, edges_4, edges_5, crossed_edges,
+                          graphs_with_crossed, graphs_without_crossed_edges, types_of_target_vertices, direct, mixed,
+                          indirect, trials_per_cell_text, trials_per_cell, n_of_trials_text]
 
-        for temp in [predefined_test_list, randomize_trials_order, randomize_graphs]:
-            temp.configure(state=state_list[0])
-        if session_type.get() == 1:
-            predefined_test_list.config(state="readonly")
-
-        for temp in [choose_factor_levels, no_of_edges, edges_3, edges_4, edges_5, crossed_edges,
-                     graphs_with_crossed, graphs_without_crossed_edges, types_of_target_vertices, direct, mixed,
-                     indirect, trials_per_cell_text, trials_per_cell, n_of_trials_text]:
-            temp.configure(state=state_list[1])
+        show_on_off(elements_left, session_type, ["normal", "disabled"])
+        show_on_off([predefined_test_list], session_type, ["readonly", "disabled"])
+        show_on_off(elements_right, session_type, ["disabled", "normal"])
 
     def change_n_of_trials(new):
         n_of_trials.configure(state="normal")
@@ -82,17 +70,16 @@ def page_1():
             tr_acc = None
             tr_attempts = None
         # Experiment
-        if session_type.get() == 1:
+        if session_type.get() == 0:
             if not try_combobox(predefined_test_list, "predefined test"):
                 return None
-        if session_type.get() == 2:
+        if session_type.get() == 1:
             if not try_any([edges_3_var.get(), edges_4_var.get(), edges_5_var.get()], "No. of edges"):
                 return None
             if not try_any([graphs_with_crossed_var.get(), graphs_without_crossed_edges_var.get()], "Crossed edges"):
                 return None
             if not try_any([direct_var.get(), mixed_var.get(), indirect_var.get()], "Types of target vertices"):
                 return None
-
             t_per_cell = try_convert_to_int(trials_per_cell.get(), "'No. of trials per cell attempts")
             if t_per_cell is None:
                 return None
@@ -164,7 +151,7 @@ def page_1():
     Separator(window, orient='vertical').place(relx=0.5, y=197, width=1, height=420)
 
     # ---------------- Predefined test ----------------- #
-    insert_radiobutton(text="Predefined test", column=0, row=10, selector=session_type, value=1, size=12,
+    insert_radiobutton(text="Predefined test", column=0, row=10, selector=session_type, value=0, size=12,
                        columnspan=3, command=session, win=window)
     insert_text(text="", column=0, row=11, size=1, win=window)
     predefined_test_list = insert_combobox(column=0, row=12, values=(1, 2, 3), columnspan=3, win=window)
@@ -175,7 +162,7 @@ def page_1():
                                                                 sticky="W", win=window)
 
     # -------------- Randomized experiment ------------- #
-    insert_radiobutton(text="Randomized experiment", column=3, row=10, selector=session_type, value=2, size=12,
+    insert_radiobutton(text="Randomized experiment", column=3, row=10, selector=session_type, value=1, size=12,
                        columnspan=3, command=session, win=window)
     choose_factor_levels = insert_text(text="Choose factor levels (max 3x2x3):", column=3, row=12, columnspan=3,
                                        sticky="W", size=12, win=window)
