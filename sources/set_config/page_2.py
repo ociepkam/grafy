@@ -126,6 +126,11 @@ def page_2():
         }
         window.destroy()
 
+    def go_back():
+        global information
+        window.destroy()
+        information = "go_back"
+
     global information
     information = None
 
@@ -200,7 +205,10 @@ def page_2():
     show_clock()
 
     insert_text(text="", column=0, row=29, size=12, win=window)
-    next_button = insert_button(text="  Next  ", column=0, row=30, command=alerts, size=12, win=window, columnspan=6)
+
+    insert_button(text="    Back    ", column=2, row=30, command=go_back, size=12, win=window, columnspan=1, sticky="W")
+    next_button = insert_button(text="    Next     ", column=3, row=30, command=alerts, size=12, sticky="W",
+                                win=window, columnspan=1)
     orig_button_background = next_button['background']
     orig_button_foreground = next_button['foreground']
 

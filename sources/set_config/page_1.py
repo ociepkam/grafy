@@ -21,7 +21,7 @@ def page_1():
     def session():
         elements_left = [randomize_trials_order, randomize_graphs]
         elements_right = [choose_factor_levels, no_of_edges, edges_3, edges_4, edges_5, crossed_edges,
-                          graphs_with_crossed, graphs_without_crossed_edges, types_of_target_vertices, direct, mixed,
+                          graphs_with_crossed, graphs_without_crossed_edges, types_of_target_vertices, direct,
                           indirect, trials_per_cell_text, trials_per_cell, n_of_trials_text]
 
         show_on_off(elements_left, session_type, ["normal", "disabled"])
@@ -37,11 +37,11 @@ def page_1():
     def calculate_n_of_trials():
         if any([edges_3_var.get(), edges_4_var.get(), edges_5_var.get()]) and \
            any([graphs_with_crossed_var.get(), graphs_without_crossed_edges_var.get()]) and \
-           any([direct_var.get(), mixed_var.get(), indirect_var.get()]):
+           any([direct_var.get(), indirect_var.get()]):
             try:
                 n = sum([edges_3_var.get(), edges_4_var.get(), edges_5_var.get()]) * \
                     sum([graphs_with_crossed_var.get(), graphs_without_crossed_edges_var.get()]) * \
-                    sum([direct_var.get(), mixed_var.get(), indirect_var.get()]) * \
+                    sum([direct_var.get(), indirect_var.get()]) * \
                     int(trials_per_cell.get())
                 change_n_of_trials(n)
             except ValueError:
@@ -73,7 +73,7 @@ def page_1():
                 return None
             if not try_any([graphs_with_crossed_var.get(), graphs_without_crossed_edges_var.get()], "Crossed edges"):
                 return None
-            if not try_any([direct_var.get(), mixed_var.get(), indirect_var.get()], "Types of target vertices"):
+            if not try_any([direct_var.get(), indirect_var.get()], "Types of target vertices"):
                 return None
             t_per_cell = try_convert_to_int(trials_per_cell.get(), "'No. of trials per cell attempts")
             if not try_in_range(t_per_cell, "Training 'No. of trials per cell", v_min=1):
@@ -107,13 +107,17 @@ def page_1():
             "crossed_edges": {"graphs_with_crossed": graphs_with_crossed_var.get(),
                               "graphs_without_crossed_edges": graphs_without_crossed_edges_var.get()},
             "types_of_target_vertices": {"direct": direct_var.get(),
-                                         "mixed": mixed_var.get(),
                                          "indirect": indirect_var.get()},
             "trials_per_cell": t_per_cell,
             "n_of_trials": n_of_trials.get()
         }
 
         window.destroy()
+
+    def close():
+        global information
+        window.destroy()
+        information = "close"
 
     insert_text(text="", column=0, row=0, size=1, win=window)
     training_session, training_session_var = insert_checkbutton(text="Training session", column=0, row=1,
@@ -184,21 +188,19 @@ def page_1():
                                            columnspan=3, sticky="W", win=window)
     direct, direct_var = insert_checkbutton(text="Direct", column=3, row=22, columnspan=3, sticky="W",
                                             win=window, command=calculate_n_of_trials)
-    mixed, mixed_var = insert_checkbutton(text="Mixed", column=3, row=23, columnspan=3, sticky="W",
-                                          win=window, command=calculate_n_of_trials)
-    indirect, indirect_var = insert_checkbutton(text="Indirect", column=3, row=24, columnspan=3, sticky="W",
+    indirect, indirect_var = insert_checkbutton(text="Indirect", column=3, row=23, columnspan=3, sticky="W",
                                                 win=window, command=calculate_n_of_trials)
 
-    insert_text(text="", column=0, row=25, size=1, win=window)
+    insert_text(text="", column=0, row=24, size=1, win=window)
 
-    trials_per_cell_text = insert_text(text="No. of trials per cell:", column=3, row=26,
+    trials_per_cell_text = insert_text(text="No. of trials per cell:", column=3, row=25,
                                        columnspan=2, sticky="W", win=window)
     s_var = StringVar()
     s_var.trace("w", lambda name, index, mode, sv=s_var: calculate_n_of_trials())
-    trials_per_cell = insert_entry(column=5, row=26, width=5, columnspan=1, sticky="W", win=window, textvariable=s_var)
+    trials_per_cell = insert_entry(column=5, row=25, width=5, columnspan=1, sticky="W", win=window, textvariable=s_var)
 
-    n_of_trials_text = insert_text(text="Total n of trials:", column=3, row=27, columnspan=2, sticky="W", win=window)
-    n_of_trials = insert_entry(column=5, row=27, width=5, columnspan=1, sticky="W", win=window)
+    n_of_trials_text = insert_text(text="Total n of trials:", column=3, row=26, columnspan=2, sticky="W", win=window)
+    n_of_trials = insert_entry(column=5, row=26, width=5, columnspan=1, sticky="W", win=window)
     change_n_of_trials("?")
 
     Separator(window, orient='horizontal').place(x=0, y=617, relwidth=1, height=2)
@@ -208,12 +210,14 @@ def page_1():
                  training_attempts_text, training_attempts, feedback_text, feedback,
                  predefined_test_list, randomize_trials_order, randomize_graphs, choose_factor_levels, no_of_edges,
                  edges_3, edges_4, edges_5, crossed_edges, graphs_with_crossed,
-                 graphs_without_crossed_edges, types_of_target_vertices, direct, mixed, indirect,
+                 graphs_without_crossed_edges, types_of_target_vertices, direct, indirect,
                  trials_per_cell_text, trials_per_cell, n_of_trials_text, n_of_trials]:
         elem.configure(state="disabled")
 
     insert_text(text="", column=0, row=29, size=12, win=window)
-    insert_button(text="  Next  ", column=3, row=30, command=alerts, size=12, win=window, columnspan=1, sticky="W")
+    insert_button(text="  Cancel  ", column=1, row=30, command=close, size=12, win=window, columnspan=1, sticky="E")
+    insert_button(text="    Next     ", column=3, row=30, command=alerts, size=12, win=window, columnspan=1)
+
     window.mainloop()
 
     return information

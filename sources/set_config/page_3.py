@@ -72,7 +72,7 @@ def page_3():
             "press_space_message": press_space_message.get(),
             # Visual
             "background_color": background_button_color["background"],
-            "text_size": txt_size.get(),
+            "text_size": txt_size,
             "vertices_color": vertices_button_color["background"],
             "edges_color": edges_button_color["background"],
             "left_graph_position": [l_graph_position_x, l_graph_position_y],
@@ -88,6 +88,11 @@ def page_3():
         }
 
         window.destroy()
+
+    def go_back():
+        global information
+        window.destroy()
+        information = "go_back"
 
     global information
     information = None
@@ -165,7 +170,9 @@ def page_3():
     insert_text(text="Exit key:", column=0, row=25, columnspan=6, win=window, sticky="W")
     exit_key = insert_entry(column=2, row=25, width=5, sticky="E", win=window, columnspan=1)
 
-    save_button = insert_button(text="  Save  ", column=0, row=30, command=alerts, size=12, win=window, columnspan=6)
+    insert_button(text="    Back    ", column=1, row=30, command=go_back, size=12, win=window, columnspan=1, sticky="E")
+    save_button = insert_button(text="    Save    ", column=3, row=30, command=alerts, size=12, win=window,
+                                columnspan=1, sticky="W")
     orig_button_background = save_button['background']
 
     window.mainloop()
