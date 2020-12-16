@@ -84,7 +84,7 @@ def page_3():
             "arrowhead_width": a_width,
             # Other
             "break_after_n_trials": b_n_trails,
-            "exit_key": exit_key
+            "exit_key": exit_key.get()
         }
 
         window.destroy()
