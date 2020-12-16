@@ -144,11 +144,11 @@ def page_2():
     _, one_target_var = insert_checkbutton(text="Use only one target", column=0, row=1, win=window,
                                            command=one_target, sticky="W", columnspan=6)
     insert_text(text="Left button target color:", column=0, row=2, win=window, sticky="W", columnspan=6)
-    left_button_color = insert_button(text="Choose color", column=0, row=2, command=choose_left_color, size=10,
+    left_button_color = insert_button(text="Choose color", column=0, row=2, command=choose_left_color, size=9,
                                       win=window, columnspan=6)
     right_button_color_text = insert_text(text="Right button target color:", column=0, row=3, win=window,
                                           sticky="W", columnspan=6)
-    right_button_color = insert_button(text="Choose color", column=0, row=3, command=choose_right_color, size=10,
+    right_button_color = insert_button(text="Choose color", column=0, row=3, command=choose_right_color, size=9,
                                        win=window, columnspan=6)
 
     # ---------------- Trial time ---------------- #
