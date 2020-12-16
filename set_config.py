@@ -17,8 +17,7 @@ actual_page = 1
 while True:
     information[actual_page] = run_page(actual_page)
     if information[actual_page] == "close":
-        information = None
-        break
+        exit()
     elif information[actual_page] == "go_back":
         information[actual_page] = None
         actual_page -= 1
@@ -27,7 +26,8 @@ while True:
     elif information[actual_page] is not None:
         actual_page += 1
     else:
-        information = None
-        break
+        exit()
 
+print(information)
+information = {**information[1], **information[2], **information[3]}
 print(information)
