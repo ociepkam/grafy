@@ -14,7 +14,7 @@ def page_1():
 
     def training():
         elements = [predefined_training_text, training_accuracy_text, training_accuracy,
-                    training_attempts_text, training_attempts, feedback_text, feedback]
+                    training_attempts_text, training_attempts,  feedback]  #feedback_text,
         show_on_off(elements, training_session_var, ["disabled", "normal"])
         show_on_off([predefined_training], training_session_var, ["disabled", "readonly"])
 
@@ -123,7 +123,7 @@ def page_1():
     training_session, training_session_var = insert_checkbutton(text="Training session", column=0, row=1,
                                                                 size=14, columnspan=6, win=window, command=training)
     insert_text(text="", column=0, row=2, size=1, win=window)
-    Separator(window, orient='horizontal').place(x=0, y=40, relwidth=1, height=2)
+    Separator(window, orient='horizontal').place(x=0, y=45, relwidth=1, height=2)
 
     predefined_training_text = insert_text(text="Select predefined training:", column=0, row=3, sticky="W", win=window)
     predefined_training = insert_combobox(column=2, row=3, values=(1, 2, 3), sticky="W", win=window)
@@ -134,14 +134,14 @@ def page_1():
     training_attempts_text = insert_text(text="Max. training attempts:", column=0, row=5, sticky="W", win=window)
     training_attempts = insert_entry(column=2, row=5, width=5, sticky="W", win=window)
 
-    feedback_text = insert_text(text="Feedback:", column=0, row=6, sticky="W", win=window)
-    feedback, feedback_var = insert_checkbutton(text="", column=2, row=6, sticky="W", win=window)
+    #feedback_text = insert_text(text="Feedback:", column=0, row=6, sticky="W", win=window)
+    feedback, feedback_var = insert_checkbutton(text="  Present feedback", column=0, row=6, sticky="W", win=window)
 
     # -------------- Experimental session -------------- #
 
     insert_text(text="", column=0, row=7, size=1, win=window)
-    Separator(window, orient='horizontal').place(x=0, y=155, relwidth=1, height=2)
-    insert_text(text="Experimental session", column=0, row=8, size=14, columnspan=6, win=window)
+    Separator(window, orient='horizontal').place(x=0, y=162, relwidth=1, height=2)
+    insert_text(text="Experimental session", column=0, row=7, size=14, columnspan=6, win=window)
     insert_text(text="", column=0, row=9, size=1, win=window)
 
     Separator(window, orient='horizontal').place(x=0, y=197, relwidth=1, height=2)
@@ -151,7 +151,7 @@ def page_1():
     insert_radiobutton(text="Predefined test", column=0, row=10, selector=session_type, value=0, size=12,
                        columnspan=3, command=session, win=window)
     insert_text(text="", column=0, row=11, size=1, win=window)
-    predefined_test_list = insert_combobox(column=0, row=12, values=(1, 2, 3), columnspan=3, win=window)
+    predefined_test_list = insert_combobox(column=0, row=12, values=(1, 2, 3), columnspan=2, win=window)
     insert_text(text="", column=0, row=13, size=1, win=window)
     randomize_trials_order, randomize_trials_order_var = insert_checkbutton(text="Randomize trials order", columnspan=3,
                                                                             row=14, column=0, sticky="W", win=window)
@@ -161,15 +161,15 @@ def page_1():
     # -------------- Randomized experiment ------------- #
     insert_radiobutton(text="Randomized experiment", column=3, row=10, selector=session_type, value=1, size=12,
                        columnspan=3, command=session, win=window)
-    choose_factor_levels = insert_text(text="Choose factor levels (max 3x2x3):", column=3, row=12, columnspan=3,
+    choose_factor_levels = insert_text(text="Choose factor levels (max 3x2x2):", column=3, row=12, columnspan=3,
                                        sticky="W", size=12, win=window)
 
     no_of_edges = insert_text(text="No. of edges:", column=3, row=14, columnspan=3, sticky="W", win=window)
     edges_3, edges_3_var = insert_checkbutton(text="3", column=3, row=15, columnspan=1, sticky="W",
                                               win=window, command=calculate_n_of_trials)
-    edges_4, edges_4_var = insert_checkbutton(text="4", column=3, row=15, columnspan=2, sticky="E",
+    edges_4, edges_4_var = insert_checkbutton(text="4", column=3, row=15, columnspan=2, sticky="",
                                               win=window, command=calculate_n_of_trials)
-    edges_5, edges_5_var = insert_checkbutton(text="5", column=3, row=15, columnspan=3, sticky="E",
+    edges_5, edges_5_var = insert_checkbutton(text="5", column=3, row=15, columnspan=3, sticky="",
                                               win=window, command=calculate_n_of_trials)
 
     insert_text(text="", column=0, row=16, size=1, win=window)
@@ -207,7 +207,7 @@ def page_1():
 
     # --------- Experimental session disabled ---------- #
     for elem in [predefined_training_text, predefined_training, training_accuracy_text, training_accuracy,
-                 training_attempts_text, training_attempts, feedback_text, feedback,
+                 training_attempts_text, training_attempts,  feedback,   #feedback_text,
                  predefined_test_list, randomize_trials_order, randomize_graphs, choose_factor_levels, no_of_edges,
                  edges_3, edges_4, edges_5, crossed_edges, graphs_with_crossed,
                  graphs_without_crossed_edges, types_of_target_vertices, direct, indirect,

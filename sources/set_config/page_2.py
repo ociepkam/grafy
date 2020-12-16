@@ -138,70 +138,75 @@ def page_2():
 
     # ------------------ Target ------------------ #
     insert_text(text="", column=5, row=0, size=1, win=window)
-    insert_text(text="Target", column=0, row=0, size=14, columnspan=6, win=window)
-    # Separator(window, orient='horizontal').place(x=0, y=40, relwidth=1, height=2)
+    insert_text(text="Targets", column=0, row=0, size=14, sticky="W", win=window)
+    Separator(window, orient='horizontal').place(x=0, y=32, relwidth=1, height=2)
 
     _, one_target_var = insert_checkbutton(text="Use only one target", column=0, row=1, win=window,
                                            command=one_target, sticky="W", columnspan=6)
     insert_text(text="Left button target color:", column=0, row=2, win=window, sticky="W", columnspan=6)
-    left_button_color = insert_button(text="Choose color", column=0, row=2, command=choose_left_color, size=12,
+    left_button_color = insert_button(text="Choose color", column=0, row=2, command=choose_left_color, size=10,
                                       win=window, columnspan=6)
     right_button_color_text = insert_text(text="Right button target color:", column=0, row=3, win=window,
                                           sticky="W", columnspan=6)
-    right_button_color = insert_button(text="Choose color", column=0, row=3, command=choose_right_color, size=12,
+    right_button_color = insert_button(text="Choose color", column=0, row=3, command=choose_right_color, size=10,
                                        win=window, columnspan=6)
 
     # ---------------- Trial time ---------------- #
-    insert_text(text="Trial time", column=0, row=4, size=14, columnspan=6, win=window)
-    insert_text(text="Trial time limit (sec):", column=0, row=5, win=window, sticky="W", columnspan=3)
-    trial_time = insert_entry(column=2, row=5, width=5, sticky="E", win=window, columnspan=1)
-    insert_text(text="Break between trials (sec):", column=0, row=6, win=window, sticky="W", columnspan=3)
-    break_time = insert_entry(column=2, row=6, width=5, sticky="E", win=window, columnspan=1)
+    #Separator(window, orient='horizontal').place(x=0, y=140, relwidth=1, height=2)
+    insert_text(text="Trial time", column=0, row=6, size=14, sticky="W", win=window)
+    Separator(window, orient='horizontal').place(x=0, y=175, relwidth=1, height=2)
+
+    insert_text(text="Trial time limit (sec):", column=0, row=8, win=window, sticky="W", columnspan=3)
+    trial_time = insert_entry(column=2, row=8, width=5, sticky="E", win=window, columnspan=1)
+    insert_text(text="Break between trials (sec):", column=0, row=9, win=window, sticky="W", columnspan=3)
+    break_time = insert_entry(column=2, row=9, width=5, sticky="E", win=window, columnspan=1)
 
     # ---------------- Trial info ---------------- #
-    insert_text(text="Trial info", column=0, row=7, size=14, columnspan=6, win=window)
+    #Separator(window, orient='horizontal').place(x=0, y=245, relwidth=1, height=2)
+    insert_text(text="Trial info", column=0, row=12, size=14, sticky="W", win=window)
+    Separator(window, orient='horizontal').place(x=0, y=280, relwidth=1, height=2)
 
     # Trial number
-    _, show_trial_number_var = insert_checkbutton(text="Show trial number", column=0, row=8, win=window,
+    _, show_trial_number_var = insert_checkbutton(text="Show trial number", column=0, row=13, win=window,
                                                   sticky="W", columnspan=6, command=show_number)
-    trial_number_position_x_text = insert_text(text="x:", column=2, row=9, win=window, sticky="EW", columnspan=1)
-    trial_number_position_x = insert_entry(column=2, row=9, width=5, sticky="E", win=window, columnspan=1)
-    trial_number_position_y_text = insert_text(text="y:", column=3, row=9, win=window, sticky="W", columnspan=1)
-    trial_number_position_y = insert_entry(column=3, row=9, width=5, sticky="E", win=window, columnspan=1)
-    trial_number_position_text = insert_text(text="\tTrial number position:", column=0, row=9, win=window,
+    trial_number_position_x_text = insert_text(text="x:", column=2, row=14, win=window, sticky="EW", columnspan=1)
+    trial_number_position_x = insert_entry(column=2, row=14, width=5, sticky="E", win=window, columnspan=1)
+    trial_number_position_y_text = insert_text(text="y:", column=3, row=14, win=window, sticky="W", columnspan=1)
+    trial_number_position_y = insert_entry(column=3, row=14, width=5, sticky="E", win=window, columnspan=1)
+    trial_number_position_text = insert_text(text="\tTrial number position:", column=0, row=14, win=window,
                                              sticky="W", columnspan=3)
-    trial_number_size_text = insert_text(text="\tTrial number size (px):", column=0, row=10, win=window, columnspan=6,
+    trial_number_size_text = insert_text(text="\tTrial number size (px):", column=0, row=15, win=window, columnspan=6,
                                          sticky="W")
-    trial_number_size = insert_entry(column=2, row=10, width=5, sticky="E", win=window, columnspan=1)
+    trial_number_size = insert_entry(column=2, row=15, width=5, sticky="E", win=window, columnspan=1)
     show_number()
 
     # Show mouse buttons
-    _, show_mouse_buttons_var = insert_checkbutton(text="Show mouse buttons reminder", column=0, row=11,
+    _, show_mouse_buttons_var = insert_checkbutton(text="Show mouse buttons reminder", column=0, row=17,
                                                    win=window, sticky="W", columnspan=6, command=show_buttons)
-    mouse_buttons_position_x_text = insert_text(text="x:", column=2, row=12, win=window, sticky="EW", columnspan=1)
-    mouse_buttons_position_x = insert_entry(column=2, row=12, width=5, sticky="E", win=window, columnspan=1)
-    mouse_buttons_position_y_text = insert_text(text="y:", column=3, row=12, win=window, sticky="W", columnspan=1)
-    mouse_buttons_position_y = insert_entry(column=3, row=12, width=5, sticky="E", win=window, columnspan=1)
-    mouse_buttons_position_text = insert_text(text="\tMouse buttons position:", column=0, row=12, win=window,
+    mouse_buttons_position_x_text = insert_text(text="x:", column=2, row=18, win=window, sticky="EW", columnspan=1)
+    mouse_buttons_position_x = insert_entry(column=2, row=18, width=5, sticky="E", win=window, columnspan=1)
+    mouse_buttons_position_y_text = insert_text(text="y:", column=3, row=18, win=window, sticky="W", columnspan=1)
+    mouse_buttons_position_y = insert_entry(column=3, row=18, width=5, sticky="E", win=window, columnspan=1)
+    mouse_buttons_position_text = insert_text(text="\tMouse buttons position:", column=0, row=18, win=window,
                                               sticky="W", columnspan=3)
-    mouse_buttons_size_text = insert_text(text="\tMouse buttons size (px):", column=0, row=13, win=window,
+    mouse_buttons_size_text = insert_text(text="\tMouse buttons size (px):", column=0, row=19, win=window,
                                           columnspan=6, sticky="W")
-    mouse_buttons_size = insert_entry(column=2, row=13, width=5, sticky="E", win=window, columnspan=1)
+    mouse_buttons_size = insert_entry(column=2, row=19, width=5, sticky="E", win=window, columnspan=1)
     show_buttons()
 
     # Clock
     _, show_clock_icon_var = insert_checkbutton(text="Show clock icon (reminder of short time left)", columnspan=6,
-                                                column=0, row=14, win=window, command=show_clock, sticky="W")
-    clock_time_text = insert_text(text="\tShow clock n sec before time limit:", column=0, row=15, win=window,
-                                  sticky="W", columnspan=4)
-    clock_time = insert_entry(column=2, row=15, width=5, sticky="E", win=window)
-    clock_position_x_text = insert_text(text="x:", column=2, row=16, win=window, sticky="EW", columnspan=1)
-    clock_position_x = insert_entry(column=2, row=16, width=5, sticky="E", win=window, columnspan=1)
-    clock_position_y_text = insert_text(text="y:", column=3, row=16, win=window, sticky="W", columnspan=1)
-    clock_position_y = insert_entry(column=3, row=16, width=5, sticky="E", win=window, columnspan=1)
-    clock_position_text = insert_text(text="\tClock position:", column=0, row=16, win=window, sticky="W", columnspan=3)
-    clock_size_text = insert_text(text="\tClock size (px):", column=0, row=17, win=window, columnspan=6, sticky="W")
-    clock_size = insert_entry(column=2, row=17, width=5, sticky="E", win=window, columnspan=1)
+                                                column=0, row=21, win=window, command=show_clock, sticky="W")
+    clock_time_text = insert_text(text="\tShow n sec before time limit:", column=0, row=23, win=window,
+                                  sticky="W", columnspan=6)
+    clock_time = insert_entry(column=2, row=23, width=5, sticky="E", win=window, columnspan=1)
+    clock_position_x_text = insert_text(text="x:", column=2, row=25, win=window, sticky="EW", columnspan=1)
+    clock_position_x = insert_entry(column=2, row=25, width=5, sticky="E", win=window, columnspan=1)
+    clock_position_y_text = insert_text(text="y:", column=3, row=25, win=window, sticky="W", columnspan=1)
+    clock_position_y = insert_entry(column=3, row=25, width=5, sticky="E", win=window, columnspan=1)
+    clock_position_text = insert_text(text="\tClock position:", column=0, row=25, win=window, sticky="W", columnspan=3)
+    clock_size_text = insert_text(text="\tClock size (px):", column=0, row=26, win=window, columnspan=6, sticky="W")
+    clock_size = insert_entry(column=2, row=26, width=5, sticky="E", win=window, columnspan=1)
     show_clock()
 
     insert_text(text="", column=0, row=29, size=12, win=window)

@@ -119,20 +119,20 @@ def page_3():
     # ------------------ Visual ------------------ #
     insert_text(text="Visual", column=0, row=11, columnspan=6, win=window, size=14)
 
-    insert_text(text="Background:", column=0, row=12, columnspan=6, win=window, sticky="W")
-    background_button_color = insert_button(text="Choose color", column=0, row=12, command=choose_background_color,
-                                            size=12, win=window, columnspan=6)
+    insert_text(text="Text size (px):", column=0, row=12, columnspan=2, win=window, sticky="W")
+    text_size = insert_entry(column=2, row=12, width=5, sticky="E", win=window, columnspan=1)
 
-    insert_text(text="Text size (px):", column=0, row=13, columnspan=2, win=window, sticky="W")
-    text_size = insert_entry(column=2, row=13, width=5, sticky="E", win=window, columnspan=1)
+    insert_text(text="Background color:", column=0, row=13, columnspan=6, win=window, sticky="W")
+    background_button_color = insert_button(text="Choose color", column=0, row=13, command=choose_background_color,
+                                            size=10, win=window, columnspan=6)
 
     insert_text(text="Vertices color:", column=0, row=14, columnspan=6, win=window, sticky="W")
     vertices_button_color = insert_button(text="Choose color", column=0, row=14, command=choose_vertices_color,
-                                          size=12, win=window, columnspan=6)
+                                          size=10, win=window, columnspan=6)
 
     insert_text(text="Edges color:", column=0, row=15, columnspan=6, win=window, sticky="W")
     edges_button_color = insert_button(text="Choose color", column=0, row=15, command=choose_edges_color,
-                                       size=12, win=window, columnspan=6)
+                                       size=10, win=window, columnspan=6)
 
     insert_text(text="x:", column=2, row=16, win=window, sticky="W", columnspan=1)
     left_graph_position_x = insert_entry(column=2, row=16, width=5, sticky="E", win=window, columnspan=1)
