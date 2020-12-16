@@ -164,7 +164,7 @@ def page_2():
     # ---------------- Trial info ---------------- #
     #Separator(window, orient='horizontal').place(x=0, y=245, relwidth=1, height=2)
     insert_text(text="Trial info", column=0, row=12, size=14, sticky="W", win=window)
-    Separator(window, orient='horizontal').place(x=0, y=280, relwidth=1, height=2)
+    Separator(window, orient='horizontal').place(x=0, y=275, relwidth=1, height=2)
 
     # Trial number
     _, show_trial_number_var = insert_checkbutton(text="Show trial number", column=0, row=13, win=window,
