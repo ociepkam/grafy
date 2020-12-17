@@ -1,4 +1,5 @@
 from sources.set_config import page_1, page_2, page_3
+import yaml
 
 
 def run_page(page_n):
@@ -10,6 +11,11 @@ def run_page(page_n):
         return page_3.page_3()
     else:
         raise Exception("Wrong page number")
+
+
+def create_new_config(info, config_name="config.yaml"):
+    f = open(config_name, 'w+')
+    yaml.safe_dump(info, f, allow_unicode=True, sort_keys=False)
 
 
 information = {1: None, 2: None, 3: None}
@@ -28,6 +34,5 @@ while True:
     else:
         exit()
 
-print(information)
 information = {**information[1], **information[2], **information[3]}
-print(information)
+create_new_config(information, "test_config.yaml")
