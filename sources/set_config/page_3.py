@@ -37,6 +37,7 @@ def page_3(info):
             arrowhead_width.insert(0, info["arrowhead_width"])
         except:
             messagebox.showerror(message="Can't load file with config")
+            correct_answer.focus_force()
 
     def alerts():
         global information
@@ -82,7 +83,6 @@ def page_3(info):
         a_width = try_convert_to_int(arrowhead_width.get(), "Arrowhead width")
         if not try_in_range(a_width, "Arrowhead width", v_min=0):
             return None
-
 
         information = {
             # Feedback text

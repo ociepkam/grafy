@@ -81,6 +81,7 @@ def page_1(info):
                 break_after_n_trials.insert(0, info["break_after_n_trials"])
         except:
             messagebox.showerror(message="Can't load file with config")
+            break_after_n_trials.focus_force()
 
     def alerts():
         global information, session_type

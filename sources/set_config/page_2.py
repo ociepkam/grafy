@@ -59,13 +59,15 @@ def page_2(info):
             clock_time.insert(0, info["clock_time"])
         except:
             messagebox.showerror(message="Can't load file with config")
+            trial_time.focus_force()
 
     def alerts():
         global information
         # ------------------ Target ------------------ #
         if not try_button_color(left_button_color, orig_button_background, "left button"):
             return None
-        if not one_target_var.get() and not try_button_color(right_button_color, orig_button_background, "right button"):
+        if not one_target_var.get() and \
+           not try_button_color(right_button_color, orig_button_background, "right button"):
             return None
         # ---------------- Trial time ---------------- #
         tr_time = try_convert_to_float(trial_time.get(), "Trial time")
@@ -181,7 +183,7 @@ def page_2(info):
                                        win=window, columnspan=6)
 
     # ---------------- Trial time ---------------- #
-    #Separator(window, orient='horizontal').place(x=0, y=140, relwidth=1, height=2)
+    # Separator(window, orient='horizontal').place(x=0, y=140, relwidth=1, height=2)
     insert_text(text="Trial time", column=0, row=6, size=14, sticky="W", win=window)
     Separator(window, orient='horizontal').place(x=0, y=175, relwidth=1, height=2)
 
@@ -191,7 +193,7 @@ def page_2(info):
     break_time = insert_entry(column=2, row=9, width=5, sticky="E", win=window, columnspan=1)
 
     # ---------------- Trial info ---------------- #
-    #Separator(window, orient='horizontal').place(x=0, y=245, relwidth=1, height=2)
+    # Separator(window, orient='horizontal').place(x=0, y=245, relwidth=1, height=2)
     insert_text(text="Trial info", column=0, row=12, size=14, sticky="W", win=window)
     Separator(window, orient='horizontal').place(x=0, y=275, relwidth=1, height=2)
 
@@ -207,7 +209,6 @@ def page_2(info):
     trial_number_size_text = insert_text(text="\tTrial number size (px):", column=0, row=15, win=window, columnspan=6,
                                          sticky="W")
     trial_number_size = insert_entry(column=2, row=15, width=5, sticky="E", win=window, columnspan=1)
-
 
     # Show mouse buttons
     _, show_mouse_buttons_var = insert_checkbutton(text="Show mouse buttons reminder", column=0, row=17,

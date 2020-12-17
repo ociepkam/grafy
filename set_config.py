@@ -48,5 +48,3 @@ if __name__ == "__main__":
 
     # information = {**information[1], **information[2], **information[3]}
     create_new_config(information, "test_config.yaml")
-
-# TODO: Tkinter Becomes Unresponsive After Message Box
