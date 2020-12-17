@@ -21,7 +21,7 @@ def create_new_config(info, config_name="config.yaml"):
 
 if __name__ == "__main__":
     information = {1: None, 2: None, 3: None}
-    actual_page = 1
+    actual_page = 2
     try:
         info = load_config("test_config.yaml")
     except:

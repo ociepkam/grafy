@@ -31,6 +31,35 @@ def page_2(info):
                     clock_position_y, clock_position_y_text, clock_size_text, clock_size]
         show_on_off(elements, show_clock_icon_var, ["disable", "normal"])
 
+    def add_info_from_config():
+        try:
+            # Target
+            one_target_var.set(info["one_target"])
+            left_button_color['background'] = info["left_button_color"]
+            right_button_color['background'] = info["right_button_color"]
+            # Trial time
+            trial_time.insert(0, info["trial_time"])
+            break_time.insert(0, info["break_time"])
+            # Trial info
+            #    trial number
+            show_trial_number_var.set(info["show_trial_number"])
+            trial_number_position_x.insert(0, info["trial_number_position_x"])
+            trial_number_position_y.insert(0, info["trial_number_position_y"])
+            trial_number_size.insert(0, info["trial_number_size"])
+            #   mouse buttons
+            show_mouse_buttons_var.set(info["show_mouse_buttons"])
+            mouse_buttons_position_x.insert(0, info["mouse_buttons_position_x"])
+            mouse_buttons_position_y.insert(0, info["mouse_buttons_position_y"])
+            mouse_buttons_size.insert(0, info["mouse_buttons_size"])
+            #   clock
+            show_clock_icon_var.set(info["show_clock_icon"])
+            clock_position_x.insert(0, info["clock_position_x"])
+            clock_position_y.insert(0, info["clock_position_y"])
+            clock_size.insert(0, info["clock_size"])
+            clock_time.insert(0, info["clock_time"])
+        except:
+            messagebox.showerror(message="Can't load file with config")
+
     def alerts():
         global information
         # ------------------ Target ------------------ #
@@ -67,7 +96,7 @@ def page_2(info):
             mouse_position_x = try_convert_to_int(mouse_buttons_position_x.get(), "Mouse buttons x position")
             if mouse_position_x is None:
                 return None
-            mouse_position_y = try_convert_to_int(mouse_buttons_position_x.get(), "Mouse buttons y position")
+            mouse_position_y = try_convert_to_int(mouse_buttons_position_y.get(), "Mouse buttons y position")
             if mouse_position_y is None:
                 return None
             mouse_size = try_convert_to_int(mouse_buttons_size.get(), "Mouse buttons size")
@@ -102,7 +131,7 @@ def page_2(info):
             # Target
             "one_target": one_target_var.get(),
             "left_button_color": left_button_color['background'],
-            "right_button_color": left_button_color['background'],
+            "right_button_color": right_button_color['background'],
             # Trial time
             "trial_time": tr_time,
             "break_time": br_time,
@@ -113,16 +142,16 @@ def page_2(info):
             "trial_number_position_y": tr_number_position_y,
             "trial_number_size": tr_number_size,
             #   mouse buttons
-            "show_mouse_buttons_number": show_mouse_buttons_var.get(),
-            "trial_mouse_buttons_position_x": mouse_position_x,
-            "trial_mouse_buttons_position_y": mouse_position_y,
-            "trial_mouse_buttons_size": mouse_size,
+            "show_mouse_buttons": show_mouse_buttons_var.get(),
+            "mouse_buttons_position_x": mouse_position_x,
+            "mouse_buttons_position_y": mouse_position_y,
+            "mouse_buttons_size": mouse_size,
             #   clock
-            "show_clock_number": show_clock_icon_var.get(),
-            "trial_clock_position_x": cl_position_x,
-            "trial_clock_position_y": cl_position_y,
-            "trial_clock_size": cl_size,
-            "trial_clock_time": cl_time
+            "show_clock_icon": show_clock_icon_var.get(),
+            "clock_position_x": cl_position_x,
+            "clock_position_y": cl_position_y,
+            "clock_size": cl_size,
+            "clock_time": cl_time
         }
         window.destroy()
 
@@ -178,7 +207,7 @@ def page_2(info):
     trial_number_size_text = insert_text(text="\tTrial number size (px):", column=0, row=15, win=window, columnspan=6,
                                          sticky="W")
     trial_number_size = insert_entry(column=2, row=15, width=5, sticky="E", win=window, columnspan=1)
-    show_number()
+
 
     # Show mouse buttons
     _, show_mouse_buttons_var = insert_checkbutton(text="Show mouse buttons reminder", column=0, row=17,
@@ -192,7 +221,6 @@ def page_2(info):
     mouse_buttons_size_text = insert_text(text="\tMouse buttons size (px):", column=0, row=19, win=window,
                                           columnspan=6, sticky="W")
     mouse_buttons_size = insert_entry(column=2, row=19, width=5, sticky="E", win=window, columnspan=1)
-    show_buttons()
 
     # Clock
     _, show_clock_icon_var = insert_checkbutton(text="Show clock icon (reminder of short time left)", columnspan=6,
@@ -207,7 +235,6 @@ def page_2(info):
     clock_position_text = insert_text(text="\tClock position:", column=0, row=25, win=window, sticky="W", columnspan=3)
     clock_size_text = insert_text(text="\tClock size (px):", column=0, row=26, win=window, columnspan=6, sticky="W")
     clock_size = insert_entry(column=2, row=26, width=5, sticky="E", win=window, columnspan=1)
-    show_clock()
 
     insert_text(text="", column=0, row=29, size=12, win=window)
 
@@ -216,6 +243,11 @@ def page_2(info):
                                 win=window, columnspan=1)
     orig_button_background = next_button['background']
     orig_button_foreground = next_button['foreground']
+
+    add_info_from_config()
+    show_number()
+    show_buttons()
+    show_clock()
 
     window.mainloop()
     return information
