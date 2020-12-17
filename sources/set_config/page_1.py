@@ -88,9 +88,12 @@ def page_1():
         sess_type = "Predefined test" if session_type == 1 else "Randomized experiment"
 
         # ------------------ Break ------------------- #
-        b_n_trails = try_convert_to_int(break_after_n_trials.get(), "Provide break after n trials")
-        if not try_in_range(b_n_trails, "Provide break after n trials", v_min=0):
-            return None
+        if break_after_n_trials.get() != "":
+            b_n_trails = try_convert_to_int(break_after_n_trials.get(), "Provide break after n trials")
+            if not try_in_range(b_n_trails, "Provide break after n trials", v_min=0):
+                return None
+        else:
+            b_n_trails = 0
 
         information = {
             # Training
