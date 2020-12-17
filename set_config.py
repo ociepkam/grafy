@@ -20,29 +20,33 @@ def create_new_config(info, config_name="config.yaml"):
 
 
 if __name__ == "__main__":
-    information = {1: None, 2: None, 3: None}
-    actual_page = 2
+    actual_page = 1
     try:
-        info = load_config("test_config.yaml")
+        information = load_config("test_config.yaml")
     except:
-        info = {1: None, 2: None, 3: None}
+        information = {1: None, 2: None, 3: None}
     while True:
         try:
-            info[actual_page]
+            information[actual_page]
         except KeyError:
-            info[actual_page] = None
-        information[actual_page] = run_page(actual_page, info[actual_page])
-        if information[actual_page] == "close":
-            exit()
-        elif information[actual_page] == "go_back":
             information[actual_page] = None
+        page_result = run_page(actual_page, information[actual_page])
+        if page_result == "close":
+            exit()
+        elif page_result == "go_back":
             actual_page -= 1
+        elif page_result is None:
+            exit()
         elif actual_page == 3:
+            information[actual_page] = page_result
             break
-        elif information[actual_page] is not None:
+        elif page_result is not None:
+            information[actual_page] = page_result
             actual_page += 1
         else:
             exit()
 
     # information = {**information[1], **information[2], **information[3]}
     create_new_config(information, "test_config.yaml")
+
+# TODO: Tkinter Becomes Unresponsive After Message Box

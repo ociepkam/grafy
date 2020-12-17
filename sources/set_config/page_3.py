@@ -14,6 +14,30 @@ def page_3(info):
     def choose_edges_color():
         return choose_button_color(edges_button_color, title="Choose edges color")
 
+    def add_info_from_config():
+        try:
+            # Feedback text
+            correct_answer.insert(0, info["correct_answer"])
+            incorrect_answer.insert(0, info["incorrect_answer"])
+            no_answer.insert(0, info["no_answer"])
+            press_space_message.insert(0, info["press_space_message"])
+            # Visual
+            text_size.insert(0, info["text_size"])
+            background_button_color["background"] = info["background_color"]
+            vertices_button_color["background"] = info["vertices_color"]
+            edges_button_color["background"] = info["edges_color"]
+            left_graph_position_x.insert(0, info["left_graph_position"][0])
+            left_graph_position_y.insert(0, info["left_graph_position"][1])
+            right_graph_position_x.insert(0, info["right_graph_position"][0])
+            right_graph_position_y.insert(0, info["right_graph_position"][1])
+            vertices_size.insert(0, info["vertices_size"])
+            vertices_distance.insert(0, info["vertices_distance"])
+            gap_between_edges_and_vertices.insert(0, info["gap_between_edges_and_vertices"])
+            arrowhead_length.insert(0, info["arrowhead_length"])
+            arrowhead_width.insert(0, info["arrowhead_width"])
+        except:
+            messagebox.showerror(message="Can't load file with config")
+
     def alerts():
         global information
         # ------------------ Visual ------------------ #
@@ -167,6 +191,8 @@ def page_3(info):
     save_button = insert_button(text="    Save    ", column=3, row=30, command=alerts, size=12, win=window,
                                 columnspan=1, sticky="W")
     orig_button_background = save_button['background']
+
+    add_info_from_config()
 
     window.mainloop()
     return information
