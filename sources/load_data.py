@@ -4,9 +4,9 @@ import csv
 import ast
 
 
-def load_config():
+def load_config(file_name="config.yaml"):
     try:
-        with open("config.yaml") as yaml_file:
+        with open(file_name) as yaml_file:
             doc = yaml.load(yaml_file, Loader=yaml.FullLoader)
         return doc
     except:

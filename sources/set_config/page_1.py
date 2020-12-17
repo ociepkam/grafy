@@ -1,11 +1,11 @@
-from tkinter import IntVar, END, StringVar
+from tkinter import IntVar, END, StringVar, messagebox
 from tkinter.ttk import Separator
 from sources.set_config.tkinter_elements import *
 from sources.set_config.utils import *
 from sources.set_config.alerts import *
 
 
-def page_1():
+def page_1(info):
     global information, session_type
     information = None
     window = create_window("Set config", 550, 720)
@@ -49,6 +49,39 @@ def page_1():
         else:
             change_n_of_trials("?")
 
+    def add_info_from_config():
+        try:
+            # Training
+            training_session_var.set(info["training_session"])
+            predefined_training.set(info["predefined_training"])
+            if info["training_accuracy"] is not None:
+                training_accuracy.insert(0, info["training_accuracy"])
+            if info["training_attempts"] is not None:
+                training_attempts.insert(0, info["training_attempts"])
+            feedback_var.set(info["feedback_var"])
+            # Session type
+            session_type.set(0 if info["session_type"] == "Predefined test" else 1)
+            # Predefined test
+            predefined_test_list.set(info["predefined_test"])
+            randomize_trials_order_var.set(info["randomize_trials_order"])
+            randomize_graphs_var.set(info["randomize_graphs"])
+            # Randomized experiment
+            edges_3_var.set(info["no_of_edges"]["3"])
+            edges_4_var.set(info["no_of_edges"]["4"])
+            edges_5_var.set(info["no_of_edges"]["5"])
+            graphs_with_crossed_var.set(info["crossed_edges"]["graphs_with_crossed"])
+            graphs_without_crossed_edges_var.set(info["crossed_edges"]["graphs_without_crossed_edges"])
+            direct_var.set(info["types_of_target_vertices"]["direct"])
+            indirect_var.set(info["types_of_target_vertices"]["indirect"])
+            if info["trials_per_cell"] is not None:
+                trials_per_cell.insert(0, info["trials_per_cell"])
+            if info["n_of_trials"] is not None:
+                n_of_trials.insert(0, info["n_of_trials"])
+            if info["break_after_n_trials"] is not None:
+                break_after_n_trials.insert(0, info["break_after_n_trials"])
+        except:
+            messagebox.showerror(message="Can't load file with config")
+
     def alerts():
         global information, session_type
         # ----------------- Training ----------------- #
@@ -85,7 +118,7 @@ def page_1():
             messagebox.showerror(message="You have to choose \"Predefined test\" or \"Randomized experiment\".")
             return None
 
-        sess_type = "Predefined test" if session_type == 1 else "Randomized experiment"
+        sess_type = "Predefined test" if session_type.get() == 0 else "Randomized experiment"
 
         # ------------------ Break ------------------- #
         if break_after_n_trials.get() != "":
@@ -144,11 +177,10 @@ def page_1():
     training_attempts_text = insert_text(text="Max. training attempts:", column=0, row=5, sticky="W", win=window)
     training_attempts = insert_entry(column=2, row=5, width=5, sticky="W", win=window)
 
-    #feedback_text = insert_text(text="Feedback:", column=0, row=6, sticky="W", win=window)
+    # feedback_text = insert_text(text="Feedback:", column=0, row=6, sticky="W", win=window)
     feedback, feedback_var = insert_checkbutton(text="  Show feedback", column=0, row=6, sticky="W", win=window)
 
     # -------------- Experimental session -------------- #
-
 
     Separator(window, orient='horizontal').place(x=0, y=177, relwidth=1, height=2)
     insert_text(text="Experimental session", column=0, row=7, size=14, columnspan=6, win=window)
@@ -224,15 +256,10 @@ def page_1():
     Separator(window, orient='horizontal').place(x=0, y=650, relwidth=1, height=2)
 
     # --------- Experimental session disabled ---------- #
-    for elem in [predefined_training_text, predefined_training, training_accuracy_text, training_accuracy,
-                 training_attempts_text, training_attempts,  feedback,   #feedback_text,
-                 predefined_test_list, randomize_trials_order, randomize_graphs, choose_factor_levels, no_of_edges,
-                 edges_3, edges_4, edges_5, crossed_edges, graphs_with_crossed,
-                 graphs_without_crossed_edges, types_of_target_vertices, direct, indirect,
-                 trials_per_cell_text, trials_per_cell, n_of_trials_text, n_of_trials]:
-        elem.configure(state="disabled")
+    add_info_from_config()
+    training()
+    session()
 
-    # insert_text(text="", column=0, row=29, size=12, win=window)
     insert_button(text="  Cancel  ", column=1, row=32, command=close, size=12, win=window, columnspan=1, sticky="E")
     insert_button(text="    Next     ", column=3, row=32, command=alerts, size=12, win=window, columnspan=1)
 

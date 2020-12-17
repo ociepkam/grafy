@@ -4,7 +4,7 @@ from sources.set_config.utils import *
 from sources.set_config.alerts import *
 
 
-def page_3():
+def page_3(info):
     def choose_background_color():
         return choose_button_color(background_button_color, title="Choose background color")
 

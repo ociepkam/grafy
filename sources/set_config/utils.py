@@ -2,7 +2,10 @@ from tkinter import colorchooser
 
 
 def show_on_off(elements, checkbutton_var, states):
-    state = states[checkbutton_var.get()]
+    if checkbutton_var.get() == -1:
+        state = "disable"
+    else:
+        state = states[checkbutton_var.get()]
     for elem in elements:
         elem.configure(state=state)
 

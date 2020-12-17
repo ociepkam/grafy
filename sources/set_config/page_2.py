@@ -4,7 +4,7 @@ from sources.set_config.utils import *
 from sources.set_config.alerts import *
 
 
-def page_2():
+def page_2(info):
     def one_target():
         right_button_color['background'] = orig_button_background
         right_button_color['foreground'] = orig_button_foreground
