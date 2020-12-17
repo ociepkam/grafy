@@ -18,21 +18,22 @@ def create_new_config(info, config_name="config.yaml"):
     yaml.safe_dump(info, f, allow_unicode=True, sort_keys=False)
 
 
-information = {1: None, 2: None, 3: None}
-actual_page = 1
-while True:
-    information[actual_page] = run_page(actual_page)
-    if information[actual_page] == "close":
-        exit()
-    elif information[actual_page] == "go_back":
-        information[actual_page] = None
-        actual_page -= 1
-    elif actual_page == 3:
-        break
-    elif information[actual_page] is not None:
-        actual_page += 1
-    else:
-        exit()
+if __name__ == "__main__":
+    information = {1: None, 2: None, 3: None}
+    actual_page = 1
+    while True:
+        information[actual_page] = run_page(actual_page)
+        if information[actual_page] == "close":
+            exit()
+        elif information[actual_page] == "go_back":
+            information[actual_page] = None
+            actual_page -= 1
+        elif actual_page == 3:
+            break
+        elif information[actual_page] is not None:
+            actual_page += 1
+        else:
+            exit()
 
-information = {**information[1], **information[2], **information[3]}
-create_new_config(information, "test_config.yaml")
+    information = {**information[1], **information[2], **information[3]}
+    create_new_config(information, "test_config.yaml")
