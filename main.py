@@ -129,7 +129,7 @@ if config["training_session"]:
                       screen_width=SCREEN_RES[0], color=config['text_color'])
 
 # EXPERIMENT
-data_exp = load_trials(config['experiment_trials'])
+_, data_exp = load_trials(join("tests", config['experiment_trials']))
 show_info(window, join('.', 'messages', "instruction2.txt"), text_size=config['text_size'],
           screen_width=SCREEN_RES[0], key=config["exit_key"], color=config['text_color'])
 
