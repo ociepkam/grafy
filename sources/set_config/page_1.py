@@ -3,6 +3,7 @@ from tkinter.ttk import Separator
 from sources.set_config.tkinter_elements import *
 from sources.set_config.utils import *
 from sources.set_config.alerts import *
+import os
 
 
 def page_1(info):
@@ -14,7 +15,7 @@ def page_1(info):
 
     def training():
         elements = [predefined_training_text, training_accuracy_text, training_accuracy,
-                    training_attempts_text, training_attempts,  feedback]  #feedback_text,
+                    training_attempts_text, training_attempts]
         show_on_off(elements, training_session_var, ["disabled", "normal"])
         show_on_off([predefined_training], training_session_var, ["disabled", "readonly"])
 
@@ -58,7 +59,6 @@ def page_1(info):
                 training_accuracy.insert(0, info["training_accuracy"])
             if info["training_attempts"] is not None:
                 training_attempts.insert(0, info["training_attempts"])
-            feedback_var.set(info["feedback_var"])
             # Session type
             session_type.set(0 if info["session_type"] == "Predefined test" else 1)
             # Predefined test
@@ -135,7 +135,6 @@ def page_1(info):
             "predefined_training": predefined_training.get(),
             "training_accuracy": tr_acc,
             "training_attempts": tr_attempts,
-            "feedback_var": feedback_var.get(),
             # Session type
             "session_type": sess_type,
             # Predefined test
@@ -169,17 +168,15 @@ def page_1(info):
     insert_text(text="", column=0, row=2, size=1, win=window)
     Separator(window, orient='horizontal').place(x=0, y=50, relwidth=1, height=2)
 
+    training_files = os.listdir(os.path.join("trials", "training"))
     predefined_training_text = insert_text(text="Select predefined training:", column=0, row=3, sticky="W", win=window)
-    predefined_training = insert_combobox(column=2, row=3, values=(1, 2, 3), sticky="W", win=window)
+    predefined_training = insert_combobox(column=2, row=3, values=training_files, sticky="W", win=window)
 
     training_accuracy_text = insert_text(text="Required training accuracy:", column=0, row=4, sticky="W", win=window)
     training_accuracy = insert_entry(column=2, row=4, width=5, sticky="W", win=window)
 
     training_attempts_text = insert_text(text="Max. training attempts:", column=0, row=5, sticky="W", win=window)
     training_attempts = insert_entry(column=2, row=5, width=5, sticky="W", win=window)
-
-    # feedback_text = insert_text(text="Feedback:", column=0, row=6, sticky="W", win=window)
-    feedback, feedback_var = insert_checkbutton(text="  Show feedback", column=0, row=6, sticky="W", win=window)
 
     # -------------- Experimental session -------------- #
 
@@ -195,7 +192,8 @@ def page_1(info):
     insert_radiobutton(text="Predefined test", column=0, row=9, selector=session_type, value=0, size=12,
                        columnspan=3, command=session, win=window)
     insert_text(text="", column=0, row=19, size=1, win=window)
-    predefined_test_list = insert_combobox(column=0, row=11, values=(1, 2, 3), columnspan=2, win=window)
+    tests_files = os.listdir(os.path.join("trials", "tests"))
+    predefined_test_list = insert_combobox(column=0, row=11, values=tests_files, columnspan=2, win=window)
     insert_text(text="", column=0, row=12, size=1, win=window)
     randomize_trials_order, randomize_trials_order_var = insert_checkbutton(text="Randomize trials order", columnspan=3,
                                                                             row=13, column=0, sticky="W", win=window)

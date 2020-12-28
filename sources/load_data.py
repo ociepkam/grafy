@@ -4,10 +4,12 @@ import csv
 import ast
 
 
-def load_config(file_name="config.yaml"):
+def load_config(file_name="config.yaml", concatenate=False):
     try:
         with open(file_name) as yaml_file:
             doc = yaml.load(yaml_file, Loader=yaml.FullLoader)
+        if concatenate:
+            doc = {**doc[1], **doc[2], **doc[3], **doc[4]}
         return doc
     except:
         raise Exception("Can't load config file")
@@ -27,7 +29,7 @@ def load_trials(file_name):
                     header = row
                 else:
                     data_row = {k: v for k, v in zip(header, row)}
-                    for k in ["NR", "FEED", "TRAIN", "NV", "NE", "Block"]:
+                    for k in ["NR", "FEED", "TRAIN", "NV", "NE"]:
                         data_row[k] = int(data_row[k])
                     for k in ["VA", "VB", "left", "right"]:
                         data_row[k] = [int(elem) for elem in data_row[k].split(",")]
@@ -37,8 +39,8 @@ def load_trials(file_name):
                         data_train.append(data_row)
                     else:
                         data_exp.append(data_row)
-        block_nr = set([info["Block"] for info in data_exp])
-        data_exp = [[info for info in data_exp if info["Block"] == i] for i in block_nr]
+        # block_nr = set([info["Block"] for info in data_exp])
+        # data_exp = [[info for info in data_exp if info["Block"] == i] for i in block_nr]
         return data_train, data_exp
     except:
         raise Exception("Can't load file with items: " + file_name)

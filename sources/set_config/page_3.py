@@ -5,194 +5,156 @@ from sources.set_config.alerts import *
 
 
 def page_3(info):
-    def choose_background_color():
-        return choose_button_color(background_button_color, title="Choose background color")
 
-    def choose_vertices_color():
-        return choose_button_color(vertices_button_color, title="Choose vertices color")
+    def feedback_on_off():
+        elements = [feedback_text,
+                    correct_answer_text, correct_answer, correct_color_text, correct_answer_button_color,
+                    incorrect_answer_text, incorrect_answer, incorrect_color_text, incorrect_answer_button_color,
+                    no_answer_text, no_answer, no_answer_color_text, no_answer_button_color,
+                    press_space_message_text, press_space_message,
+                    press_space_button_color_text, press_space_button_color,
+                    feedback_text_size_text, feedback_text_size,
+                    feedback_position_x_text, feedback_position_x, feedback_position_y_text, feedback_position_y,
+                    feedback_position_text]
+        show_on_off(elements, feedback_var, ["disabled", "normal"])
 
-    def choose_edges_color():
-        return choose_button_color(edges_button_color, title="Choose edges color")
+    def choose_correct_answer():
+        return choose_button_color(correct_answer_button_color, title="Choose correct answer feedback text color")
 
-    def add_info_from_config():
-        try:
-            # Feedback text
-            correct_answer.insert(0, info["correct_answer"])
-            incorrect_answer.insert(0, info["incorrect_answer"])
-            no_answer.insert(0, info["no_answer"])
-            press_space_message.insert(0, info["press_space_message"])
-            # Visual
-            text_size.insert(0, info["text_size"])
-            background_button_color["background"] = info["background_color"]
-            vertices_button_color["background"] = info["vertices_color"]
-            edges_button_color["background"] = info["edges_color"]
-            left_graph_position_x.insert(0, info["left_graph_position"][0])
-            left_graph_position_y.insert(0, info["left_graph_position"][1])
-            right_graph_position_x.insert(0, info["right_graph_position"][0])
-            right_graph_position_y.insert(0, info["right_graph_position"][1])
-            vertices_size.insert(0, info["vertices_size"])
-            vertices_distance.insert(0, info["vertices_distance"])
-            gap_between_edges_and_vertices.insert(0, info["gap_between_edges_and_vertices"])
-            arrowhead_length.insert(0, info["arrowhead_length"])
-            arrowhead_width.insert(0, info["arrowhead_width"])
-        except:
-            messagebox.showerror(message="Can't load file with config")
-            correct_answer.focus_force()
+    def choose_incorrect_answer():
+        return choose_button_color(incorrect_answer_button_color, title="Choose incorrect answer feedback text color")
 
-    def alerts():
-        global information
-        # ------------------ Visual ------------------ #
-        if not try_button_color(background_button_color, orig_button_background, "background color"):
-            return None
-        txt_size = try_convert_to_int(text_size.get(), "Text size")
-        if not try_in_range(txt_size, "Text size", v_min=0):
-            return None
-        if not try_button_color(edges_button_color, orig_button_background, "edges color"):
-            return None
+    def choose_no_answer():
+        return choose_button_color(no_answer_button_color, title="Choose no answer feedback text color")
 
-        l_graph_position_x = try_convert_to_int(left_graph_position_x.get(), "Left graph x position")
-        if l_graph_position_x is None:
-            return None
-        l_graph_position_y = try_convert_to_int(left_graph_position_y.get(), "Left graph y position")
-        if l_graph_position_y is None:
-            return None
-
-        r_graph_position_x = try_convert_to_int(right_graph_position_x.get(), "Right graph x position")
-        if r_graph_position_x is None:
-            return None
-        r_graph_position_y = try_convert_to_int(right_graph_position_y.get(), "Right graph y position")
-        if r_graph_position_y is None:
-            return None
-
-        v_size = try_convert_to_int(vertices_size.get(), "Vertices size")
-        if not try_in_range(v_size, "Vertices size", v_min=0):
-            return None
-
-        v_distance = try_convert_to_int(vertices_distance.get(), "Distance between vertices")
-        if not try_in_range(v_distance, "Distance between vertices", v_min=0):
-            return None
-
-        e_v_gap = try_convert_to_int(gap_between_edges_and_vertices.get(), "Gap between edges and vertices")
-        if not try_in_range(e_v_gap, "Gap between edges and vertices", v_min=0):
-            return None
-
-        a_length = try_convert_to_int(arrowhead_length.get(), "Arrowhead length")
-        if not try_in_range(a_length, "Arrowhead length", v_min=0):
-            return None
-
-        a_width = try_convert_to_int(arrowhead_width.get(), "Arrowhead width")
-        if not try_in_range(a_width, "Arrowhead width", v_min=0):
-            return None
-
-        information = {
-            # Feedback text
-            "correct_answer": correct_answer.get(),
-            "incorrect_answer": incorrect_answer.get(),
-            "no_answer": no_answer.get(),
-            "press_space_message": press_space_message.get(),
-            # Visual
-            "background_color": background_button_color["background"],
-            "text_size": txt_size,
-            "vertices_color": vertices_button_color["background"],
-            "edges_color": edges_button_color["background"],
-            "left_graph_position": [l_graph_position_x, l_graph_position_y],
-            "right_graph_position": [r_graph_position_x, r_graph_position_y],
-            "vertices_size": v_size,
-            "vertices_distance": v_distance,
-            "gap_between_edges_and_vertices": e_v_gap,
-            "arrowhead_length": a_length,
-            "arrowhead_width": a_width
-        }
-
-        window.destroy()
+    def choose_press_space():
+        return choose_button_color(press_space_button_color, title="Choose press space text color")
 
     def go_back():
         global information
         window.destroy()
         information = "go_back"
 
+    def add_info_from_config():
+        try:
+            feedback_var.set(info["feedback"])
+            correct_answer.insert(0, info["correct_answer"])
+            correct_answer_button_color["background"] = info["correct_answer_color"]
+            incorrect_answer.insert(0, info["incorrect_answer"])
+            incorrect_answer_button_color["background"] = info["incorrect_answer_color"]
+            no_answer.insert(0, info["no_answer"])
+            no_answer_button_color["background"] = info["no_answer_color"]
+
+            press_space_message.insert(0, info["press_space_message"])
+            press_space_button_color["background"] = info["press_space_color"]
+
+            feedback_text_size.insert(0, info["feedback_text_size"])
+            feedback_position_x.insert(0, info["feedback_position_x"])
+            feedback_position_y.insert(0, info["feedback_position_y"])
+
+        except:
+            messagebox.showerror(message="Can't load file with config")
+            feedback.focus_force()
+
+    def alerts():
+        global information
+        if feedback_var.get():
+            if not try_button_color(correct_answer_button_color, orig_button_background, "correct answer text"):
+                return None
+            if not try_button_color(incorrect_answer_button_color, orig_button_background, "incorrect answer text"):
+                return None
+            if not try_button_color(no_answer_button_color, orig_button_background, "no answer text"):
+                return None
+            if not try_button_color(press_space_button_color, orig_button_background, "press space text"):
+                return None
+
+            txt_size = try_convert_to_int(feedback_text_size.get(), "Feedback text size")
+            if not try_in_range(txt_size, "Feedback text size", v_min=0):
+                return None
+
+            f_position_x = try_convert_to_int(feedback_position_x.get(), "Feedback x position")
+            if f_position_x is None:
+                return None
+            f_position_y = try_convert_to_int(feedback_position_y.get(), "Feedback y position")
+            if f_position_y is None:
+                return None
+        else:
+            txt_size = None
+
+        information = {
+            "feedback": feedback_var.get(),
+            "correct_answer": correct_answer.get(),
+            "correct_answer_color": correct_answer_button_color["background"],
+            "incorrect_answer": incorrect_answer.get(),
+            "incorrect_answer_color": incorrect_answer_button_color["background"],
+            "no_answer": no_answer.get(),
+            "no_answer_color": no_answer_button_color["background"],
+            "press_space_message": press_space_message.get(),
+            "press_space_button_color": press_space_button_color["background"],
+            "feedback_text_size": txt_size,
+            "feedback_position": [feedback_position_x.get(), feedback_position_y.get()]}
+
+        window.destroy()
+
     global information
     information = None
 
     window = create_window("Set config", 550, 680)
 
-    # -------------- Feedback text --------------- #
+    feedback, feedback_var = insert_checkbutton(text="  Show feedback", column=0, row=0, sticky="W", win=window,
+                                                command=feedback_on_off)
 
-    insert_text(text="", column=5, row=0, size=1, win=window)
-    insert_text(text="Feedback text", column=0, row=0, size=14, sticky="W", win=window)
-    Separator(window, orient='horizontal').place(x=0, y=35, relwidth=1, height=2)
+    feedback_text = insert_text(text="Feedback text", column=0, row=1, size=14, sticky="W", win=window)
 
-    insert_text(text="Correct answer:", column=0, row=3, columnspan=6, win=window, sticky="W")
-    correct_answer = insert_entry(column=0, row=4, width=5, sticky="EW", win=window, columnspan=6)
+    correct_answer_text = insert_text(text="Correct answer:", column=0, row=2, columnspan=6, win=window, sticky="W")
+    correct_answer = insert_entry(column=0, row=3, width=5, sticky="EW", win=window, columnspan=6)
 
-    insert_text(text="Incorrect answer:", column=0, row=5, columnspan=6, win=window, sticky="W")
+    correct_color_text = insert_text(text="Correct answer color:", column=0, row=4, columnspan=6, win=window,
+                                     sticky="W")
+    correct_answer_button_color = insert_button(text="Choose color", column=0, row=4, command=choose_correct_answer,
+                                                size=9, win=window, columnspan=6)
+
+    incorrect_answer_text = insert_text(text="Incorrect answer:", column=0, row=5, columnspan=6, win=window, sticky="W")
     incorrect_answer = insert_entry(column=0, row=6, width=5, sticky="EW", win=window, columnspan=6)
 
-    insert_text(text="No answer:", column=0, row=7, columnspan=6, win=window, sticky="W")
-    no_answer = insert_entry(column=0, row=8, width=5, sticky="EW", win=window, columnspan=6)
+    incorrect_color_text = insert_text(text="Incorrect answer color:", column=0, row=7, columnspan=6, win=window,
+                                       sticky="W")
+    incorrect_answer_button_color = insert_button(text="Choose color", column=0, row=7, win=window, columnspan=6,
+                                                  command=choose_incorrect_answer, size=9)
 
-    insert_text(text="Press space message:", column=0, row=9, columnspan=6, win=window, sticky="W")
-    press_space_message = insert_entry(column=0, row=10, width=5, sticky="EW", win=window, columnspan=6)
+    no_answer_text = insert_text(text="No answer:", column=0, row=8, columnspan=6, win=window, sticky="W")
+    no_answer = insert_entry(column=0, row=9, width=5, sticky="EW", win=window, columnspan=6)
 
-    # ------------------ Visual ------------------ #
-    insert_text(text="Visual", column=0, row=12, sticky="W", win=window, size=14)
-    Separator(window, orient='horizontal').place(x=0, y=285, relwidth=1, height=2)
+    no_answer_color_text = insert_text(text="No answer color:", column=0, row=10, columnspan=6, win=window, sticky="W")
+    no_answer_button_color = insert_button(text="Choose color", column=0, row=10, command=choose_no_answer,
+                                                size=9, win=window, columnspan=6)
 
-    insert_text(text="Text size (px):", column=0, row=14, columnspan=2, win=window, sticky="W")
-    text_size = insert_entry(column=2, row=14, width=5, sticky="E", win=window, columnspan=1)
+    press_space_message_text = insert_text(text="Press space message:", column=0, row=11, columnspan=6, win=window,
+                                           sticky="W")
+    press_space_message = insert_entry(column=0, row=12, width=5, sticky="EW", win=window, columnspan=6)
 
-    insert_text(text="Background color:", column=0, row=15, columnspan=6, win=window, sticky="W")
-    background_button_color = insert_button(text="Choose color", column=0, row=15, command=choose_background_color,
-                                            size=9, win=window, columnspan=6)
+    press_space_button_color_text = insert_text(text="Background color:", column=0, row=13, columnspan=6, win=window,
+                                                sticky="W")
+    press_space_button_color = insert_button(text="Choose color", column=0, row=13, command=choose_press_space,
+                                                size=9, win=window, columnspan=6)
 
-    insert_text(text="Non-target vertices color:", column=0, row=16, columnspan=6, win=window, sticky="W")
-    vertices_button_color = insert_button(text="Choose color", column=0, row=16, command=choose_vertices_color,
-                                          size=9, win=window, columnspan=6)
+    feedback_text_size_text = insert_text(text="Feedback text size (px):", column=0, row=14, columnspan=2, win=window,
+                                          sticky="W")
+    feedback_text_size = insert_entry(column=2, row=14, width=5, sticky="E", win=window, columnspan=1)
 
-    insert_text(text="Edges color:", column=0, row=17, columnspan=6, win=window, sticky="W")
-    edges_button_color = insert_button(text="Choose color", column=0, row=17, command=choose_edges_color,
-                                       size=9, win=window, columnspan=6)
+    feedback_position_x_text = insert_text(text="x:", column=2, row=15, win=window, sticky="W", columnspan=1)
+    feedback_position_x = insert_entry(column=2, row=15, width=5, sticky="E", win=window, columnspan=1)
+    feedback_position_y_text = insert_text(text="y:", column=3, row=15, win=window, sticky="W", columnspan=1)
+    feedback_position_y = insert_entry(column=3, row=15, width=5, sticky="E", win=window, columnspan=1)
+    feedback_position_text = insert_text(text="Feedback text position:", column=0, row=15, columnspan=6, win=window,
+                                         sticky="W")
 
-    insert_text(text="x:", column=2, row=19, win=window, sticky="W", columnspan=1)
-    left_graph_position_x = insert_entry(column=2, row=19, width=5, sticky="E", win=window, columnspan=1)
-    insert_text(text="y:", column=3, row=19, win=window, sticky="W", columnspan=1)
-    left_graph_position_y = insert_entry(column=3, row=19, width=5, sticky="E", win=window, columnspan=1)
-    insert_text(text="Left graph position:", column=0, row=19, columnspan=6, win=window, sticky="W")
-
-    insert_text(text="x:", column=2, row=20, win=window, sticky="W", columnspan=1)
-    right_graph_position_x = insert_entry(column=2, row=20, width=5, sticky="E", win=window, columnspan=1)
-    insert_text(text="y:", column=3, row=20, win=window, sticky="W", columnspan=1)
-    right_graph_position_y = insert_entry(column=3, row=20, width=5, sticky="E", win=window, columnspan=1)
-    insert_text(text="Right graph position:    ", column=0, row=20, columnspan=6, win=window, sticky="W")
-
-    insert_text(text="Vertices size:", column=0, row=21, columnspan=6, win=window, sticky="W")
-    vertices_size = insert_entry(column=2, row=21, width=5, sticky="E", win=window, columnspan=1)
-
-    insert_text(text="Distance between vertices:", column=0, row=22, columnspan=6, win=window, sticky="W")
-    vertices_distance = insert_entry(column=2, row=22, width=5, sticky="E", win=window, columnspan=1)
-
-    insert_text(text="Gap between edges and vertices:", column=0, row=23, columnspan=6, win=window, sticky="W")
-    gap_between_edges_and_vertices = insert_entry(column=2, row=23, width=5, sticky="E", win=window, columnspan=1)
-
-    insert_text(text="Arrowhead length:", column=0, row=24, columnspan=6, win=window, sticky="W")
-    arrowhead_length = insert_entry(column=2, row=24, width=5, sticky="E", win=window, columnspan=1)
-
-    insert_text(text="Arrowhead width:", column=0, row=25, columnspan=6, win=window, sticky="W")
-    arrowhead_width = insert_entry(column=2, row=25, width=5, sticky="E", win=window, columnspan=1)
-
-    # ------------------ Other ------------------- #
-
-    # insert_text(text="Exit key:", column=0, row=25, columnspan=6, win=window, sticky="W")
-    # exit_key = insert_entry(column=2, row=25, width=5, sticky="E", win=window, columnspan=1)
-
-    # ------------------------------------- #
-
-    insert_button(text="    Back    ", column=1, row=30, command=go_back, size=12, win=window, columnspan=1, sticky="E")
-    save_button = insert_button(text="    Save    ", column=3, row=30, command=alerts, size=12, win=window,
-                                columnspan=1, sticky="W")
-    orig_button_background = save_button['background']
-
+    insert_button(text="    Back    ", column=1, row=32, command=go_back, size=12, win=window, columnspan=1, sticky="E")
+    next_button = insert_button(text="    Next     ", column=3, row=32, command=alerts, size=12, win=window,
+                                columnspan=1)
+    orig_button_background = next_button['background']
     add_info_from_config()
+    feedback_on_off()
 
     window.mainloop()
     return information

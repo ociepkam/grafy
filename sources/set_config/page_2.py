@@ -40,6 +40,7 @@ def page_2(info):
             # Trial time
             trial_time.insert(0, info["trial_time"])
             break_time.insert(0, info["break_time"])
+            click_show_time.insert(0, info["click_show_time"])
             # Trial info
             #    trial number
             show_trial_number_var.set(info["show_trial_number"])
@@ -75,6 +76,9 @@ def page_2(info):
             return None
         br_time = try_convert_to_float(break_time.get(), "Break time")
         if not try_in_range(br_time, "Break time", v_min=0):
+            return None
+        cl_show_time = try_convert_to_float(click_show_time.get(), "Show chose option")
+        if not try_in_range(cl_show_time, "Show chose option", v_min=0):
             return None
         # ---------------- Trial info ---------------- #
         # Trial number
@@ -137,6 +141,7 @@ def page_2(info):
             # Trial time
             "trial_time": tr_time,
             "break_time": br_time,
+            "click_show_time": cl_show_time,
             # Trial info
             #    trial number
             "show_trial_number": show_trial_number_var.get(),
@@ -191,6 +196,9 @@ def page_2(info):
     trial_time = insert_entry(column=2, row=8, width=5, sticky="E", win=window, columnspan=1)
     insert_text(text="Break between trials (sec):", column=0, row=9, win=window, sticky="W", columnspan=3)
     break_time = insert_entry(column=2, row=9, width=5, sticky="E", win=window, columnspan=1)
+
+    insert_text(text="Show chose option (sec):", column=0, row=10, win=window, sticky="W", columnspan=3)
+    click_show_time = insert_entry(column=2, row=10, width=5, sticky="E", win=window, columnspan=1)
 
     # ---------------- Trial info ---------------- #
     # Separator(window, orient='horizontal').place(x=0, y=245, relwidth=1, height=2)

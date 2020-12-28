@@ -44,7 +44,7 @@ def try_combobox(value, text, message=True):
 def try_button_color(button, origin, text, message=True):
     if button["background"] == origin:
         if message:
-            messagebox.showerror(message="You have to choose {} background color".format(text))
+            messagebox.showerror(message="You have to choose {} color".format(text))
         return False
     return True
 

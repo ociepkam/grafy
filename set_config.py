@@ -1,4 +1,4 @@
-from sources.set_config import page_1, page_2, page_3
+from sources.set_config import page_1, page_2, page_3, page_4
 from sources.load_data import load_config
 import yaml
 
@@ -10,6 +10,8 @@ def run_page(page_n, info=None):
         return page_2.page_2(info)
     if page_n == 3:
         return page_3.page_3(info)
+    if page_n == 4:
+        return page_4.page_4(info)
     else:
         raise Exception("Wrong page number")
 
@@ -24,7 +26,7 @@ if __name__ == "__main__":
     try:
         information = load_config("test_config.yaml")
     except:
-        information = {1: None, 2: None, 3: None}
+        information = {1: None, 2: None, 3: None, 4: None}
     while True:
         try:
             information[actual_page]
@@ -37,7 +39,7 @@ if __name__ == "__main__":
             actual_page -= 1
         elif page_result is None:
             exit()
-        elif actual_page == 3:
+        elif actual_page == 4:
             information[actual_page] = page_result
             break
         elif page_result is not None:
