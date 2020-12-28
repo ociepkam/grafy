@@ -93,10 +93,10 @@ if config["training_session"]:
     while mean_acc < config["training_accuracy"]:
 
         show_image(window, 'instruction1.png', SCREEN_RES)
-        # show_image(window, 'instruction2.png', SCREEN_RES)
-        # show_image(window, 'instruction3.png', SCREEN_RES)
-        # show_image(window, 'instruction4.png', SCREEN_RES)
-        # show_image(window, 'instruction5.png', SCREEN_RES)
+        show_image(window, 'instruction2.png', SCREEN_RES)
+        show_image(window, 'instruction3.png', SCREEN_RES)
+        show_image(window, 'instruction4.png', SCREEN_RES)
+        show_image(window, 'instruction5.png', SCREEN_RES)
 
         mean_acc = 0
         i = 1
