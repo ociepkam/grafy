@@ -80,6 +80,8 @@ def page_3(info):
                 return None
         else:
             txt_size = None
+            f_position_x = None
+            f_position_y = None
 
         information = {
             "feedback": feedback_var.get(),
@@ -92,7 +94,7 @@ def page_3(info):
             "press_space_message": press_space_message.get(),
             "press_space_button_color": press_space_button_color["background"],
             "feedback_text_size": txt_size,
-            "feedback_position": [feedback_position_x.get(), feedback_position_y.get()]}
+            "feedback_position": [f_position_x, f_position_y]}
 
         window.destroy()
 
