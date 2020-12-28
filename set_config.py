@@ -24,7 +24,7 @@ def create_new_config(info, config_name="config.yaml"):
 if __name__ == "__main__":
     actual_page = 1
     try:
-        information = load_config("test_config.yaml")
+        information = load_config("config.yaml")
     except:
         information = {1: None, 2: None, 3: None, 4: None}
     while True:
@@ -48,5 +48,4 @@ if __name__ == "__main__":
         else:
             exit()
 
-    # information = {**information[1], **information[2], **information[3]}
-    create_new_config(information, "test_config.yaml")
+    create_new_config(information, "config.yaml")

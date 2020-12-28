@@ -47,92 +47,107 @@ def prepare_result(i, info, answers, rt, acc, exp):
             rt["left"], rt["right"], max(rt["left"], rt["right"]) if rt["left"] and rt["right"] else None]
 
 
-config = load_config()
-
-data_train = load_trials(config['training_trials'])
-data_exp = load_trials(config['experiment_trials'])
-
-### DO WYWALENIA BLOKI:
-if config["random_trials_order"]:
-    for block in data_exp:
-        random.shuffle(block)
+config = load_config("config.yaml", concatenate=True)
 
 SCREEN_RES = get_screen_res()
-
-window = visual.Window(SCREEN_RES, fullscr=True, monitor='testMonitor', units='pix', color='Gainsboro')
+window = visual.Window(SCREEN_RES, fullscr=True, units='pix', color=config["background_color"])
 FRAMES_PER_SEC = get_frame_rate(window)
 mouse = event.Mouse(visible=True)
 
-clock_image = visual.ImageStim(win=window, image=join('images', 'clock.png'), interpolate=True,
-                               size=config['CLOCK_SIZE'], pos=config['CLOCK_POS'])
+if config["show_clock_icon"]:
+    clock_image = visual.ImageStim(win=window, image=join('images', 'clock.png'), size=config['clock_size'],
+                                   interpolate=True, pos=[config['clock_position_x'], config['clock_position_y']])
+else:
+    clock_image = None
 
-mouse_info = visual.ImageStim(win=window, image=join('images', 'mouse_info.PNG'), interpolate=True,
-                              size=130, pos=[-60, -250])
+if config["show_mouse_buttons"]:
+    mouse_info = visual.ImageStim(win=window, image=join('images', 'mouse_info.PNG'), interpolate=True,
+                                  size=config["mouse_buttons_size"],
+                                  pos=[config["mouse_buttons_position_x"], config["mouse_buttons_position_y"]])
+else:
+    mouse_info = None
 
-answers_colors = config["answers_colors"]
+if config["one_target"]:
+    answers_colors = [config["left_button_color"]]
+else:
+    answers_colors = [config["left_button_color"], config["right_button_color"]]
 
-pos_feedb = visual.TextStim(window, text=replace_polish(config["pos_feedb"]), color='black', height=25, pos=(0, -120))
-neg_feedb = visual.TextStim(window, text=replace_polish(config["neg_feedb"]), color='black', height=25, pos=(0, -120))
-no_feedb = visual.TextStim(window, text=replace_polish(config["no_feedb"]), color='black', height=25, pos=(0, -120))
-feedb = {"pos": pos_feedb, "neg": neg_feedb, "no": no_feedb}
+if config["feedback"]:
+    pos_feedb = visual.TextStim(window, text=replace_polish(config["correct_answer"]), pos=config["feedback_position"],
+                                color=config["correct_answer_color"], height=config["feedback_text_size"])
+    neg_feedb = visual.TextStim(window, text=replace_polish(config["incorrect_answer"]),
+                                height=config["feedback_text_size"], pos=config["feedback_position"],
+                                color=config["incorrect_answer_color"])
+    no_feedb = visual.TextStim(window, text=replace_polish(config["no_answer"]), pos=config["feedback_position"],
+                               color=config["no_answer_color"], height=config["feedback_text_size"])
+    feedb = {"pos": pos_feedb, "neg": neg_feedb, "no": no_feedb}
+else:
+    feedb = None
 
 
 # TRAINING
-mean_acc = 0
-training_nr = 0
-while mean_acc < config["min_training_acc"]:
-
-    # INSTRUCTIONS:
-    # show_info(window, join('.', 'messages', "instruction1.txt"), text_size=config['TEXT_SIZE'],
-    #           screen_width=SCREEN_RES[0], key=config["exit_key"])
-    show_image(window, 'instruction1.png', SCREEN_RES, key=config["exit_key"])
-    show_image(window, 'instruction2.png', SCREEN_RES, key=config["exit_key"])
-    show_image(window, 'instruction3.png', SCREEN_RES, key=config["exit_key"])
-    show_image(window, 'instruction4.png', SCREEN_RES, key=config["exit_key"])
-    show_image(window, 'instruction5.png', SCREEN_RES, key=config["exit_key"])
-
+if config["training_session"]:
+    data_train, _ = load_trials(join("training", config['predefined_training']))
     mean_acc = 0
-    i = 1
-    training_nr += 1
-    for info in data_train:
-        idx_info = visual.TextStim(window, color='black', pos=(500, 400), height=50,
-                                   text=i)
-        answers, rt, acc, A_to_B_relation = trial(window, config, answers_colors, info, mouse, clock_image,
-                                                  feedb, mouse_info, idx_info)
+    training_nr = 0
+    while mean_acc < config["training_accuracy"]:
 
-        RESULTS.append(prepare_result(i, info, answers, rt, acc, "train"))
-        i += 1
-        if not config["only_one_target"]:
-            mean_acc += 1 if acc["left"] and acc["right"] else 0
+        show_image(window, 'instruction1.png', SCREEN_RES)
+        # show_image(window, 'instruction2.png', SCREEN_RES)
+        # show_image(window, 'instruction3.png', SCREEN_RES)
+        # show_image(window, 'instruction4.png', SCREEN_RES)
+        # show_image(window, 'instruction5.png', SCREEN_RES)
+
+        mean_acc = 0
+        i = 1
+        training_nr += 1
+        for info in data_train:
+            if config["show_trial_number"]:
+                idx_info = visual.TextStim(window, color=config["text_color"], height=config["trial_number_size"], text=i,
+                                           pos=[config["trial_number_position_x"], config["trial_number_position_y"]])
+            else:
+                idx_info = None
+            answers, rt, acc, A_to_B_relation = trial(window, config, answers_colors, info, mouse, clock_image,
+                                                      feedb, mouse_info, idx_info)
+
+            RESULTS.append(prepare_result(i, info, answers, rt, acc, "train"))
+            i += 1
+            if not config["one_target"]:
+                mean_acc += 1 if acc["left"] and acc["right"] else 0
+            else:
+                mean_acc += 1 if acc["left"] else 0
+        if i > 1:
+            mean_acc /= (i - 1)
         else:
-            mean_acc += 1 if acc["left"] else 0
-    if i > 1:
-        mean_acc /= (i - 1)
-    else:
-        break
-    if mean_acc < config["min_training_acc"] and training_nr == config['max_training_attempts']:
-        show_info(window, join('.', 'messages', "end.txt"), text_size=config['TEXT_SIZE'], screen_width=SCREEN_RES[0])
-        exit(1)
-    if mean_acc < config["min_training_acc"]:
-        show_info(window, join('.', 'messages', "training_info.txt"),
-                  text_size=config['TEXT_SIZE'], screen_width=SCREEN_RES[0])
+            break
+        if mean_acc < config["min_training_acc"] and training_nr == config['max_training_attempts']:
+            show_info(window, join('.', 'messages', "too_many_attempts.txt"), text_size=config['text_size'],
+                      screen_width=SCREEN_RES[0], color=config['text_color'])
+            exit(1)
+        if mean_acc < config["min_training_acc"]:
+            show_info(window, join('.', 'messages', "training_info.txt"), text_size=config['text_size'],
+                      screen_width=SCREEN_RES[0], color=config['text_color'])
 
 # EXPERIMENT
-show_info(window, join('.', 'messages', "instruction2.txt"), text_size=config['TEXT_SIZE'],
-          screen_width=SCREEN_RES[0], key=config["exit_key"])
+data_exp = load_trials(config['experiment_trials'])
+show_info(window, join('.', 'messages', "instruction2.txt"), text_size=config['text_size'],
+          screen_width=SCREEN_RES[0], key=config["exit_key"], color=config['text_color'])
 
 i = 1
-for c in data_exp:
-    idx_info = visual.TextStim(window, color='black', pos=(500, 400), height=50, text=i)
+for info in data_exp:
+    if config["show_trial_number"]:
+        idx_info = visual.TextStim(window, color=config["text_color"], height=config["trial_number_size"], text=i,
+                                   pos=[config["trial_number_position_x"], config["trial_number_position_y"]])
+    else:
+        idx_info = None
     answers, rt, acc, A_to_B_relation = trial(window, config, answers_colors, info,
                                               mouse, clock_image, feedb, mouse_info, idx_info)
     RESULTS.append(prepare_result(i, info, answers, rt, acc, "exp"))
     i += 1
 
     if i == config['break_after_n_trials']:
-        show_info(window, join('.', 'messages', "break.txt"), text_size=config['TEXT_SIZE'] + 25,
-                  screen_width=SCREEN_RES[0], key=config["exit_key"], color='green')
+        show_info(window, join('.', 'messages', "break.txt"), text_size=config['text_size'] + 25,
+                  screen_width=SCREEN_RES[0], key=config["exit_key"], color=config['text_color'])
 
-    show_info(window, join('.', 'messages', "end.txt"), text_size=config['TEXT_SIZE'], screen_width=SCREEN_RES[0])
-
-
+    show_info(window, join('.', 'messages', "end.txt"), text_size=config['text_size'],
+              screen_width=SCREEN_RES[0], color=config['text_color'])
