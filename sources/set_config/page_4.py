@@ -116,54 +116,54 @@ def page_4(info):
     window = create_window("Set config", 550, 680)
 
     # ------------------ Visual ------------------ #
-    insert_text(text="Visual", column=0, row=11, sticky="W", win=window, size=14)
-    Separator(window, orient='horizontal').place(x=0, y=285, relwidth=1, height=2)
+    insert_text(text="Visual", column=0, row=0, sticky="W", win=window, size=14)
+    Separator(window, orient='horizontal').place(x=0, y=40, relwidth=1, height=2)
 
-    insert_text(text="Text size (px):", column=0, row=13, columnspan=2, win=window, sticky="W")
-    text_size = insert_entry(column=2, row=13, width=5, sticky="E", win=window, columnspan=1)
+    insert_text(text="Text size (px):", column=0, row=2, columnspan=2, win=window, sticky="W")
+    text_size = insert_entry(column=2, row=2, width=5, sticky="E", win=window, columnspan=1)
 
-    insert_text(text="Text color:", column=0, row=14, columnspan=6, win=window, sticky="W")
-    text_button_color = insert_button(text="Choose color", column=0, row=14, command=choose_text_color,
+    insert_text(text="Text color:", column=0, row=3, columnspan=6, win=window, sticky="W")
+    text_button_color = insert_button(text="Choose color", column=0, row=3, command=choose_text_color,
                                       size=9, win=window, columnspan=6)
 
-    insert_text(text="Background color:", column=0, row=15, columnspan=6, win=window, sticky="W")
-    background_button_color = insert_button(text="Choose color", column=0, row=15, command=choose_background_color,
+    insert_text(text="Background color:", column=0, row=4, columnspan=6, win=window, sticky="W")
+    background_button_color = insert_button(text="Choose color", column=0, row=4, command=choose_background_color,
                                             size=9, win=window, columnspan=6)
 
-    insert_text(text="Non-target vertices color:", column=0, row=16, columnspan=6, win=window, sticky="W")
-    vertices_button_color = insert_button(text="Choose color", column=0, row=16, command=choose_vertices_color,
+    insert_text(text="Non-target vertices color:", column=0, row=5, columnspan=6, win=window, sticky="W")
+    vertices_button_color = insert_button(text="Choose color", column=0, row=5, command=choose_vertices_color,
                                           size=9, win=window, columnspan=6)
 
-    insert_text(text="Edges color:", column=0, row=17, columnspan=6, win=window, sticky="W")
-    edges_button_color = insert_button(text="Choose color", column=0, row=17, command=choose_edges_color,
+    insert_text(text="Edges color:", column=0, row=6, columnspan=6, win=window, sticky="W")
+    edges_button_color = insert_button(text="Choose color", column=0, row=6, command=choose_edges_color,
                                        size=9, win=window, columnspan=6)
 
-    insert_text(text="x:", column=2, row=19, win=window, sticky="W", columnspan=1)
-    left_graph_position_x = insert_entry(column=2, row=19, width=5, sticky="E", win=window, columnspan=1)
-    insert_text(text="y:", column=3, row=19, win=window, sticky="W", columnspan=1)
-    left_graph_position_y = insert_entry(column=3, row=19, width=5, sticky="E", win=window, columnspan=1)
-    insert_text(text="Left graph position:", column=0, row=19, columnspan=6, win=window, sticky="W")
+    insert_text(text="x:", column=2, row=9, win=window, sticky="W", columnspan=1)
+    left_graph_position_x = insert_entry(column=2, row=9, width=5, sticky="E", win=window, columnspan=1)
+    insert_text(text="y:", column=3, row=9, win=window, sticky="W", columnspan=1)
+    left_graph_position_y = insert_entry(column=3, row=9, width=5, sticky="E", win=window, columnspan=1)
+    insert_text(text="Left graph position:", column=0, row=9, columnspan=6, win=window, sticky="W")
 
-    insert_text(text="x:", column=2, row=20, win=window, sticky="W", columnspan=1)
-    right_graph_position_x = insert_entry(column=2, row=20, width=5, sticky="E", win=window, columnspan=1)
-    insert_text(text="y:", column=3, row=20, win=window, sticky="W", columnspan=1)
-    right_graph_position_y = insert_entry(column=3, row=20, width=5, sticky="E", win=window, columnspan=1)
-    insert_text(text="Right graph position:    ", column=0, row=20, columnspan=6, win=window, sticky="W")
+    insert_text(text="x:", column=2, row=10, win=window, sticky="W", columnspan=1)
+    right_graph_position_x = insert_entry(column=2, row=10, width=5, sticky="E", win=window, columnspan=1)
+    insert_text(text="y:", column=3, row=10, win=window, sticky="W", columnspan=1)
+    right_graph_position_y = insert_entry(column=3, row=10, width=5, sticky="E", win=window, columnspan=1)
+    insert_text(text="Right graph position:    ", column=0, row=10, columnspan=6, win=window, sticky="W")
 
-    insert_text(text="Vertices size:", column=0, row=21, columnspan=6, win=window, sticky="W")
-    vertices_size = insert_entry(column=2, row=21, width=5, sticky="E", win=window, columnspan=1)
+    insert_text(text="Vertices size:", column=0, row=11, columnspan=6, win=window, sticky="W")
+    vertices_size = insert_entry(column=2, row=11, width=5, sticky="E", win=window, columnspan=1)
 
-    insert_text(text="Distance between vertices:", column=0, row=22, columnspan=6, win=window, sticky="W")
-    vertices_distance = insert_entry(column=2, row=22, width=5, sticky="E", win=window, columnspan=1)
+    insert_text(text="Distance between vertices:", column=0, row=12, columnspan=6, win=window, sticky="W")
+    vertices_distance = insert_entry(column=2, row=12, width=5, sticky="E", win=window, columnspan=1)
 
-    insert_text(text="Gap between edges and vertices:", column=0, row=23, columnspan=6, win=window, sticky="W")
-    gap_between_edges_and_vertices = insert_entry(column=2, row=23, width=5, sticky="E", win=window, columnspan=1)
+    insert_text(text="Gap between edges and vertices:", column=0, row=13, columnspan=6, win=window, sticky="W")
+    gap_between_edges_and_vertices = insert_entry(column=2, row=13, width=5, sticky="E", win=window, columnspan=1)
 
-    insert_text(text="Arrowhead length:", column=0, row=24, columnspan=6, win=window, sticky="W")
-    arrowhead_length = insert_entry(column=2, row=24, width=5, sticky="E", win=window, columnspan=1)
+    insert_text(text="Arrowhead length:", column=0, row=14, columnspan=6, win=window, sticky="W")
+    arrowhead_length = insert_entry(column=2, row=14, width=5, sticky="E", win=window, columnspan=1)
 
-    insert_text(text="Arrowhead width:", column=0, row=25, columnspan=6, win=window, sticky="W")
-    arrowhead_width = insert_entry(column=2, row=25, width=5, sticky="E", win=window, columnspan=1)
+    insert_text(text="Arrowhead width:", column=0, row=15, columnspan=6, win=window, sticky="W")
+    arrowhead_width = insert_entry(column=2, row=15, width=5, sticky="E", win=window, columnspan=1)
 
     # ------------------ Other ------------------- #
 

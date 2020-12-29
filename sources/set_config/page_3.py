@@ -7,7 +7,7 @@ from sources.set_config.alerts import *
 def page_3(info):
 
     def feedback_on_off():
-        elements = [feedback_text,
+        elements = [#feedback_text,
                     correct_answer_text, correct_answer, correct_color_text, correct_answer_button_color,
                     incorrect_answer_text, incorrect_answer, incorrect_color_text, incorrect_answer_button_color,
                     no_answer_text, no_answer, no_answer_color_text, no_answer_button_color,
@@ -103,55 +103,68 @@ def page_3(info):
 
     window = create_window("Set config", 550, 680)
 
-    feedback, feedback_var = insert_checkbutton(text="  Show feedback", column=0, row=0, sticky="W", win=window,
-                                                command=feedback_on_off)
+    #feedback_text = insert_text(text="Feedback text", column=0, row=0, size=14, sticky="W", win=window)
 
-    feedback_text = insert_text(text="Feedback text", column=0, row=1, size=14, sticky="W", win=window)
+    feedback, feedback_var = insert_checkbutton(text="Show feedback in training trials", column=0, row=1, sticky="W", win=window,
+                                                command=feedback_on_off, size=16, columnspan=6)
 
-    correct_answer_text = insert_text(text="Correct answer:", column=0, row=2, columnspan=6, win=window, sticky="W")
-    correct_answer = insert_entry(column=0, row=3, width=5, sticky="EW", win=window, columnspan=6)
+    # TEXTS
 
-    correct_color_text = insert_text(text="Correct answer color:", column=0, row=4, columnspan=6, win=window,
-                                     sticky="W")
-    correct_answer_button_color = insert_button(text="Choose color", column=0, row=4, command=choose_correct_answer,
-                                                size=9, win=window, columnspan=6)
+    # Correct answer
+    correct_answer_text = insert_text(text="Correct answer text:", column=0, row=2, columnspan=1, win=window, sticky="W")
+    correct_answer = insert_entry(column=0, row=2, width=50, sticky="E", win=window, columnspan=6)
 
-    incorrect_answer_text = insert_text(text="Incorrect answer:", column=0, row=5, columnspan=6, win=window, sticky="W")
-    incorrect_answer = insert_entry(column=0, row=6, width=5, sticky="EW", win=window, columnspan=6)
+    # InCorrect answer
+    incorrect_answer_text = insert_text(text="Incorrect answer text:", column=0, row=3, columnspan=1, win=window, sticky="W")
+    incorrect_answer = insert_entry(column=0, row=3, width=50, sticky="E", win=window, columnspan=6)
 
-    incorrect_color_text = insert_text(text="Incorrect answer color:", column=0, row=7, columnspan=6, win=window,
-                                       sticky="W")
-    incorrect_answer_button_color = insert_button(text="Choose color", column=0, row=7, win=window, columnspan=6,
-                                                  command=choose_incorrect_answer, size=9)
+    # No answer
+    no_answer_text = insert_text(text="No answer text:", column=0, row=4, columnspan=1, win=window, sticky="W")
+    no_answer = insert_entry(column=0, row=4, width=50, sticky="E", win=window, columnspan=6)
 
-    no_answer_text = insert_text(text="No answer:", column=0, row=8, columnspan=6, win=window, sticky="W")
-    no_answer = insert_entry(column=0, row=9, width=5, sticky="EW", win=window, columnspan=6)
-
-    no_answer_color_text = insert_text(text="No answer color:", column=0, row=10, columnspan=6, win=window, sticky="W")
-    no_answer_button_color = insert_button(text="Choose color", column=0, row=10, command=choose_no_answer,
-                                                size=9, win=window, columnspan=6)
-
-    press_space_message_text = insert_text(text="Press space message:", column=0, row=11, columnspan=6, win=window,
+    # Press space
+    press_space_message_text = insert_text(text="Press space text:", column=0, row=5, columnspan=1, win=window,
                                            sticky="W")
-    press_space_message = insert_entry(column=0, row=12, width=5, sticky="EW", win=window, columnspan=6)
+    press_space_message = insert_entry(column=0, row=5, width=50, sticky="E", win=window, columnspan=6)
 
-    press_space_button_color_text = insert_text(text="Background color:", column=0, row=13, columnspan=6, win=window,
+
+    # COLORS
+    correct_color_text = insert_text(text="Correct answer color:", column=0, row=7, columnspan=1, win=window,
+                                     sticky="W")
+    correct_answer_button_color = insert_button(text="Choose color", column=1, row=7, win=window, columnspan=1,
+                                                  command=choose_correct_answer, size=9, sticky="W")
+
+    incorrect_color_text = insert_text(text="Incorrect answer color:", column=0, row=8, columnspan=1, win=window,
+                                       sticky="W")
+    incorrect_answer_button_color = insert_button(text="Choose color", column=1, row=8, win=window,
+                                                  command=choose_incorrect_answer, size=9, sticky="W", columnspan=1)
+
+    no_answer_color_text = insert_text(text="No answer color:", column=0, row=9, columnspan=1, win=window, sticky="W")
+    no_answer_button_color = insert_button(text="Choose color", column=1, row=9, command=choose_no_answer,
+                                                size=9, win=window, sticky="W", columnspan=1)
+
+    press_space_button_color_text = insert_text(text="Press space color:", column=0, row=10, columnspan=1, win=window,
                                                 sticky="W")
-    press_space_button_color = insert_button(text="Choose color", column=0, row=13, command=choose_press_space,
-                                                size=9, win=window, columnspan=6)
+    press_space_button_color = insert_button(text="Choose color", column=1, row=10, command=choose_press_space,
+                                                size=9, win=window, sticky="W", columnspan=1)
 
-    feedback_text_size_text = insert_text(text="Feedback text size (px):", column=0, row=14, columnspan=2, win=window,
+    # GENERAL
+
+    feedback_text_size_text = insert_text(text="Feedback text size (px):", column=0, row=14, columnspan=1, win=window,
                                           sticky="W")
-    feedback_text_size = insert_entry(column=2, row=14, width=5, sticky="E", win=window, columnspan=1)
+    feedback_text_size = insert_entry(column=1, row=14, width=5, sticky="E", win=window, columnspan=1)
 
-    feedback_position_x_text = insert_text(text="x:", column=2, row=15, win=window, sticky="W", columnspan=1)
-    feedback_position_x = insert_entry(column=2, row=15, width=5, sticky="E", win=window, columnspan=1)
-    feedback_position_y_text = insert_text(text="y:", column=3, row=15, win=window, sticky="W", columnspan=1)
-    feedback_position_y = insert_entry(column=3, row=15, width=5, sticky="E", win=window, columnspan=1)
-    feedback_position_text = insert_text(text="Feedback text position:", column=0, row=15, columnspan=6, win=window,
+    feedback_position_text = insert_text(text="Feedback text position:", column=0, row=15, columnspan=1, win=window,
                                          sticky="W")
 
-    insert_button(text="    Back    ", column=1, row=32, command=go_back, size=12, win=window, columnspan=1, sticky="E")
+    feedback_position_x_text = insert_text(text="x:", column=1, row=15, win=window, sticky="W", columnspan=1)
+    feedback_position_x = insert_entry(column=1, row=15, width=5, sticky="E", win=window, columnspan=1)
+
+    feedback_position_y_text = insert_text(text="y:", column=3, row=15, win=window, sticky="W", columnspan=1)
+    feedback_position_y = insert_entry(column=3, row=15, width=5, sticky="E", win=window, columnspan=1)
+
+
+    insert_button(text="    Back    ", column=0, row=32, command=go_back, size=12, win=window, columnspan=1, sticky="")
     next_button = insert_button(text="    Next     ", column=3, row=32, command=alerts, size=12, win=window,
                                 columnspan=1)
     orig_button_background = next_button['background']

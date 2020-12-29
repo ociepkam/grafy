@@ -180,13 +180,13 @@ def page_1(info):
 
     # -------------- Experimental session -------------- #
 
-    Separator(window, orient='horizontal').place(x=0, y=177, relwidth=1, height=2)
+    Separator(window, orient='horizontal').place(x=0, y=155, relwidth=1, height=2)
     insert_text(text="Experimental session", column=0, row=7, size=14, columnspan=6, win=window)
     insert_text(text="", column=0, row=8, size=1, win=window)
     # insert_text(text="", column=0, row=9, size=1, win=window)
 
-    Separator(window, orient='horizontal').place(x=0, y=210, relwidth=1, height=2)
-    Separator(window, orient='vertical').place(relx=0.5, y=210, width=1, height=395)
+    Separator(window, orient='horizontal').place(x=0, y=195, relwidth=1, height=2)
+    Separator(window, orient='vertical').place(relx=0.5, y=195, width=1, height=405)
 
     # ---------------- Predefined test ----------------- #
     insert_radiobutton(text="Predefined test", column=0, row=9, selector=session_type, value=0, size=12,
@@ -247,7 +247,7 @@ def page_1(info):
     change_n_of_trials("?")
 
     # --------- Break ---------- #
-    Separator(window, orient='horizontal').place(x=0, y=605, relwidth=1, height=2)
+    Separator(window, orient='horizontal').place(x=0, y=600, relwidth=1, height=2)
 
     insert_text(text="Provide break after n trials:", column=0, row=27, win=window, size=14, columnspan=5)
     break_after_n_trials = insert_entry(column=2, row=27, width=5, sticky="E", win=window)

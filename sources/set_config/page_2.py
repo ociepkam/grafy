@@ -190,20 +190,20 @@ def page_2(info):
     # ---------------- Trial time ---------------- #
     # Separator(window, orient='horizontal').place(x=0, y=140, relwidth=1, height=2)
     insert_text(text="Trial time", column=0, row=6, size=14, sticky="W", win=window)
-    Separator(window, orient='horizontal').place(x=0, y=175, relwidth=1, height=2)
+    Separator(window, orient='horizontal').place(x=0, y=165, relwidth=1, height=2)
 
     insert_text(text="Trial time limit (sec):", column=0, row=8, win=window, sticky="W", columnspan=3)
     trial_time = insert_entry(column=2, row=8, width=5, sticky="E", win=window, columnspan=1)
     insert_text(text="Break between trials (sec):", column=0, row=9, win=window, sticky="W", columnspan=3)
     break_time = insert_entry(column=2, row=9, width=5, sticky="E", win=window, columnspan=1)
 
-    insert_text(text="Show chose option (sec):", column=0, row=10, win=window, sticky="W", columnspan=3)
+    insert_text(text="Mark selected vertex for (sec):", column=0, row=10, win=window, sticky="W", columnspan=3)
     click_show_time = insert_entry(column=2, row=10, width=5, sticky="E", win=window, columnspan=1)
 
     # ---------------- Trial info ---------------- #
     # Separator(window, orient='horizontal').place(x=0, y=245, relwidth=1, height=2)
     insert_text(text="Trial info", column=0, row=12, size=14, sticky="W", win=window)
-    Separator(window, orient='horizontal').place(x=0, y=275, relwidth=1, height=2)
+    Separator(window, orient='horizontal').place(x=0, y=288, relwidth=1, height=2)
 
     # Trial number
     _, show_trial_number_var = insert_checkbutton(text="Show trial number", column=0, row=13, win=window,
