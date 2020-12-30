@@ -1,0 +1,5 @@
+﻿You've completed the training.
+
+Now the proper test starts.
+
+Press space.
