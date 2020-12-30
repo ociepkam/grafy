@@ -111,7 +111,7 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
             clock_image.setAutoDraw(False)
         acc = {"left": answers["left"] == info["left"][1], "right": answers["right"]}
 
-    if info["FEED"]:
+    if config["feedback"]:
         b.mark_answer(info["left"][1], color=answers_colors[0])
         if not config["one_target"]:
             b.mark_answer(info["right"][1], color=answers_colors[1])
@@ -143,7 +143,7 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
         mouse_info.setAutoDraw(False)
     if config["show_trial_number"]:
         idx_info.setAutoDraw(False)
-    if info["FEED"]:
+    if config["feedback"]:
         press_space_msg.setAutoDraw(False)
         for k, v in feedb.items():
             v.setAutoDraw(False)
