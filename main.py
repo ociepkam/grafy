@@ -147,7 +147,7 @@ for info in data_exp:
 
     if i == config['break_after_n_trials']:
         show_info(window, join('.', 'messages', "break.txt"), text_size=config['text_size'] + 25,
-                  screen_width=SCREEN_RES[0], key=config["exit_key"], color=config['text_color'])
+                  screen_width=SCREEN_RES[0], key="q", color=config['text_color'])
 
-    show_info(window, join('.', 'messages', "end.txt"), text_size=config['text_size'],
+show_info(window, join('.', 'messages', "end.txt"), text_size=config['text_size'],
               screen_width=SCREEN_RES[0], color=config['text_color'])

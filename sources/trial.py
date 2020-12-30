@@ -143,9 +143,10 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
         mouse_info.setAutoDraw(False)
     if config["show_trial_number"]:
         idx_info.setAutoDraw(False)
-    press_space_msg.setAutoDraw(False)
-    for k, v in feedb.items():
-        v.setAutoDraw(False)
+    if info["FEED"]:
+        press_space_msg.setAutoDraw(False)
+        for k, v in feedb.items():
+            v.setAutoDraw(False)
 
     window.flip()
     time.sleep(config["break_time"])
