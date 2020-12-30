@@ -16,7 +16,7 @@ RAND = str(random.randint(100, 999))
 
 RESULTS = list()
 RESULTS.append(["ID", "GENDER", "AGE", "DATE",
-                "ORDER", "NR", 'EXPERIMENT', "FEED",
+                "ORDER", "NR", 'EXPERIMENT',
                 "VA", "EA", "VB", "EB", "left", "right",
                 "NV", "NE", "Type", "Crossed_edges",
                 "LEFT_ANS", "RIGHT_ANS",
@@ -34,7 +34,7 @@ def save_beh():
 
 def prepare_result(i, info, answers, rt, acc, exp):
     return [part_id, part_sex, part_age, date,
-            i, info["NR"], exp, info["FEED"],
+            i, info["NR"], exp,
             # "VA", "EA", "VB", "EB", "left", "right",
             info["VA"], info["EA"], info["VB"], info["EB"], info["left"], info["right"],
             # "NV", "NE", "Type", Crossed_edges
@@ -128,10 +128,18 @@ if config["training_session"]:
             show_info(window, join('.', 'messages', "training_info.txt"), text_size=config['text_size'],
                       screen_width=SCREEN_RES[0], color=config['text_color'])
 
+    show_info(window, join('.', 'messages', "instruction2.txt"), text_size=config['text_size'],
+              screen_width=SCREEN_RES[0], key="q", color=config['text_color'])
+
 # EXPERIMENT
+if not config["training_session"]:
+    show_image(window, 'instruction1.png', SCREEN_RES)
+    show_image(window, 'instruction2.png', SCREEN_RES)
+    show_image(window, 'instruction3.png', SCREEN_RES)
+    show_image(window, 'instruction4.png', SCREEN_RES)
+    show_image(window, 'instruction5.png', SCREEN_RES)
+
 _, data_exp = load_trials(join("tests", config['predefined_test']))
-show_info(window, join('.', 'messages', "instruction2.txt"), text_size=config['text_size'],
-          screen_width=SCREEN_RES[0], key="q", color=config['text_color'])
 
 i = 1
 for info in data_exp:
