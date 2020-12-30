@@ -193,7 +193,7 @@ def page_2(info):
                                           sticky="W", columnspan=6)
     right_button_color = insert_button(text="Choose color", column=0, row=3, command=choose_right_color, size=9,
                                        win=window, columnspan=6)
-    click_show_time, click_show_time_var = insert_checkbutton(text="Mark first selected vertex till the end of a trial",
+    click_show_time, click_show_time_var = insert_checkbutton(text="Mark first selected vertex till end of a trial",
                                          column=0, row=4, sticky="W", win=window, columnspan=4)
 
     # ---------------- Trial time ---------------- #

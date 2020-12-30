@@ -124,10 +124,10 @@ if config["training_session"]:
                       screen_width=SCREEN_RES[0], color=config['text_color'])
             exit(1)
         if mean_acc < config["training_accuracy"]:
-            show_info(window, join('.', 'messages', "training_info.txt"), text_size=config['text_size'],
+            show_info(window, join('.', 'messages', "after_unsuccessful_training.txt"), text_size=config['text_size'],
                       screen_width=SCREEN_RES[0], color=config['text_color'])
 
-    show_info(window, join('.', 'messages', "instruction2.txt"), text_size=config['text_size'],
+    show_info(window, join('.', 'messages', "after_training.txt"), text_size=config['text_size'],
               screen_width=SCREEN_RES[0], key="q", color=config['text_color'])
 
 # EXPERIMENT
@@ -139,8 +139,9 @@ else:
     # TODO: Randomized experiment
     pass
 
+#################   Powtorzone drugi raz:
 if config["training_session"]:
-    show_info(window, join('.', 'messages', "instruction2.txt"), text_size=config['text_size'],
+    show_info(window, join('.', 'messages', "after_training.txt"), text_size=config['text_size'],
               screen_width=SCREEN_RES[0], key="q", color=config['text_color'])
 
 i = 1
