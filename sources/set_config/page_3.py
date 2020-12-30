@@ -38,19 +38,20 @@ def page_3(info):
     def add_info_from_config():
         try:
             feedback_var.set(info["feedback"])
-            correct_answer.insert(0, info["correct_answer"])
-            correct_answer_button_color["background"] = info["correct_answer_color"]
-            incorrect_answer.insert(0, info["incorrect_answer"])
-            incorrect_answer_button_color["background"] = info["incorrect_answer_color"]
-            no_answer.insert(0, info["no_answer"])
-            no_answer_button_color["background"] = info["no_answer_color"]
+            if info["feedback"]:
+                correct_answer.insert(0, info["correct_answer"])
+                incorrect_answer.insert(0, info["incorrect_answer"])
+                no_answer.insert(0, info["no_answer"])
+                press_space_message.insert(0, info["press_space_message"])
 
-            press_space_message.insert(0, info["press_space_message"])
-            press_space_button_color["background"] = info["press_space_color"]
+                correct_answer_button_color["background"] = info["correct_answer_color"]
+                incorrect_answer_button_color["background"] = info["incorrect_answer_color"]
+                no_answer_button_color["background"] = info["no_answer_color"]
+                press_space_button_color["background"] = info["press_space_color"]
 
-            feedback_text_size.insert(0, info["feedback_text_size"])
-            feedback_position_x.insert(0, info["feedback_position_x"])
-            feedback_position_y.insert(0, info["feedback_position_y"])
+                feedback_text_size.insert(0, info["feedback_text_size"])
+                feedback_position_x.insert(0, info["feedback_position_x"])
+                feedback_position_y.insert(0, info["feedback_position_y"])
 
         except:
             messagebox.showerror(message="Can't load file with config")
