@@ -44,20 +44,23 @@ def page_2(info):
             # Trial info
             #    trial number
             show_trial_number_var.set(info["show_trial_number"])
-            trial_number_position_x.insert(0, info["trial_number_position_x"])
-            trial_number_position_y.insert(0, info["trial_number_position_y"])
-            trial_number_size.insert(0, info["trial_number_size"])
+            if info["show_trial_number"]:
+                trial_number_position_x.insert(0, info["trial_number_position_x"])
+                trial_number_position_y.insert(0, info["trial_number_position_y"])
+                trial_number_size.insert(0, info["trial_number_size"])
             #   mouse buttons
             show_mouse_buttons_var.set(info["show_mouse_buttons"])
-            mouse_buttons_position_x.insert(0, info["mouse_buttons_position_x"])
-            mouse_buttons_position_y.insert(0, info["mouse_buttons_position_y"])
-            mouse_buttons_size.insert(0, info["mouse_buttons_size"])
+            if info["show_mouse_buttons"]:
+                mouse_buttons_position_x.insert(0, info["mouse_buttons_position_x"])
+                mouse_buttons_position_y.insert(0, info["mouse_buttons_position_y"])
+                mouse_buttons_size.insert(0, info["mouse_buttons_size"])
             #   clock
             show_clock_icon_var.set(info["show_clock_icon"])
-            clock_position_x.insert(0, info["clock_position_x"])
-            clock_position_y.insert(0, info["clock_position_y"])
-            clock_size.insert(0, info["clock_size"])
-            clock_time.insert(0, info["clock_time"])
+            if info["show_clock_icon"]:
+                clock_position_x.insert(0, info["clock_position_x"])
+                clock_position_y.insert(0, info["clock_position_y"])
+                clock_size.insert(0, info["clock_size"])
+                clock_time.insert(0, info["clock_time"])
         except:
             messagebox.showerror(message="Can't load file with config")
             trial_time.focus_force()
