@@ -84,6 +84,11 @@ if config["feedback"]:
 else:
     feedb = None
 
+show_image(window, 'instruction1.png', SCREEN_RES)
+show_image(window, 'instruction2.png', SCREEN_RES)
+show_image(window, 'instruction3.png', SCREEN_RES)
+show_image(window, 'instruction4.png', SCREEN_RES)
+show_image(window, 'instruction5.png', SCREEN_RES)
 
 # TRAINING
 if config["training_session"]:
@@ -91,12 +96,6 @@ if config["training_session"]:
     mean_acc = 0
     training_nr = 0
     while mean_acc < config["training_accuracy"] or training_nr < 1:
-
-        show_image(window, 'instruction1.png', SCREEN_RES)
-        show_image(window, 'instruction2.png', SCREEN_RES)
-        show_image(window, 'instruction3.png', SCREEN_RES)
-        show_image(window, 'instruction4.png', SCREEN_RES)
-        show_image(window, 'instruction5.png', SCREEN_RES)
 
         mean_acc = 0
         i = 1
@@ -136,8 +135,13 @@ if config["session_type"] == "Predefined test":
     _, data_exp = load_trials(join("tests", config['predefined_test']))
     if config["randomize_trials_order"]:
         random.shuffle(data_exp)
-show_info(window, join('.', 'messages', "instruction2.txt"), text_size=config['text_size'],
-          screen_width=SCREEN_RES[0], key="q", color=config['text_color'])
+else:
+    # TODO: Randomized experiment
+    pass
+
+if config["training_session"]:
+    show_info(window, join('.', 'messages', "instruction2.txt"), text_size=config['text_size'],
+              screen_width=SCREEN_RES[0], key="q", color=config['text_color'])
 
 i = 1
 for info in data_exp:
