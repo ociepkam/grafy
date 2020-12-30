@@ -6,7 +6,7 @@
   session_type: Randomized experiment
   predefined_test: ''
   randomize_trials_order: false
-  randomize_graphs: false
+  randomize_graphs: true
   no_of_edges:
     '3': true
     '4': true

@@ -2,6 +2,7 @@ import yaml
 from os.path import join
 import csv
 import ast
+import random
 
 
 def load_config(file_name="config.yaml", concatenate=False):
@@ -15,7 +16,7 @@ def load_config(file_name="config.yaml", concatenate=False):
         raise Exception("Can't load config file")
 
 
-def load_trials(file_name):
+def load_trials(file_name, randomize_graphs=False):
     file_path = join("trials", file_name)
     print(file_path)
     try:
@@ -35,6 +36,12 @@ def load_trials(file_name):
                         data_row[k] = [int(elem) for elem in data_row[k].split(",")]
                     for k in ["EA", "EB"]:
                         data_row[k] = ast.literal_eval(data_row[k])
+                    print(data_row)
+                    if randomize_graphs and random.choice([True, False]):
+                        data_row["VA"], data_row["VB"] = data_row["VB"], data_row["VA"]
+                        data_row["EA"], data_row["EB"] = data_row["EB"], data_row["EA"]
+                        data_row["left"], data_row["right"] = data_row["right"], data_row["left"]
+                    print(data_row)
                     if data_row["TRAIN"] == 1:
                         data_train.append(data_row)
                     else:

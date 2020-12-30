@@ -87,10 +87,10 @@ else:
 
 # TRAINING
 if config["training_session"]:
-    data_train, _ = load_trials(join("training", config['predefined_training']))
+    data_train, _ = load_trials(join("training", config['predefined_training']), randomize_graphs=config["randomize_graphs"])
     mean_acc = 0
     training_nr = 0
-    while mean_acc < config["training_accuracy"]:
+    while mean_acc < config["training_accuracy"] or training_nr < 1:
 
         show_image(window, 'instruction1.png', SCREEN_RES)
         show_image(window, 'instruction2.png', SCREEN_RES)
@@ -129,7 +129,10 @@ if config["training_session"]:
                       screen_width=SCREEN_RES[0], color=config['text_color'])
 
 # EXPERIMENT
-_, data_exp = load_trials(join("tests", config['predefined_test']))
+if config["session_type"] == "Predefined test":
+    _, data_exp = load_trials(join("tests", config['predefined_test']))
+    if config["randomize_trials_order"]:
+        random.shuffle(data_exp)
 show_info(window, join('.', 'messages', "instruction2.txt"), text_size=config['text_size'],
           screen_width=SCREEN_RES[0], key="q", color=config['text_color'])
 
