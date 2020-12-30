@@ -46,7 +46,7 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
     a.mark_answer(v_nr=info["left"][0], color=answers_colors[0])
     if not config["one_target"]:
         a.mark_answer(v_nr=info["right"][0], color=answers_colors[1])
-    if config["feedback"]:
+    if config["feedback"] and info["FEED"]:
         press_space_msg = visual.TextStim(window, text=replace_polish(config["press_space_message"]),
                                           color=config["press_space_button_color"], height=config["feedback_text_size"],
                                           pos=[config["feedback_position"][0], config["feedback_position"][1] - 100])
@@ -111,7 +111,7 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
             clock_image.setAutoDraw(False)
         acc = {"left": answers["left"] == info["left"][1], "right": answers["right"]}
 
-    if info["FEED"]:
+    if config["feedback"] and info["FEED"]:
         b.mark_answer(info["left"][1], color=answers_colors[0])
         if not config["one_target"]:
             b.mark_answer(info["right"][1], color=answers_colors[1])
@@ -143,7 +143,7 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
         mouse_info.setAutoDraw(False)
     if config["show_trial_number"]:
         idx_info.setAutoDraw(False)
-    if info["FEED"]:
+    if config["feedback"] and info["FEED"]:
         press_space_msg.setAutoDraw(False)
         for k, v in feedb.items():
             v.setAutoDraw(False)

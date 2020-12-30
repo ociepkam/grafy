@@ -15,12 +15,12 @@ NAME = "{}_{}_{}".format(part_id, part_sex[:1], part_age)
 RAND = str(random.randint(100, 999))
 
 RESULTS = list()
-RESULTS.append(["ID", "SEX", "AGE", "DATE",
+RESULTS.append(["ID", "GENDER", "AGE", "DATE",
                 "ORDER", "NR", 'EXPERIMENT', "FEED",
                 "VA", "EA", "VB", "EB", "left", "right",
                 "NV", "NE", "Type", "Crossed_edges",
                 "LEFT_ANS", "RIGHT_ANS",
-                'LEFT_ACC', "RIGHT_ACC", "ACC",
+                'LEFT_CORRECT', "RIGHT_CORRECT", "CORRECT",
                 "LEFT_RT", "RIGHT_RT", 'RT'
                 ])
 
@@ -120,11 +120,11 @@ if config["training_session"]:
             mean_acc /= (i - 1)
         else:
             break
-        if mean_acc < config["min_training_acc"] and training_nr == config['max_training_attempts']:
+        if mean_acc < config["training_accuracy"] and training_nr == config['max_training_attempts']:
             show_info(window, join('.', 'messages', "too_many_attempts.txt"), text_size=config['text_size'],
                       screen_width=SCREEN_RES[0], color=config['text_color'])
             exit(1)
-        if mean_acc < config["min_training_acc"]:
+        if mean_acc < config["training_accuracy"]:
             show_info(window, join('.', 'messages', "training_info.txt"), text_size=config['text_size'],
                       screen_width=SCREEN_RES[0], color=config['text_color'])
 
