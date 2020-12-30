@@ -12,27 +12,27 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
     response_clock = core.Clock()
 
     A_to_B_relation = None
-    # if config["random_rotation/symmetry"]:
-    #     while True:
-    #         for matrix in ["A", "B"]:
-    #             if random.choice([True, False]):
-    #                 rotate_matrices_in_trial(info, matrix)
-    #                 if matrix == "A":
-    #                     transformation_A = "ROTATION"
-    #                 else:
-    #                     transformation_B = "ROTATION"
-    #             else:
-    #                 mirror_matrices_in_trial(info, matrix)
-    #                 if matrix == "A":
-    #                     transformation_A = "MIRROR"
-    #                 else:
-    #                     transformation_B = "MIRROR"
-    #         if info["VA"] != info["VB"] or info["EA"] != info["EB"]:
-    #             if transformation_A == transformation_B:
-    #                 A_to_B_relation = "ROTATION"
-    #             else:
-    #                 A_to_B_relation = "MIRROR"
-    #             break
+    if config["randomize_graphs"]:
+        while True:
+            for matrix in ["A", "B"]:
+                if random.choice([True, False]):
+                    rotate_matrices_in_trial(info, matrix)
+                    if matrix == "A":
+                        transformation_A = "ROTATION"
+                    else:
+                        transformation_B = "ROTATION"
+                else:
+                    mirror_matrices_in_trial(info, matrix)
+                    if matrix == "A":
+                        transformation_A = "MIRROR"
+                    else:
+                        transformation_B = "MIRROR"
+            if info["VA"] != info["VB"] or info["EA"] != info["EB"]:
+                if transformation_A == transformation_B:
+                    A_to_B_relation = "ROTATION"
+                else:
+                    A_to_B_relation = "MIRROR"
+                break
 
     if not config["randomize_graphs"] or random.choice([True, False]):
         a = Matrix(win=window, pos=config["left_graph_position"], config=config, v=info["VA"], e=info["EA"])
@@ -70,18 +70,20 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
                     rt["left"] = response_clock.getTime()
                     b.mark_answer(idx, color=answers_colors[0])
                     window.flip()
-                    time.sleep(config["click_show_time"]) # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    b.mark_answer(idx, color=config["vertices_color"])
-                    window.flip()
+                    if not config["click_show_time"]:
+                        time.sleep(0.2)
+                        b.mark_answer(idx, color=config["vertices_color"])
+                        window.flip()
                     click["left"] = True
                     answers["left"] = idx
                 elif not click["right"] and mouse.isPressedIn(point, buttons=[2]):
                     rt["right"] = response_clock.getTime()
                     b.mark_answer(idx, color=answers_colors[1])
                     window.flip()
-                    time.sleep(config["click_show_time"]) #! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    b.mark_answer(idx, color=config["vertices_color"])
-                    window.flip()
+                    if not config["click_show_time"]:
+                        time.sleep(0.2)
+                        b.mark_answer(idx, color=config["vertices_color"])
+                        window.flip()
                     click["right"] = True
                     answers["right"] = idx
             if config["show_clock_icon"] and config["trial_time"] - response_clock.getTime() < config['clock_time']:
@@ -98,9 +100,10 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
                     rt["left"] = response_clock.getTime()
                     b.mark_answer(idx, color=answers_colors[0])
                     window.flip()
-                    time.sleep(config["click_show_time"]) # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    b.mark_answer(idx, color=config["vertices_color"])
-                    window.flip()
+                    if not config["click_show_time"]:
+                        time.sleep(0.2)
+                        b.mark_answer(idx, color=config["vertices_color"])
+                        window.flip()
                     click["left"] = True
                     answers["left"] = idx
             if config["show_clock_icon"] and config["trial_time"] - response_clock.getTime() < config['click_show_time']:

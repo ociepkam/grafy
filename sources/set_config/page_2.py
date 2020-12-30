@@ -8,7 +8,11 @@ def page_2(info):
     def one_target():
         right_button_color['background'] = orig_button_background
         right_button_color['foreground'] = orig_button_foreground
-        show_on_off([right_button_color_text, right_button_color], one_target_var, ["normal", "disable"])
+        click_show_time['background'] = orig_button_background
+        click_show_time['foreground'] = orig_button_foreground
+        click_show_time_var.set(False)
+        show_on_off([right_button_color_text, right_button_color, click_show_time],
+                    one_target_var, ["normal", "disable"])
 
     def choose_left_color():
         return choose_button_color(left_button_color, title="Choose left button color")
@@ -37,10 +41,10 @@ def page_2(info):
             one_target_var.set(info["one_target"])
             left_button_color['background'] = info["left_button_color"]
             right_button_color['background'] = info["right_button_color"]
+            click_show_time_var.set(info["click_show_time"])
             # Trial time
             trial_time.insert(0, info["trial_time"])
             break_time.insert(0, info["break_time"])
-            click_show_time.insert(0, info["click_show_time"])
             # Trial info
             #    trial number
             show_trial_number_var.set(info["show_trial_number"])
@@ -80,9 +84,9 @@ def page_2(info):
         br_time = try_convert_to_float(break_time.get(), "Break time")
         if not try_in_range(br_time, "Break time", v_min=0):
             return None
-        cl_show_time = try_convert_to_float(click_show_time.get(), "Show chose option")
-        if not try_in_range(cl_show_time, "Show chose option", v_min=0):
-            return None
+        # cl_show_time = try_convert_to_float(click_show_time.get(), "Show chose option")
+        # if not try_in_range(cl_show_time, "Show chose option", v_min=0):
+        #     return None
         # ---------------- Trial info ---------------- #
         # Trial number
         if show_trial_number_var.get():
@@ -141,10 +145,10 @@ def page_2(info):
             "one_target": one_target_var.get(),
             "left_button_color": left_button_color['background'],
             "right_button_color": right_button_color['background'],
+            "click_show_time": click_show_time_var.get(),
             # Trial time
             "trial_time": tr_time,
             "break_time": br_time,
-            "click_show_time": cl_show_time,
             # Trial info
             #    trial number
             "show_trial_number": show_trial_number_var.get(),
@@ -189,19 +193,22 @@ def page_2(info):
                                           sticky="W", columnspan=6)
     right_button_color = insert_button(text="Choose color", column=0, row=3, command=choose_right_color, size=9,
                                        win=window, columnspan=6)
+    click_show_time, click_show_time_var = insert_checkbutton(text="Mark first selected vertex till the end of a trial",
+                                         column=0, row=4, sticky="W", win=window, columnspan=4)
 
     # ---------------- Trial time ---------------- #
     # Separator(window, orient='horizontal').place(x=0, y=140, relwidth=1, height=2)
-    insert_text(text="Trial time", column=0, row=6, size=14, sticky="W", win=window)
+    insert_text(text="Trial time", column=0, row=7, size=14, sticky="W", win=window)
     Separator(window, orient='horizontal').place(x=0, y=165, relwidth=1, height=2)
 
-    insert_text(text="Trial time limit (sec):", column=0, row=8, win=window, sticky="W", columnspan=3)
-    trial_time = insert_entry(column=2, row=8, width=5, sticky="E", win=window, columnspan=1)
-    insert_text(text="Break between trials (sec):", column=0, row=9, win=window, sticky="W", columnspan=3)
-    break_time = insert_entry(column=2, row=9, width=5, sticky="E", win=window, columnspan=1)
+    insert_text(text="Trial time limit (sec):", column=0, row=9, win=window, sticky="W", columnspan=3)
+    trial_time = insert_entry(column=2, row=9, width=5, sticky="E", win=window, columnspan=1)
+    insert_text(text="Break between trials (sec):", column=0, row=10, win=window, sticky="W", columnspan=3)
+    break_time = insert_entry(column=2, row=10, width=5, sticky="E", win=window, columnspan=1)
 
-    insert_text(text="Mark selected vertex for (sec):", column=0, row=10, win=window, sticky="W", columnspan=3)
-    click_show_time = insert_entry(column=2, row=10, width=5, sticky="E", win=window, columnspan=1)
+    # insert_text(text="Mark selected vertex for (sec):", column=0, row=10, win=window, sticky="W", columnspan=3)
+    # click_show_time = insert_entry(column=2, row=10, width=5, sticky="E", win=window, columnspan=1)
+
 
     # ---------------- Trial info ---------------- #
     # Separator(window, orient='horizontal').place(x=0, y=245, relwidth=1, height=2)
