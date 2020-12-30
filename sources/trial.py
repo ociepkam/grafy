@@ -46,9 +46,10 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
     a.mark_answer(v_nr=info["left"][0], color=answers_colors[0])
     if not config["one_target"]:
         a.mark_answer(v_nr=info["right"][0], color=answers_colors[1])
-    press_space_msg = visual.TextStim(window, text=replace_polish(config["press_space_message"]),
-                                      color=config["press_space_button_color"], height=config["feedback_text_size"],
-                                      pos=[config["feedback_position"][0], config["feedback_position"][1] - 100])
+    if config["feedback"]:
+        press_space_msg = visual.TextStim(window, text=replace_polish(config["press_space_message"]),
+                                          color=config["press_space_button_color"], height=config["feedback_text_size"],
+                                          pos=[config["feedback_position"][0], config["feedback_position"][1] - 100])
     a.set_auto_draw(True)
     b.set_auto_draw(True)
     window.callOnFlip(response_clock.reset)
@@ -83,11 +84,12 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
                     window.flip()
                     click["right"] = True
                     answers["right"] = idx
-            if config["trial_time"] - response_clock.getTime() < config['clock_time']:
+            if config["show_clock_icon"] and config["trial_time"] - response_clock.getTime() < config['clock_time']:
                 clock_image.setAutoDraw(True)
             check_exit()
             window.flip()
-        clock_image.setAutoDraw(False)
+        if config["show_clock_icon"]:
+            clock_image.setAutoDraw(False)
         acc = {"left": answers["left"] == info["left"][1], "right": answers["right"] == info["right"][1]}
     else:
         while response_clock.getTime() < config["trial_time"] and not click["left"]:

@@ -1,0 +1,69 @@
+1:
+  training_session: true
+  predefined_training: 12_trials.csv
+  training_accuracy: 1.0
+  training_attempts: 2
+  session_type: Randomized experiment
+  predefined_test: ''
+  randomize_trials_order: false
+  randomize_graphs: false
+  no_of_edges:
+    '3': true
+    '4': true
+    '5': false
+  crossed_edges:
+    graphs_with_crossed: true
+    graphs_without_crossed_edges: false
+  types_of_target_vertices:
+    direct: true
+    indirect: false
+  trials_per_cell: 2
+  n_of_trials: '4'
+  break_after_n_trials: 3
+2:
+  one_target: false
+  left_button_color: '#ff0080'
+  right_button_color: '#ff0000'
+  trial_time: 11.0
+  break_time: 1.0
+  click_show_time: 1.0
+  show_trial_number: false
+  trial_number_position_x: null
+  trial_number_position_y: null
+  trial_number_size: null
+  show_mouse_buttons: false
+  mouse_buttons_position_x: null
+  mouse_buttons_position_y: null
+  mouse_buttons_size: null
+  show_clock_icon: false
+  clock_position_x: null
+  clock_position_y: null
+  clock_size: null
+  clock_time: null
+3:
+  feedback: false
+  correct_answer: ''
+  correct_answer_color: SystemButtonFace
+  incorrect_answer: ''
+  incorrect_answer_color: SystemButtonFace
+  no_answer: ''
+  no_answer_color: SystemButtonFace
+  press_space_message: ''
+  press_space_button_color: SystemButtonFace
+  feedback_text_size: null
+  feedback_position:
+  - null
+  - null
+4:
+  text_color: '#800080'
+  background_color: '#c0c0c0'
+  text_size: 11
+  vertices_color: '#408080'
+  edges_color: '#000080'
+  left_graph_position: [0,0]
+  right_graph_position: [200, 0]
+  vertices_size: 20
+  vertices_distance: 80
+  gap_between_edges_and_vertices: 20
+  arrowhead_length: 15
+  arrowhead_width: 15

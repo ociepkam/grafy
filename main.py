@@ -129,9 +129,9 @@ if config["training_session"]:
                       screen_width=SCREEN_RES[0], color=config['text_color'])
 
 # EXPERIMENT
-_, data_exp = load_trials(join("tests", config['experiment_trials']))
+_, data_exp = load_trials(join("tests", config['predefined_test']))
 show_info(window, join('.', 'messages', "instruction2.txt"), text_size=config['text_size'],
-          screen_width=SCREEN_RES[0], key=config["exit_key"], color=config['text_color'])
+          screen_width=SCREEN_RES[0], key="q", color=config['text_color'])
 
 i = 1
 for info in data_exp:
