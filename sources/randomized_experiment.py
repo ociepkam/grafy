@@ -2,7 +2,6 @@ import random
 
 
 def prepare_randomized_experiment(data, config):
-    print(data)
     new_data = []
     for edge in [3, 4, 5]:
         if config["no_of_edges"][str(edge)]:
@@ -24,5 +23,4 @@ def prepare_randomized_experiment(data, config):
                                     new_data.append(trials[:config["trials_per_cell"] - i])
                                     i += (config["trials_per_cell"] - i)
 
-    new_data = [item for sub_list in new_data for item in sub_list]
-    return new_data
+    return [item for sub_list in new_data for item in sub_list]
