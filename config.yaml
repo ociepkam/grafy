@@ -9,8 +9,8 @@
   randomize_graphs: true
   no_of_edges:
     '3': true
-    '4': true
-    '5': false
+    '4': false
+    '5': true
   crossed_edges:
     graphs_with_crossed: true
     graphs_without_crossed_edges: false
