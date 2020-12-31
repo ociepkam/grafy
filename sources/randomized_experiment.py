@@ -6,7 +6,7 @@ def prepare_randomized_experiment(data, config):
     new_data = []
     for edge in [3, 4, 5]:
         if config["no_of_edges"][str(edge)]:
-            temp_edge = [elem for elem in data if len(elem["EA"]) == edge]
+            temp_edge = [elem for elem in data if elem["NE"] == edge]
             for crossed, bool_v in [["graphs_with_crossed", "yes"], ["graphs_without_crossed_edges", "no"]]:
                 if config["crossed_edges"][crossed]:
                     temp_crossed = [elem for elem in temp_edge if elem["Crossed_edges"] == bool_v]
