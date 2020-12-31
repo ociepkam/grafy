@@ -112,8 +112,11 @@ def page_1(info):
             t_per_cell = try_convert_to_int(trials_per_cell.get(), "'No. of trials per cell attempts")
             if not try_in_range(t_per_cell, "Training 'No. of trials per cell", v_min=1):
                 return None
+            n_trials = try_convert_to_int(n_of_trials.get(), "'No. of trials")
+
         else:
             t_per_cell = None
+            n_trials = None
 
         if session_type.get() not in [0, 1]:
             messagebox.showerror(message="You have to choose \"Predefined test\" or \"Randomized experiment\".")
@@ -150,7 +153,7 @@ def page_1(info):
             "types_of_target_vertices": {"direct": direct_var.get(),
                                          "indirect": indirect_var.get()},
             "trials_per_cell": t_per_cell,
-            "n_of_trials": n_of_trials.get(),
+            "n_of_trials": n_trials,
             # Break
             "break_after_n_trials": b_n_trails
         }

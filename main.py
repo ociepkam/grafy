@@ -9,6 +9,7 @@ from sources.load_data import load_config, load_trials, replace_polish
 from sources.screen import get_screen_res, get_frame_rate
 from sources.show_info import show_info, show_image
 from sources.trial import trial
+from sources.randomized_experiment import prepare_randomized_experiment
 
 part_id, part_sex, part_age, date = experiment_info()
 NAME = "{}_{}_{}".format(part_id, part_sex[:1], part_age)
@@ -134,9 +135,8 @@ if config["session_type"] == "Predefined test":
     if config["randomize_trials_order"]:
         random.shuffle(data_exp)
 else:
-    # TODO: Randomized experiment
-    pass
-
+    _, data_exp = load_trials(join("experiment", "experiment.csv"))
+    data_exp = prepare_randomized_experiment(data_exp, config)
 
 if config["training_session"]:
     show_info(window, join('.', 'messages', "after_training.txt"), text_size=config['text_size'],

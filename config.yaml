@@ -1,5 +1,5 @@
 1:
-  training_session: true
+  training_session: false
   predefined_training: 12_trials.csv
   training_accuracy: 1.0
   training_attempts: 2
@@ -9,8 +9,8 @@
   randomize_graphs: true
   no_of_edges:
     '3': true
-    '4': true
-    '5': false
+    '4': false
+    '5': true
   crossed_edges:
     graphs_with_crossed: true
     graphs_without_crossed_edges: false
@@ -18,7 +18,7 @@
     direct: true
     indirect: false
   trials_per_cell: 2
-  n_of_trials: '4'
+  n_of_trials: 4
   break_after_n_trials: 3
 2:
   one_target: false
