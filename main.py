@@ -139,11 +139,6 @@ else:
     # TODO: Randomized experiment
     pass
 
-#################   Powtorzone drugi raz:
-if config["training_session"]:
-    show_info(window, join('.', 'messages', "after_training.txt"), text_size=config['text_size'],
-              screen_width=SCREEN_RES[0], key="q", color=config['text_color'])
-
 i = 1
 for info in data_exp:
     if config["show_trial_number"]:
