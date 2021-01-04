@@ -137,6 +137,7 @@ if config["session_type"] == "Predefined test":
 else:
     _, data_exp = load_trials(join("experiment", "experiment.csv"))
     data_exp = prepare_randomized_experiment(data_exp, config)
+    random.shuffle(data_exp)
 
 if config["training_session"]:
     show_info(window, join('.', 'messages', "after_training.txt"), text_size=config['text_size'],
