@@ -1,4 +1,5 @@
 import random
+import copy
 
 
 def prepare_randomized_experiment(data, config):
@@ -17,10 +18,10 @@ def prepare_randomized_experiment(data, config):
                             i = 0
                             while i < config["trials_per_cell"]:
                                 if len(trials) < config["trials_per_cell"] - i:
-                                    new_data.append(trials)
+                                    new_data.append(copy.deepcopy(trials))
                                     i += len(trials)
                                 else:
-                                    new_data.append(trials[:config["trials_per_cell"] - i])
+                                    new_data.append(copy.deepcopy(trials[:config["trials_per_cell"] - i]))
                                     i += (config["trials_per_cell"] - i)
 
     return [item for sub_list in new_data for item in sub_list]

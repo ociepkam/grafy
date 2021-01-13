@@ -10,7 +10,6 @@ from sources.matrix_operations import rotate_matrices_in_trial, mirror_matrices_
 
 def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse_info, idx_info):
     response_clock = core.Clock()
-
     A_to_B_relation = None
     if config["randomize_graphs"] or config["session_type"] == "Randomized experiment":
         while True:
@@ -33,7 +32,6 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
                 else:
                     A_to_B_relation = "MIRROR"
                 break
-
     if not config["randomize_graphs"] \
             or not config["session_type"] == "Randomized experiment" or random.choice([True, False]):
         a = Matrix(win=window, pos=config["left_graph_position"], config=config, v=info["VA"], e=info["EA"])
