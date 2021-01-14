@@ -6,7 +6,7 @@ import random
 
 from sources.experiment_info import experiment_info
 from sources.load_data import load_config, load_trials, replace_polish
-from sources.screen import get_screen_res, get_frame_rate
+from sources.screen import get_screen_res
 from sources.show_info import show_info, show_image
 from sources.trial import trial
 from sources.randomized_experiment import prepare_randomized_experiment
@@ -52,7 +52,6 @@ config = load_config("config.yaml", concatenate=True)
 
 SCREEN_RES = get_screen_res()
 window = visual.Window(SCREEN_RES, fullscr=True, units='pix', color=config["background_color"])
-FRAMES_PER_SEC = get_frame_rate(window)
 mouse = event.Mouse(visible=True)
 
 if config["show_clock_icon"]:
@@ -88,7 +87,8 @@ else:
 
 # TRAINING
 if config["training_session"]:
-    data_train, _ = load_trials(join("training", config['predefined_training']), randomize_graphs=config["randomize_graphs"])
+    data_train, _ = load_trials(file_name=join("training", config['predefined_training']),
+                                randomize_graphs=config["randomize_graphs"])
     mean_acc = 0
     training_nr = 0
     while mean_acc < config["training_accuracy"] or training_nr < 1:
@@ -166,4 +166,4 @@ for info in data_exp:
                   screen_width=SCREEN_RES[0], key="q", color=config['text_color'])
 
 show_info(window, join('.', 'messages', "end.txt"), text_size=config['text_size'],
-              screen_width=SCREEN_RES[0], color=config['text_color'])
+          screen_width=SCREEN_RES[0], color=config['text_color'])

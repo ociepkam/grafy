@@ -194,10 +194,9 @@ def page_2(info):
     right_button_color = insert_button(text="Choose color", column=0, row=3, command=choose_right_color, size=9,
                                        win=window, columnspan=6)
     click_show_time, click_show_time_var = insert_checkbutton(text="Mark first selected vertex till end of a trial",
-                                         column=0, row=4, sticky="W", win=window, columnspan=4)
+                                                              column=0, row=4, sticky="W", win=window, columnspan=4)
 
     # ---------------- Trial time ---------------- #
-    # Separator(window, orient='horizontal').place(x=0, y=140, relwidth=1, height=2)
     insert_text(text="Trial time", column=0, row=7, size=14, sticky="W", win=window)
     Separator(window, orient='horizontal').place(x=0, y=165, relwidth=1, height=2)
 
@@ -205,10 +204,6 @@ def page_2(info):
     trial_time = insert_entry(column=2, row=9, width=5, sticky="E", win=window, columnspan=1)
     insert_text(text="Break between trials (sec):", column=0, row=10, win=window, sticky="W", columnspan=3)
     break_time = insert_entry(column=2, row=10, width=5, sticky="E", win=window, columnspan=1)
-
-    # insert_text(text="Mark selected vertex for (sec):", column=0, row=10, win=window, sticky="W", columnspan=3)
-    # click_show_time = insert_entry(column=2, row=10, width=5, sticky="E", win=window, columnspan=1)
-
 
     # ---------------- Trial info ---------------- #
     # Separator(window, orient='horizontal').place(x=0, y=245, relwidth=1, height=2)
@@ -256,6 +251,8 @@ def page_2(info):
     clock_size = insert_entry(column=2, row=26, width=5, sticky="E", win=window, columnspan=1)
 
     insert_text(text="", column=0, row=29, size=12, win=window)
+
+    # ------------------ Other ------------------- #
 
     insert_button(text="    Back    ", column=2, row=30, command=go_back, size=12, win=window, columnspan=1, sticky="W")
     next_button = insert_button(text="    Next     ", column=3, row=30, command=alerts, size=12, sticky="W",

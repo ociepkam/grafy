@@ -167,11 +167,6 @@ def page_4(info):
 
     # ------------------ Other ------------------- #
 
-    # insert_text(text="Exit key:", column=0, row=25, columnspan=6, win=window, sticky="W")
-    # exit_key = insert_entry(column=2, row=25, width=5, sticky="E", win=window, columnspan=1)
-
-    # ------------------------------------- #
-
     insert_button(text="    Back    ", column=1, row=30, command=go_back, size=12, win=window, columnspan=1, sticky="E")
     save_button = insert_button(text="    Save    ", column=3, row=30, command=alerts, size=12, win=window,
                                 columnspan=1, sticky="W")

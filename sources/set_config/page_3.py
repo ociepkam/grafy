@@ -7,8 +7,7 @@ from sources.set_config.alerts import *
 def page_3(info):
 
     def feedback_on_off():
-        elements = [#feedback_text,
-                    correct_answer_text, correct_answer, correct_color_text, correct_answer_button_color,
+        elements = [correct_answer_text, correct_answer, correct_color_text, correct_answer_button_color,
                     incorrect_answer_text, incorrect_answer, incorrect_color_text, incorrect_answer_button_color,
                     no_answer_text, no_answer, no_answer_color_text, no_answer_button_color,
                     press_space_message_text, press_space_message,
@@ -104,19 +103,19 @@ def page_3(info):
 
     window = create_window("Set config", 550, 680)
 
-    #feedback_text = insert_text(text="Feedback text", column=0, row=0, size=14, sticky="W", win=window)
-
-    feedback, feedback_var = insert_checkbutton(text="Show feedback in training trials", column=0, row=1, sticky="W", win=window,
-                                                command=feedback_on_off, size=16, columnspan=6)
+    feedback, feedback_var = insert_checkbutton(text="Show feedback in training trials", column=0, row=1, sticky="W",
+                                                win=window, command=feedback_on_off, size=16, columnspan=6)
 
     # TEXTS
 
     # Correct answer
-    correct_answer_text = insert_text(text="Correct answer text:", column=0, row=2, columnspan=1, win=window, sticky="W")
+    correct_answer_text = insert_text(text="Correct answer text:", column=0, row=2,
+                                      columnspan=1, win=window, sticky="W")
     correct_answer = insert_entry(column=0, row=2, width=50, sticky="E", win=window, columnspan=6)
 
     # InCorrect answer
-    incorrect_answer_text = insert_text(text="Incorrect answer text:", column=0, row=3, columnspan=1, win=window, sticky="W")
+    incorrect_answer_text = insert_text(text="Incorrect answer text:", column=0, row=3,
+                                        columnspan=1, win=window, sticky="W")
     incorrect_answer = insert_entry(column=0, row=3, width=50, sticky="E", win=window, columnspan=6)
 
     # No answer
@@ -128,12 +127,11 @@ def page_3(info):
                                            sticky="W")
     press_space_message = insert_entry(column=0, row=5, width=50, sticky="E", win=window, columnspan=6)
 
-
     # COLORS
     correct_color_text = insert_text(text="Correct answer color:", column=0, row=7, columnspan=1, win=window,
                                      sticky="W")
     correct_answer_button_color = insert_button(text="Choose color", column=1, row=7, win=window, columnspan=1,
-                                                  command=choose_correct_answer, size=9, sticky="W")
+                                                command=choose_correct_answer, size=9, sticky="W")
 
     incorrect_color_text = insert_text(text="Incorrect answer color:", column=0, row=8, columnspan=1, win=window,
                                        sticky="W")
@@ -147,7 +145,7 @@ def page_3(info):
     press_space_button_color_text = insert_text(text="Press space color:", column=0, row=10, columnspan=1, win=window,
                                                 sticky="W")
     press_space_button_color = insert_button(text="Choose color", column=1, row=10, command=choose_press_space,
-                                                size=9, win=window, sticky="W", columnspan=1)
+                                             size=9, win=window, sticky="W", columnspan=1)
 
     # GENERAL
 
@@ -164,6 +162,7 @@ def page_3(info):
     feedback_position_y_text = insert_text(text="y:", column=3, row=15, win=window, sticky="W", columnspan=1)
     feedback_position_y = insert_entry(column=3, row=15, width=5, sticky="E", win=window, columnspan=1)
 
+    # ------------------ Other ------------------- #
 
     insert_button(text="    Back    ", column=0, row=32, command=go_back, size=12, win=window, columnspan=1, sticky="")
     next_button = insert_button(text="    Next     ", column=3, row=32, command=alerts, size=12, win=window,

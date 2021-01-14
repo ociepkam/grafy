@@ -31,7 +31,6 @@ def page_1(info):
         randomize_trials_order_var.set(False)
         randomize_graphs_var.set(False)
 
-
     def change_n_of_trials(new):
         n_of_trials.configure(state="normal")
         n_of_trials.delete(0, END)
@@ -264,6 +263,8 @@ def page_1(info):
     add_info_from_config()
     training()
     session()
+
+    # ------------------ Other ------------------- #
 
     insert_button(text="  Cancel  ", column=1, row=32, command=close, size=12, win=window, columnspan=1, sticky="E")
     insert_button(text="    Next     ", column=3, row=32, command=alerts, size=12, win=window, columnspan=1)

@@ -25,17 +25,7 @@ def read_text_from_file(file_name, insert=''):
     return ''.join(msg)
 
 
-def show_info(win, file_name, text_size, screen_width, insert='', key='f7', color = 'black'):
-    """
-    Clear way to show info message into screen.
-    :param win:
-    :param file_name:
-    :param screen_width:
-    :param text_size:
-    :param insert: extra text for read_text_from_file
-    :param key: exit key
-    :return:
-    """
+def show_info(win, file_name, text_size, screen_width, insert='', key='f7', color='black'):
     hello_msg = read_text_from_file(os.path.join(file_name), insert=insert)
     hello_msg = visual.TextStim(win=win, antialias=True, font=u'Arial',
                                 text=hello_msg, height=text_size,

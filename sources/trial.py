@@ -10,27 +10,30 @@ from sources.matrix_operations import rotate_matrices_in_trial, mirror_matrices_
 
 def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse_info, idx_info):
     response_clock = core.Clock()
-    A_to_B_relation = None
+    a_to_b_relation = None
+    press_space_msg = None
+    transformation_a = None
+    transformation_b = None
     if config["randomize_graphs"] or config["session_type"] == "Randomized experiment":
         while True:
             for matrix in ["A", "B"]:
                 if random.choice([True, False]):
                     rotate_matrices_in_trial(info, matrix)
                     if matrix == "A":
-                        transformation_A = "ROTATION"
+                        transformation_a = "ROTATION"
                     else:
-                        transformation_B = "ROTATION"
+                        transformation_b = "ROTATION"
                 else:
                     mirror_matrices_in_trial(info, matrix)
                     if matrix == "A":
-                        transformation_A = "MIRROR"
+                        transformation_a = "MIRROR"
                     else:
-                        transformation_B = "MIRROR"
+                        transformation_b = "MIRROR"
             if info["VA"] != info["VB"] or info["EA"] != info["EB"]:
-                if transformation_A == transformation_B:
-                    A_to_B_relation = "ROTATION"
+                if transformation_a == transformation_b:
+                    a_to_b_relation = "ROTATION"
                 else:
-                    A_to_B_relation = "MIRROR"
+                    a_to_b_relation = "MIRROR"
                 break
     if not config["randomize_graphs"] \
             or not config["session_type"] == "Randomized experiment" or random.choice([True, False]):
@@ -105,7 +108,8 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
                         window.flip()
                     click["left"] = True
                     answers["left"] = idx
-            if config["show_clock_icon"] and config["trial_time"] - response_clock.getTime() < config['click_show_time']:
+            if config["show_clock_icon"] and \
+               config["trial_time"] - response_clock.getTime() < config['click_show_time']:
                 clock_image.setAutoDraw(True)
             check_exit()
             window.flip()
@@ -152,4 +156,4 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
 
     window.flip()
     time.sleep(config["break_time"])
-    return answers, rt, acc, A_to_B_relation
+    return answers, rt, acc, a_to_b_relation
