@@ -45,9 +45,21 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
         info["left"] = info["left"][::-1]
         info["right"] = info["right"][::-1]
 
-    a.mark_answer(v_nr=info["left"][0], color=answers_colors[0])
-    if not config["one_target"]:
+    switch_targets = False
+    if not config["one_target"] and config["session_type"] == "Randomized experiment" \
+            and info['TRAIN'] == 0 and random.choice([True, False]):
+        a.mark_answer(v_nr=info["left"][0], color=answers_colors[1])
+        a.mark_answer(v_nr=info["right"][0], color=answers_colors[0])
+        switch_targets = True
+    elif not config["one_target"]:
+        a.mark_answer(v_nr=info["left"][0], color=answers_colors[0])
         a.mark_answer(v_nr=info["right"][0], color=answers_colors[1])
+    elif config["session_type"] == "Randomized experiment" and info['TRAIN'] == 0 and random.choice([True, False]):
+        a.mark_answer(v_nr=info["right"][0], color=answers_colors[0])
+        switch_targets = True
+    else:
+        a.mark_answer(v_nr=info["left"][0], color=answers_colors[0])
+
     if config["feedback"]:
         press_space_msg = visual.TextStim(window, text=replace_polish(config["press_space_message"]),
                                           color=config["press_space_button_color"], height=config["feedback_text_size"],
@@ -94,7 +106,10 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
             window.flip()
         if config["show_clock_icon"]:
             clock_image.setAutoDraw(False)
-        acc = {"left": answers["left"] == info["left"][1], "right": answers["right"] == info["right"][1]}
+        if not switch_targets:
+            acc = {"left": answers["left"] == info["left"][1], "right": answers["right"] == info["right"][1]}
+        else:
+            acc = {"left": answers["left"] == info["right"][1], "right": answers["right"] == info["left"][1]}
     else:
         while response_clock.getTime() < config["trial_time"] and not click["left"]:
             for idx, point in b.v:
@@ -115,7 +130,10 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
             window.flip()
         if config["show_clock_icon"]:
             clock_image.setAutoDraw(False)
-        acc = {"left": answers["left"] == info["left"][1], "right": answers["right"]}
+        if not switch_targets:
+            acc = {"left": answers["left"] == info["left"][1], "right": answers["right"]}
+        else:
+            acc = {"left": answers["left"] == info["right"][1], "right": answers["right"]}
 
     if config["feedback"]:
         b.mark_answer(info["left"][1], color=answers_colors[0])
