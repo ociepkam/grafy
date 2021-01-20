@@ -31,9 +31,9 @@ def load_trials(file_name, randomize_graphs=False):
                     data_row = {k: v for k, v in zip(header, row)}
                     for k in ["NR", "FEED", "TRAIN", "NV", "NE"]:
                         data_row[k] = int(data_row[k])
-                    for k in ["VA", "VB", "left", "right"]:
+                    for k in ["VA", "VB"]:
                         data_row[k] = [int(elem) for elem in data_row[k].split(",")]
-                    for k in ["EA", "EB"]:
+                    for k in ["EA", "EB", "left", "right"]:
                         data_row[k] = ast.literal_eval(data_row[k])
 
                     if randomize_graphs and random.choice([True, False]):

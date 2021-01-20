@@ -14,7 +14,7 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
     press_space_msg = None
     transformation_a = None
     transformation_b = None
-    if config["randomize_graphs"] or config["session_type"] == "Randomized experiment":
+    if config["randomize_graphs"] or config["session_type"] == "Randomized experiment" and info['TRAIN'] == 1:
         while True:
             for matrix in ["A", "B"]:
                 if random.choice([True, False]):
@@ -35,8 +35,8 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
                 else:
                     a_to_b_relation = "MIRROR"
                 break
-    if not config["randomize_graphs"] \
-            or not config["session_type"] == "Randomized experiment" or random.choice([True, False]):
+    if not config["randomize_graphs"] or not config["session_type"] == "Randomized experiment" \
+            or info['TRAIN'] == 1 or random.choice([True, False]):
         a = Matrix(win=window, pos=config["left_graph_position"], config=config, v=info["VA"], e=info["EA"])
         b = Matrix(win=window, pos=config["right_graph_position"], config=config, v=info["VB"], e=info["EB"])
     else:
