@@ -11,7 +11,7 @@ def experiment_info():
     date = now.strftime("%Y-%m-%d %H:%M")
 
     my_dlg = gui.Dlg(title="GRAPHS")
-    my_dlg.addText('Subject info:')
+    my_dlg.addText('Participant info:')
     my_dlg.addField('ID:')
     my_dlg.addField('Age:')
     my_dlg.addField('Gender:', choices=['M', "F"])

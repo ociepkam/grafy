@@ -14,7 +14,7 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
     press_space_msg = None
     transformation_a = None
     transformation_b = None
-    if config["randomize_graphs"] or config["session_type"] == "Randomized experiment" and info['TRAIN'] == 1:
+    if config["randomize_graphs"] or config["session_type"] == "Randomized experiment" and info['TRAIN'] == 0:
         while True:
             for matrix in ["A", "B"]:
                 if random.choice([True, False]):
