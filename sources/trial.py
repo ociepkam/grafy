@@ -29,7 +29,7 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
                         transformation_a = "MIRROR"
                     else:
                         transformation_b = "MIRROR"
-            if info["VA"] != info["VB"] or info["EA"] != info["EB"]:
+            if info["Nodes_A"] != info["Nodes_B"] or info["Edges_A"] != info["Edges_B"]:
                 if transformation_a == transformation_b:
                     a_to_b_relation = "ROTATION"
                 else:
@@ -37,28 +37,29 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
                 break
     if not config["randomize_graphs"] or not config["session_type"] == "Randomized experiment" \
             or info['TRAIN'] == 1 or random.choice([True, False]):
-        a = Matrix(win=window, pos=config["left_graph_position"], config=config, v=info["VA"], e=info["EA"])
-        b = Matrix(win=window, pos=config["right_graph_position"], config=config, v=info["VB"], e=info["EB"])
+        a = Matrix(win=window, pos=config["left_graph_position"], config=config, v=info["Nodes_A"], e=info["Edges_A"])
+        b = Matrix(win=window, pos=config["right_graph_position"], config=config, v=info["Nodes_B"], e=info["Edges_B"])
     else:
-        a = Matrix(win=window, pos=config["left_graph_position"], config=config, v=info["VB"], e=info["EB"])
-        b = Matrix(win=window, pos=config["right_graph_position"], config=config, v=info["VA"], e=info["EA"])
-        info["left"] = info["left"][::-1]
-        info["right"] = info["right"][::-1]
+        a = Matrix(win=window, pos=config["left_graph_position"], config=config, v=info["Nodes_B"], e=info["Edges_B"])
+        b = Matrix(win=window, pos=config["right_graph_position"], config=config, v=info["Nodes_A"], e=info["Edges_A"])
+        info["Left_button_targets"] = info["Left_button_targets"][::-1]
+        info["Right_button_targets"] = info["Right_button_targets"][::-1]
 
     switch_targets = False
-    if not config["one_target"] and config["session_type"] == "Randomized experiment" \
+    if not config["one_target"] and (config["session_type"] == "Randomized experiment" or config["randomize_graphs"])\
             and info['TRAIN'] == 0 and random.choice([True, False]):
-        a.mark_answer(v_nr=info["left"][0], color=answers_colors[1])
-        a.mark_answer(v_nr=info["right"][0], color=answers_colors[0])
+        a.mark_answer(v_nr=info["Left_button_targets"][0], color=answers_colors[1])
+        a.mark_answer(v_nr=info["Right_button_targets"][0], color=answers_colors[0])
         switch_targets = True
     elif not config["one_target"]:
-        a.mark_answer(v_nr=info["left"][0], color=answers_colors[0])
-        a.mark_answer(v_nr=info["right"][0], color=answers_colors[1])
-    elif config["session_type"] == "Randomized experiment" and info['TRAIN'] == 0 and random.choice([True, False]):
-        a.mark_answer(v_nr=info["right"][0], color=answers_colors[0])
+        a.mark_answer(v_nr=info["Left_button_targets"][0], color=answers_colors[0])
+        a.mark_answer(v_nr=info["Right_button_targets"][0], color=answers_colors[1])
+    elif (config["session_type"] == "Randomized experiment" or config["randomize_graphs"]) \
+            and info['TRAIN'] == 0 and random.choice([True, False]):
+        a.mark_answer(v_nr=info["Right_button_targets"][0], color=answers_colors[0])
         switch_targets = True
     else:
-        a.mark_answer(v_nr=info["left"][0], color=answers_colors[0])
+        a.mark_answer(v_nr=info["Left_button_targets"][0], color=answers_colors[0])
 
     if config["feedback"]:
         press_space_msg = visual.TextStim(window, text=replace_polish(config["press_space_message"]),
@@ -107,9 +108,11 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
         if config["show_clock_icon"]:
             clock_image.setAutoDraw(False)
         if not switch_targets:
-            acc = {"left": answers["left"] == info["left"][1], "right": answers["right"] == info["right"][1]}
+            acc = {"left": answers["left"] == info["Left_button_targets"][1],
+                   "right": answers["right"] == info["Right_button_targets"][1]}
         else:
-            acc = {"left": answers["left"] == info["right"][1], "right": answers["right"] == info["left"][1]}
+            acc = {"left": answers["left"] == info["Right_button_targets"][1],
+                   "right": answers["right"] == info["Left_button_targets"][1]}
     else:
         while response_clock.getTime() < config["trial_time"] and not click["left"]:
             for idx, point in b.v:
@@ -131,14 +134,14 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
         if config["show_clock_icon"]:
             clock_image.setAutoDraw(False)
         if not switch_targets:
-            acc = {"left": answers["left"] == info["left"][1], "right": answers["right"]}
+            acc = {"left": answers["left"] == info["Left_button_targets"][1], "right": answers["right"]}
         else:
-            acc = {"left": answers["left"] == info["right"][1], "right": answers["right"]}
+            acc = {"left": answers["left"] == info["Right_button_targets"][1], "right": answers["right"]}
 
     if config["feedback"]:
-        b.mark_answer(info["left"][1], color=answers_colors[0])
+        b.mark_answer(info["Left_button_targets"][1], color=answers_colors[0])
         if not config["one_target"]:
-            b.mark_answer(info["right"][1], color=answers_colors[1])
+            b.mark_answer(info["Right_button_targets"][1], color=answers_colors[1])
 
         if not config["one_target"]:
             if not click["left"] or not click["right"]:

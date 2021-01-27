@@ -12,7 +12,7 @@ def page_4(info):
         return choose_button_color(background_button_color, title="Choose background color")
 
     def choose_vertices_color():
-        return choose_button_color(vertices_button_color, title="Choose vertices color")
+        return choose_button_color(vertices_button_color, title="Choose nodes color")
 
     def choose_edges_color():
         return choose_button_color(edges_button_color, title="Choose edges color")
@@ -45,7 +45,7 @@ def page_4(info):
             return None
         if not try_button_color(background_button_color, orig_button_background, "background"):
             return None
-        if not try_button_color(vertices_button_color, orig_button_background, "non-target vertices"):
+        if not try_button_color(vertices_button_color, orig_button_background, "non-target nodes"):
             return None
         txt_size = try_convert_to_int(text_size.get(), "Text size")
         if not try_in_range(txt_size, "Text size", v_min=0):
@@ -67,16 +67,16 @@ def page_4(info):
         if r_graph_position_y is None:
             return None
 
-        v_size = try_convert_to_int(vertices_size.get(), "Vertices size")
-        if not try_in_range(v_size, "Vertices size", v_min=0):
+        v_size = try_convert_to_int(vertices_size.get(), "nodes size")
+        if not try_in_range(v_size, "nodes size", v_min=0):
             return None
 
-        v_distance = try_convert_to_int(vertices_distance.get(), "Distance between vertices")
-        if not try_in_range(v_distance, "Distance between vertices", v_min=0):
+        v_distance = try_convert_to_int(vertices_distance.get(), "Distance between nodes")
+        if not try_in_range(v_distance, "Distance between nodes", v_min=0):
             return None
 
-        e_v_gap = try_convert_to_int(gap_between_edges_and_vertices.get(), "Gap between edges and vertices")
-        if not try_in_range(e_v_gap, "Gap between edges and vertices", v_min=0):
+        e_v_gap = try_convert_to_int(gap_between_edges_and_vertices.get(), "Gap between edges and nodes")
+        if not try_in_range(e_v_gap, "Gap between edges and nodes", v_min=0):
             return None
 
         a_length = try_convert_to_int(arrowhead_length.get(), "Arrowhead length")
@@ -130,7 +130,7 @@ def page_4(info):
     background_button_color = insert_button(text="Choose color", column=0, row=4, command=choose_background_color,
                                             size=9, win=window, columnspan=6)
 
-    insert_text(text="Non-target vertices color:", column=0, row=5, columnspan=6, win=window, sticky="W")
+    insert_text(text="Non-target nodes color:", column=0, row=5, columnspan=6, win=window, sticky="W")
     vertices_button_color = insert_button(text="Choose color", column=0, row=5, command=choose_vertices_color,
                                           size=9, win=window, columnspan=6)
 
@@ -150,13 +150,13 @@ def page_4(info):
     right_graph_position_y = insert_entry(column=3, row=10, width=5, sticky="E", win=window, columnspan=1)
     insert_text(text="Right graph position:    ", column=0, row=10, columnspan=6, win=window, sticky="W")
 
-    insert_text(text="Vertices size:", column=0, row=11, columnspan=6, win=window, sticky="W")
+    insert_text(text="Nodes size:", column=0, row=11, columnspan=6, win=window, sticky="W")
     vertices_size = insert_entry(column=2, row=11, width=5, sticky="E", win=window, columnspan=1)
 
-    insert_text(text="Distance between vertices:", column=0, row=12, columnspan=6, win=window, sticky="W")
+    insert_text(text="Distance between nodes:", column=0, row=12, columnspan=6, win=window, sticky="W")
     vertices_distance = insert_entry(column=2, row=12, width=5, sticky="E", win=window, columnspan=1)
 
-    insert_text(text="Gap between edges and vertices:", column=0, row=13, columnspan=6, win=window, sticky="W")
+    insert_text(text="Gap between edges and nodes:", column=0, row=13, columnspan=6, win=window, sticky="W")
     gap_between_edges_and_vertices = insert_entry(column=2, row=13, width=5, sticky="E", win=window, columnspan=1)
 
     insert_text(text="Arrowhead length:", column=0, row=14, columnspan=6, win=window, sticky="W")

@@ -18,8 +18,8 @@ RAND = str(random.randint(100, 999))
 RESULTS = list()
 RESULTS.append(["ID", "GENDER", "AGE", "DATE",
                 "ORDER", "NR", 'EXPERIMENT',
-                "VA", "EA", "VB", "EB", "left", "right",
-                "NV", "NE", "Type", "Crossed_edges",
+                "Nodes_A", "Edges_A", "Nodes_B", "Edges_B", "Left_button_targets", "Right_button_targets",
+                "Number_of_nodes", "Number_of_edges", "Type", "Crossed_edges",
                 "LEFT_ANS", "RIGHT_ANS",
                 'LEFT_CORRECT', "RIGHT_CORRECT", "CORRECT",
                 "LEFT_RT", "RIGHT_RT", 'RT'
@@ -36,10 +36,12 @@ def save_beh():
 def prepare_result(i, info, answers, rt, acc, exp):
     return [part_id, part_sex, part_age, date,
             i, info["NR"], exp,
-            # "VA", "EA", "VB", "EB", "left", "right",
-            info["VA"], info["EA"], info["VB"], info["EB"], info["left"], info["right"],
+            # "VA", "EA", "VB", "EB",
+            info["Nodes_A"], info["Edges_A"], info["Nodes_B"], info["Edges_B"],
+            # "Left_button_targets", "Right_button_targets"
+            info["Left_button_targets"], info["Right_button_targets"],
             # "NV", "NE", "Type", Crossed_edges
-            info["NV"], info["NE"], info["Type"], info["Crossed_edges"],
+            info["Number_of_nodes"], info["Number_of_edges"], info["Type"], info["Crossed_edges"],
             # "LEFT_ANS", "RIGHT_ANS",
             answers["left"], answers["right"],
             # 'LEFT_ACC', "RIGHT_ACC", "ACC",
@@ -121,7 +123,7 @@ if config["training_session"]:
             mean_acc /= (i - 1)
         else:
             break
-        if mean_acc < config["training_accuracy"] and training_nr == config['max_training_attempts']:
+        if mean_acc < config["training_accuracy"] and training_nr == config['training_attempts']:
             show_info(window, join('.', 'messages', "too_many_attempts.txt"), text_size=config['text_size'],
                       screen_width=SCREEN_RES[0], color=config['text_color'])
             exit(1)

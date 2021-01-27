@@ -1,69 +1,73 @@
 1:
-  training_session: false
-  predefined_training: 12_trials.csv
-  training_accuracy: 1.0
-  training_attempts: 2
-  session_type: Randomized experiment
-  predefined_test: ''
+  training_session: true
+  predefined_training: 6_trials.csv
+  training_accuracy: 0.5
+  training_attempts: 3
+  session_type: Predefined test
+  predefined_test: test_44_trials.csv
   randomize_trials_order: false
-  randomize_graphs: true
+  randomize_graphs: false
   no_of_edges:
-    '3': true
+    '3': false
     '4': false
-    '5': true
+    '5': false
   crossed_edges:
-    graphs_with_crossed: true
+    graphs_with_crossed: false
     graphs_without_crossed_edges: false
   types_of_target_vertices:
-    direct: true
+    direct: false
     indirect: false
-  trials_per_cell: 2
-  n_of_trials: 4
-  break_after_n_trials: 3
+  trials_per_cell: null
+  n_of_trials: null
+  break_after_n_trials: 0
 2:
   one_target: false
-  left_button_color: '#ff0080'
-  right_button_color: '#ff0000'
-  trial_time: 11.0
+  left_button_color: '#ffff00'
+  right_button_color: '#0000ff'
+  click_show_time: false
+  trial_time: 24.0
   break_time: 1.0
-  click_show_time: 1.0
-  show_trial_number: false
-  trial_number_position_x: null
-  trial_number_position_y: null
-  trial_number_size: null
-  show_mouse_buttons: false
-  mouse_buttons_position_x: null
-  mouse_buttons_position_y: null
-  mouse_buttons_size: null
-  show_clock_icon: false
-  clock_position_x: null
-  clock_position_y: null
-  clock_size: null
-  clock_time: null
+  show_trial_number: true
+  trial_number_position_x: 550
+  trial_number_position_y: 350
+  trial_number_size: 40
+  show_mouse_buttons: true
+  mouse_buttons_position_x: 0
+  mouse_buttons_position_y: -350
+  mouse_buttons_size: 100
+  show_clock_icon: true
+  clock_position_x: 0
+  clock_position_y: 350
+  clock_size: 100
+  clock_time: 4.0
 3:
-  feedback: false
-  correct_answer: ''
-  correct_answer_color: SystemButtonFace
-  incorrect_answer: ''
-  incorrect_answer_color: SystemButtonFace
-  no_answer: ''
-  no_answer_color: SystemButtonFace
-  press_space_message: ''
-  press_space_button_color: SystemButtonFace
-  feedback_text_size: null
+  feedback: true
+  correct_answer: Your answer was correct
+  correct_answer_color: '#008000'
+  incorrect_answer: Your answer was incorrect. The correct answer is presented above.
+  incorrect_answer_color: '#cd0532'
+  no_answer: No answer
+  no_answer_color: '#000000'
+  press_space_message: Press space
+  press_space_button_color: '#000000'
+  feedback_text_size: 20
   feedback_position:
-  - null
-  - null
+  - 0
+  - -100
 4:
-  text_color: '#800080'
-  background_color: '#c0c0c0'
-  text_size: 11
-  vertices_color: '#408080'
-  edges_color: '#000080'
-  left_graph_position: [0,0]
-  right_graph_position: [200, 0]
-  vertices_size: 20
+  text_color: '#000000'
+  background_color: '#ffffff'
+  text_size: 30
+  vertices_color: '#000000'
+  edges_color: '#000000'
+  left_graph_position:
+  - -130
+  - 0
+  right_graph_position:
+  - 130
+  - 0
+  vertices_size: 18
   vertices_distance: 80
-  gap_between_edges_and_vertices: 20
-  arrowhead_length: 15
-  arrowhead_width: 15
+  gap_between_edges_and_vertices: 21
+  arrowhead_length: 14
+  arrowhead_width: 7

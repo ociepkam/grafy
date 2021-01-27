@@ -29,17 +29,17 @@ def load_trials(file_name, randomize_graphs=False):
                     header = row
                 else:
                     data_row = {k: v for k, v in zip(header, row)}
-                    for k in ["NR", "FEED", "TRAIN", "NV", "NE"]:
+                    for k in ["NR", "FEED", "TRAIN", "Number_of_nodes", "Number_of_edges"]:
                         data_row[k] = int(data_row[k])
-                    for k in ["VA", "VB"]:
+                    for k in ["Nodes_A", "Nodes_B"]:
                         data_row[k] = [int(elem) for elem in data_row[k].split(",")]
-                    for k in ["EA", "EB", "left", "right"]:
+                    for k in ["Edges_A", "Edges_B", "Left_button_targets", "Right_button_targets"]:
                         data_row[k] = ast.literal_eval(data_row[k])
 
                     if randomize_graphs and random.choice([True, False]):
-                        data_row["VA"], data_row["VB"] = data_row["VB"], data_row["VA"]
-                        data_row["EA"], data_row["EB"] = data_row["EB"], data_row["EA"]
-                        data_row["left"], data_row["right"] = data_row["right"], data_row["left"]
+                        data_row["Nodes_A"], data_row["Nodes_B"] = data_row["Nodes_B"], data_row["Nodes_A"]
+                        data_row["Edges_A"], data_row["Edges_B"] = data_row["Edges_B"], data_row["Edges_A"]
+                        data_row["Left_button_targets"], data_row["Right_button_targets"] = data_row["Right_button_targets"], data_row["Left_button_targets"]
 
                     if data_row["TRAIN"] == 1:
                         data_train.append(data_row)

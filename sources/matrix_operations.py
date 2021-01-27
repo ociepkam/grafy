@@ -54,13 +54,17 @@ def mirror_matrix(v, e, left, right):
 
 def rotate_matrices_in_trial(info, matrix):
     if matrix == "A":
-        info["left"][0], info["right"][0] = rotate_matrix(info["VA"], info["EA"], info["left"][0], info["right"][0])
+        info["Left_button_targets"][0], info["Right_button_targets"][0] = rotate_matrix(info["Nodes_A"],
+        info["Edges_A"], info["Left_button_targets"][0], info["Right_button_targets"][0])
     elif matrix == 'B':
-        info["left"][1], info["right"][1] = rotate_matrix(info["VB"], info["EB"], info["left"][1], info["right"][1])
+        info["Left_button_targets"][1], info["Right_button_targets"][1] = rotate_matrix(info["Nodes_B"],
+        info["Edges_B"], info["Left_button_targets"][1], info["Right_button_targets"][1])
 
 
 def mirror_matrices_in_trial(info, matrix):
     if matrix == "A":
-        info["left"][0], info["right"][0] = mirror_matrix(info["VA"], info["EA"], info["left"][0], info["right"][0])
+        info["Left_button_targets"][0], info["Right_button_targets"][0] = mirror_matrix(info["Nodes_A"],
+        info["EA"], info["Left_button_targets"][0], info["Right_button_targets"][0])
     elif matrix == "B":
-        info["left"][1], info["right"][1] = mirror_matrix(info["VB"], info["EB"], info["left"][1], info["right"][1])
+        info["Left_button_targets"][1], info["Right_button_targets"][1] = mirror_matrix(info["Nodes_B"],
+        info["Edges_B"], info["Left_button_targets"][1], info["Right_button_targets"][1])
