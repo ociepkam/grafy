@@ -64,7 +64,7 @@ def rotate_matrices_in_trial(info, matrix):
 def mirror_matrices_in_trial(info, matrix):
     if matrix == "A":
         info["Left_button_targets"][0], info["Right_button_targets"][0] = mirror_matrix(info["Nodes_A"],
-        info["EA"], info["Left_button_targets"][0], info["Right_button_targets"][0])
+        info["Edges_A"], info["Left_button_targets"][0], info["Right_button_targets"][0])
     elif matrix == "B":
         info["Left_button_targets"][1], info["Right_button_targets"][1] = mirror_matrix(info["Nodes_B"],
         info["Edges_B"], info["Left_button_targets"][1], info["Right_button_targets"][1])

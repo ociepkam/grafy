@@ -138,7 +138,7 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
         else:
             acc = {"left": answers["left"] == info["Right_button_targets"][1], "right": answers["right"]}
 
-    if config["feedback"]:
+    if config["feedback"] and info["TRAIN"] == 1:
         b.mark_answer(info["Left_button_targets"][1], color=answers_colors[0])
         if not config["one_target"]:
             b.mark_answer(info["Right_button_targets"][1], color=answers_colors[1])
