@@ -21,10 +21,10 @@ def page_4(info):
         try:
             # Visual
             text_size.insert(0, info["text_size"])
-            text_button_color["background"] = info["text_color"]
-            background_button_color["background"] = info["background_color"]
-            vertices_button_color["background"] = info["vertices_color"]
-            edges_button_color["background"] = info["edges_color"]
+            change_button_color(text_button_color, info["text_color"])
+            change_button_color(background_button_color, info["background_color"])
+            change_button_color(vertices_button_color, info["vertices_color"])
+            change_button_color(edges_button_color, info["edges_color"])
             left_graph_position_x.insert(0, info["left_graph_position"][0])
             left_graph_position_y.insert(0, info["left_graph_position"][1])
             right_graph_position_x.insert(0, info["right_graph_position"][0])

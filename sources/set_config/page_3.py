@@ -43,14 +43,14 @@ def page_3(info):
                 no_answer.insert(0, info["no_answer"])
                 press_space_message.insert(0, info["press_space_message"])
 
-                correct_answer_button_color["background"] = info["correct_answer_color"]
-                incorrect_answer_button_color["background"] = info["incorrect_answer_color"]
-                no_answer_button_color["background"] = info["no_answer_color"]
-                press_space_button_color["background"] = info["press_space_color"]
+                change_button_color(correct_answer_button_color, info["correct_answer_color"])
+                change_button_color(incorrect_answer_button_color, info["incorrect_answer_color"])
+                change_button_color(no_answer_button_color, info["no_answer_color"])
+                change_button_color(press_space_button_color, info["press_space_button_color"])
 
                 feedback_text_size.insert(0, info["feedback_text_size"])
-                feedback_position_x.insert(0, info["feedback_position_x"])
-                feedback_position_y.insert(0, info["feedback_position_y"])
+                feedback_position_x.insert(0, info["feedback_position"][0])
+                feedback_position_y.insert(0, info["feedback_position"][1])
 
         except:
             messagebox.showerror(message="Can't load file with config")

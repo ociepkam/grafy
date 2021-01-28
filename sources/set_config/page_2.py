@@ -39,8 +39,8 @@ def page_2(info):
         try:
             # Target
             one_target_var.set(info["one_target"])
-            left_button_color['background'] = info["left_button_color"]
-            right_button_color['background'] = info["right_button_color"]
+            change_button_color(left_button_color, info["left_button_color"])
+            change_button_color(right_button_color, info["right_button_color"])
             click_show_time_var.set(info["click_show_time"])
             # Trial time
             trial_time.insert(0, info["trial_time"])
