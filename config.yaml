@@ -3,22 +3,22 @@
   predefined_training: 6_trials.csv
   training_accuracy: 0.5
   training_attempts: 3
-  session_type: Predefined test
+  session_type: Randomized experiment
   predefined_test: test_44_trials.csv
   randomize_trials_order: false
   randomize_graphs: false
   no_of_edges:
-    '3': false
+    '3': true
     '4': false
     '5': false
   crossed_edges:
     graphs_with_crossed: false
-    graphs_without_crossed_edges: false
+    graphs_without_crossed_edges: true
   types_of_target_vertices:
-    direct: false
-    indirect: false
-  trials_per_cell: null
-  n_of_trials: null
+    direct: true
+    indirect: true
+  trials_per_cell: 5
+  n_of_trials: 10
   break_after_n_trials: 0
 2:
   one_target: false
@@ -50,13 +50,13 @@
   no_answer_color: '#000000'
   press_space_message: Press space
   press_space_button_color: '#000000'
-  feedback_text_size: 20
+  feedback_text_size: 30
   feedback_position:
   - 0
   - -100
 4:
   text_color: '#000000'
-  background_color: '#ffffff'
+  background_color: '#dddddd'
   text_size: 30
   vertices_color: '#000000'
   edges_color: '#000000'
