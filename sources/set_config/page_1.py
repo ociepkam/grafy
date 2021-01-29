@@ -175,7 +175,7 @@ def page_1(info):
     predefined_training_text = insert_text(text="Select predefined training:", column=0, row=3, sticky="W", win=window)
     predefined_training = insert_combobox(column=2, row=3, values=training_files, sticky="W", win=window)
 
-    training_accuracy_text = insert_text(text="Required training accuracy:", column=0, row=4, sticky="W", win=window)
+    training_accuracy_text = insert_text(text="Min. required training accuracy:", column=0, row=4, sticky="W", win=window)
     training_accuracy = insert_entry(column=2, row=4, width=5, sticky="W", win=window)
 
     training_attempts_text = insert_text(text="Max. training attempts:", column=0, row=5, sticky="W", win=window)

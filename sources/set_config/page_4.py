@@ -142,13 +142,13 @@ def page_4(info):
     left_graph_position_x = insert_entry(column=2, row=9, width=5, sticky="E", win=window, columnspan=1)
     insert_text(text="y:", column=3, row=9, win=window, sticky="W", columnspan=1)
     left_graph_position_y = insert_entry(column=3, row=9, width=5, sticky="E", win=window, columnspan=1)
-    insert_text(text="Left graph position:", column=0, row=9, columnspan=6, win=window, sticky="W")
+    insert_text(text="Graph A position:", column=0, row=9, columnspan=6, win=window, sticky="W")
 
     insert_text(text="x:", column=2, row=10, win=window, sticky="W", columnspan=1)
     right_graph_position_x = insert_entry(column=2, row=10, width=5, sticky="E", win=window, columnspan=1)
     insert_text(text="y:", column=3, row=10, win=window, sticky="W", columnspan=1)
     right_graph_position_y = insert_entry(column=3, row=10, width=5, sticky="E", win=window, columnspan=1)
-    insert_text(text="Right graph position:    ", column=0, row=10, columnspan=6, win=window, sticky="W")
+    insert_text(text="Graph B position:    ", column=0, row=10, columnspan=6, win=window, sticky="W")
 
     insert_text(text="Nodes size:", column=0, row=11, columnspan=6, win=window, sticky="W")
     vertices_size = insert_entry(column=2, row=11, width=5, sticky="E", win=window, columnspan=1)
