@@ -5,20 +5,15 @@ from sources.set_config.alerts import *
 
 
 def page_2(info):
-    def one_target():
-        right_button_color['background'] = orig_button_background
-        right_button_color['foreground'] = orig_button_foreground
-        click_show_time['background'] = orig_button_background
-        click_show_time['foreground'] = orig_button_foreground
-        click_show_time_var.set(False)
-        show_on_off([right_button_color_text, right_button_color, click_show_time],
-                    one_target_var, ["normal", "disable"])
-
     def choose_left_color():
         return choose_button_color(left_button_color, title="Choose left button color")
 
     def choose_right_color():
         return choose_button_color(right_button_color, title="Choose right button color")
+
+    def show_one_target():
+        elements = [right_button_color_text, right_button_color, click_show_time]
+        show_on_off(elements, one_target_var, ["normal", "disable"])
 
     def show_number():
         elements = [trial_number_position_x_text, trial_number_position_x, trial_number_position_y_text,
@@ -185,7 +180,7 @@ def page_2(info):
     Separator(window, orient='horizontal').place(x=0, y=32, relwidth=1, height=2)
 
     _, one_target_var = insert_checkbutton(text="Use only one target", column=0, row=1, win=window,
-                                           command=one_target, sticky="W", columnspan=6)
+                                           command=show_one_target, sticky="W", columnspan=6)
     insert_text(text="Left button target color:", column=0, row=2, win=window, sticky="W", columnspan=6)
     left_button_color = insert_button(text="Choose color", column=0, row=2, command=choose_left_color, size=9,
                                       win=window, columnspan=6)
@@ -264,6 +259,7 @@ def page_2(info):
     show_number()
     show_buttons()
     show_clock()
+    show_one_target()
 
     window.mainloop()
     return information

@@ -12,11 +12,12 @@ def show_on_off(elements, checkbutton_var, states):
 
 def change_button_color(button, color_code):
     button['background'] = color_code
-    color_code = tuple(int(color_code[i:i + 2], 16) for i in (1, 3, 5))
-    if sum(color_code) < 100:
-        button['foreground'] = 'white'
-    else:
-        button['foreground'] = 'black'
+    if color_code != "SystemButtonFace":
+        color_code = tuple(int(color_code[i:i + 2], 16) for i in (1, 3, 5))
+        if sum(color_code) < 100:
+            button['foreground'] = 'white'
+        else:
+            button['foreground'] = 'black'
 
 
 def choose_button_color(button, title):
