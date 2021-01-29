@@ -1,10 +1,10 @@
 1:
-  training_session: true
-  predefined_training: 6_trials.csv
-  training_accuracy: 0.5
-  training_attempts: 3
-  session_type: Randomized experiment
-  predefined_test: test_44_trials.csv
+  training_session: false
+  predefined_training: 8_trials.csv
+  training_accuracy: null
+  training_attempts: null
+  session_type: Predefined test
+  predefined_test: test_hard_36 — kopia.csv
   randomize_trials_order: false
   randomize_graphs: false
   no_of_edges:
@@ -17,8 +17,8 @@
   types_of_target_vertices:
     direct: true
     indirect: true
-  trials_per_cell: 5
-  n_of_trials: 10
+  trials_per_cell: null
+  n_of_trials: null
   break_after_n_trials: 0
 2:
   one_target: false
@@ -28,16 +28,16 @@
   trial_time: 24.0
   break_time: 1.0
   show_trial_number: true
-  trial_number_position_x: 550
+  trial_number_position_x: 600
   trial_number_position_y: 350
   trial_number_size: 40
   show_mouse_buttons: true
   mouse_buttons_position_x: 0
-  mouse_buttons_position_y: -350
+  mouse_buttons_position_y: -200
   mouse_buttons_size: 100
   show_clock_icon: true
   clock_position_x: 0
-  clock_position_y: 350
+  clock_position_y: 200
   clock_size: 100
   clock_time: 4.0
 3:
@@ -45,7 +45,7 @@
   correct_answer: Your answer was correct
   correct_answer_color: '#008000'
   incorrect_answer: Your answer was incorrect. The correct answer is presented above.
-  incorrect_answer_color: '#cd0532'
+  incorrect_answer_color: '#ff0000'
   no_answer: No answer
   no_answer_color: '#000000'
   press_space_message: Press space
