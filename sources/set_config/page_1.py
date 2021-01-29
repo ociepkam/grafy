@@ -28,8 +28,6 @@ def page_1(info):
         show_on_off(elements_left, session_type, ["normal", "disabled"])
         show_on_off([predefined_test_list], session_type, ["readonly", "disabled"])
         show_on_off(elements_right, session_type, ["disabled", "normal"])
-        randomize_trials_order_var.set(False)
-        randomize_graphs_var.set(False)
 
     def change_n_of_trials(new):
         n_of_trials.configure(state="normal")
