@@ -34,21 +34,22 @@ SUMMARY_RESULTS.append(["ID", "GENDER", "AGE", "DATE",
 n_of_exp_trials_applied = 0
 n_of_trials_with_answer = 0
 n_of_correct_exp_trials = 0
-percent_correct = None
-mean_RT = None
 
 @atexit.register
 def save_results():
-    with open(join('results', '{}_{}.csv'.format(NAME, RAND)), 'w', newline='') as f:
+    with open(join('results/raw_results', '{}_{}.csv'.format(NAME, RAND)), 'w', newline='') as f:
         beh_writer = csv.writer(f, delimiter=";")
         beh_writer.writerows(RESULTS)
 
+    percent_correct = 0
+    mean_RT = 0
     if n_of_exp_trials_applied > 0:
         percent_correct = round(n_of_correct_exp_trials/n_of_exp_trials_applied, 3)
         mean_RT = round(RT_sum/n_of_trials_with_answer, 3)
-    SUMMARY_RESULTS.append([part_id, part_sex, part_age, date, n_of_exp_trials_applied,
-                            n_of_trials_with_answer, n_of_correct_exp_trials, percent_correct, mean_RT])
-    with open(join('summary_results', '{}_{}.csv'.format(NAME, RAND)), 'w', newline='') as s:
+    SUMMARY_RESULTS.append([part_id, part_sex, part_age, date,
+                            n_of_exp_trials_applied, n_of_trials_with_answer, n_of_correct_exp_trials, percent_correct,
+                            mean_RT])
+    with open(join('results/summary_results', '{}_{}.csv'.format(NAME, RAND)), 'w', newline='') as s:
         beh_sum_writer = csv.writer(s, delimiter=";")
         beh_sum_writer.writerows(SUMMARY_RESULTS)
 
@@ -65,9 +66,9 @@ def prepare_result(i, info, answers, rt, acc, exp):
             # "LEFT_ANS", "RIGHT_ANS",
             answers["left"], answers["right"],
             # 'LEFT_ACC', "RIGHT_ACC", "ACC",
-            int(acc["left"]), int(acc["right"]), int(acc["left"] and acc["right"]),
+            acc["left"], acc["right"], acc["left"] and acc["right"],
             # "LEFT_RT", "RIGHT_RT",
-            round(rt["left"],3), round(rt["right"],3),
+            rt["left"], rt["right"],
             #'RT'
             round(max(rt["left"], rt["right"]),3) if rt["left"] and rt["right"] else None]
 
@@ -144,13 +145,14 @@ if config["training_session"]:
         if i > 1:
             mean_acc /= (i - 1)
         else:
+            print("AA")
             break
         if mean_acc < config["training_accuracy"] and training_nr == config['training_attempts']:
-            show_info(window, join('.', 'messages', "too_many_attempts.txt"), text_size=config['text_size'],
+            show_info(window, join('.', 'texts', "too_many_attempts.txt"), text_size=config['text_size'],
                       screen_width=SCREEN_RES[0], color=config['text_color'])
             exit(1)
         if mean_acc < config["training_accuracy"]:
-            show_info(window, join('.', 'messages', "after_unsuccessful_training.txt"), text_size=config['text_size'],
+            show_info(window, join('.', 'texts', "after_unsuccessful_training.txt"), text_size=config['text_size'],
                       screen_width=SCREEN_RES[0], color=config['text_color'])
 
 # EXPERIMENT
@@ -164,9 +166,10 @@ else:
     random.shuffle(data_exp)
 
 if config["training_session"]:
-    show_info(window, join('.', 'messages', "after_training.txt"), text_size=config['text_size'],
+    show_info(window, join('.', 'texts', "after_training.txt"), text_size=config['text_size'],
               screen_width=SCREEN_RES[0], key="q", color=config['text_color'])
 else:
+    # INSTRUCTIONS
     show_image(window, 'instruction1.png', SCREEN_RES)
     show_image(window, 'instruction2.png', SCREEN_RES)
     show_image(window, 'instruction3.png', SCREEN_RES)
@@ -197,8 +200,8 @@ for info in data_exp:
         n_of_trials_with_answer += 1 if rt["left"] and rt["right"] else 0
 
     if i == config['break_after_n_trials']:
-        show_info(window, join('.', 'messages', "break.txt"), text_size=config['text_size'] + 25,
+        show_info(window, join('.', 'texts', "break.txt"), text_size=config['text_size'] + 25,
                   screen_width=SCREEN_RES[0], key="q", color=config['text_color'])
 
-show_info(window, join('.', 'messages', "end.txt"), text_size=config['text_size'],
+show_info(window, join('.', 'texts', "end.txt"), text_size=config['text_size'],
           screen_width=SCREEN_RES[0], color=config['text_color'])
