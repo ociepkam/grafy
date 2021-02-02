@@ -10,7 +10,7 @@ def experiment_info():
     now = datetime.datetime.now()
     date = now.strftime("%Y-%m-%d %H:%M")
 
-    my_dlg = gui.Dlg(title="GRAPHS")
+    my_dlg = gui.Dlg(title="Graph Mapping")
     my_dlg.addText('Participant info:')
     my_dlg.addField('ID:')
     my_dlg.addField('Age:')

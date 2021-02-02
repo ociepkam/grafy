@@ -64,7 +64,7 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
     if config["feedback"]:
         press_space_msg = visual.TextStim(window, text=replace_polish(config["press_space_message"]),
                                           color=config["press_space_button_color"], height=config["feedback_text_size"],
-                                          pos=[config["feedback_position"][0], config["feedback_position"][1] - 100])
+                                          pos=[config["feedback_position"][0], config["feedback_position"][1] - 60])
     a.set_auto_draw(True)
     b.set_auto_draw(True)
     window.callOnFlip(response_clock.reset)
@@ -137,6 +137,9 @@ def trial(window, config, answers_colors, info, mouse, clock_image, feedb, mouse
             acc = {"left": answers["left"] == info["Left_button_targets"][1], "right": answers["right"]}
         else:
             acc = {"left": answers["left"] == info["Right_button_targets"][1], "right": answers["right"]}
+
+    b.mark_answer(answers["left"], color=config["vertices_color"])
+    b.mark_answer(answers["right"], color=config["vertices_color"])
 
     if config["feedback"] and info["FEED"] == 1:
         b.mark_answer(info["Left_button_targets"][1], color=answers_colors[0])
