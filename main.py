@@ -26,11 +26,31 @@ RESULTS.append(["ID", "GENDER", "AGE", "DATE",
                 ])
 
 
+SUMMARY_RESULTS = list()
+SUMMARY_RESULTS.append(["ID", "GENDER", "AGE", "DATE",
+                        "N_of_exp_trials_applied", "N_of_trials_with_answer",
+                        "N_of_correct_trials", "Percent_correct", "Mean_RT"])
+
+n_of_exp_trials_applied = 0
+n_of_trials_with_answer = 0
+n_of_correct_exp_trials = 0
+percent_correct = None
+mean_RT = None
+
 @atexit.register
-def save_beh():
-    with open(join('results', '{}_{}.csv'.format(NAME, RAND)), 'w') as f:
-        beh_writer = csv.writer(f)
+def save_results():
+    with open(join('results', '{}_{}.csv'.format(NAME, RAND)), 'w', newline='') as f:
+        beh_writer = csv.writer(f, delimiter=";")
         beh_writer.writerows(RESULTS)
+
+    if n_of_exp_trials_applied > 0:
+        percent_correct = round(n_of_correct_exp_trials/n_of_exp_trials_applied, 3)
+        mean_RT = round(RT_sum/n_of_trials_with_answer, 3)
+    SUMMARY_RESULTS.append([part_id, part_sex, part_age, date, n_of_exp_trials_applied,
+                            n_of_trials_with_answer, n_of_correct_exp_trials, percent_correct, mean_RT])
+    with open(join('summary_results', '{}_{}.csv'.format(NAME, RAND)), 'w', newline='') as s:
+        beh_sum_writer = csv.writer(s, delimiter=";")
+        beh_sum_writer.writerows(SUMMARY_RESULTS)
 
 
 def prepare_result(i, info, answers, rt, acc, exp):
@@ -45,9 +65,11 @@ def prepare_result(i, info, answers, rt, acc, exp):
             # "LEFT_ANS", "RIGHT_ANS",
             answers["left"], answers["right"],
             # 'LEFT_ACC', "RIGHT_ACC", "ACC",
-            acc["left"], acc["right"], acc["left"] and acc["right"],
-            # "LEFT_RT", "RIGHT_RT", 'RT',
-            rt["left"], rt["right"], max(rt["left"], rt["right"]) if rt["left"] and rt["right"] else None]
+            int(acc["left"]), int(acc["right"]), int(acc["left"] and acc["right"]),
+            # "LEFT_RT", "RIGHT_RT",
+            round(rt["left"],3), round(rt["right"],3),
+            #'RT'
+            round(max(rt["left"], rt["right"]),3) if rt["left"] and rt["right"] else None]
 
 
 config = load_config("config.yaml", concatenate=True)
@@ -152,6 +174,7 @@ else:
     show_image(window, 'instruction5.png', SCREEN_RES)
 
 i = 1
+RT_sum = 0
 for info in data_exp:
     if config["show_trial_number"]:
         idx_info = visual.TextStim(window, color=config["text_color"], height=config["trial_number_size"], text=i,
@@ -162,6 +185,16 @@ for info in data_exp:
                                               mouse, clock_image, feedb, mouse_info, idx_info)
     RESULTS.append(prepare_result(i, info, answers, rt, acc, "exp"))
     i += 1
+
+    n_of_exp_trials_applied += 1
+    if config["one_target"]:
+        n_of_correct_exp_trials += int(acc["left"])
+        RT_sum += rt["left"] if rt["left"] else 0
+        n_of_trials_with_answer += 1 if rt["left"] else 0
+    else:
+        n_of_correct_exp_trials += int(acc["left"] and acc["right"])
+        RT_sum += max(rt["left"], rt["right"]) if rt["left"] and rt["right"] else 0
+        n_of_trials_with_answer += 1 if rt["left"] and rt["right"] else 0
 
     if i == config['break_after_n_trials']:
         show_info(window, join('.', 'messages', "break.txt"), text_size=config['text_size'] + 25,

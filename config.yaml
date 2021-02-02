@@ -1,8 +1,8 @@
 1:
-  training_session: true
+  training_session: false
   predefined_training: 12_trials.csv
-  training_accuracy: 0.65
-  training_attempts: 3
+  training_accuracy: null
+  training_attempts: null
   session_type: Predefined test
   predefined_test: test_44_items.csv
   randomize_trials_order: false
