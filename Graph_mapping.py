@@ -50,7 +50,7 @@ def save_results():
     SUMMARY_RESULTS.append([part_id, part_sex, part_age, date,
                             n_of_exp_trials_applied, n_of_trials_with_answer, n_of_correct_exp_trials, percent_correct,
                             mean_rt])
-    with open(join('results' 'summary_results', '{}_{}.csv'.format(NAME, RAND)), 'w', newline='') as s:
+    with open(join('results', 'summary_results', '{}_{}.csv'.format(NAME, RAND)), 'w', newline='') as s:
         beh_sum_writer = csv.writer(s, delimiter=";")
         beh_sum_writer.writerows(SUMMARY_RESULTS)
 
