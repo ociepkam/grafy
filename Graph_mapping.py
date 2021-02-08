@@ -35,21 +35,22 @@ n_of_exp_trials_applied = 0
 n_of_trials_with_answer = 0
 n_of_correct_exp_trials = 0
 
+
 @atexit.register
 def save_results():
-    with open(join('results/raw_results', '{}_{}.csv'.format(NAME, RAND)), 'w', newline='') as f:
+    with open(join('results', 'raw_results', '{}_{}.csv'.format(NAME, RAND)), 'w', newline='') as f:
         beh_writer = csv.writer(f, delimiter=";")
         beh_writer.writerows(RESULTS)
 
     percent_correct = 0
-    mean_RT = 0
+    mean_rt = 0
     if n_of_exp_trials_applied > 0:
         percent_correct = round(n_of_correct_exp_trials/n_of_exp_trials_applied, 3)
-        mean_RT = round(RT_sum/n_of_trials_with_answer, 3)
+        mean_rt = round(RT_sum/n_of_trials_with_answer, 3)
     SUMMARY_RESULTS.append([part_id, part_sex, part_age, date,
                             n_of_exp_trials_applied, n_of_trials_with_answer, n_of_correct_exp_trials, percent_correct,
-                            mean_RT])
-    with open(join('results/summary_results', '{}_{}.csv'.format(NAME, RAND)), 'w', newline='') as s:
+                            mean_rt])
+    with open(join('results' 'summary_results', '{}_{}.csv'.format(NAME, RAND)), 'w', newline='') as s:
         beh_sum_writer = csv.writer(s, delimiter=";")
         beh_sum_writer.writerows(SUMMARY_RESULTS)
 
@@ -69,8 +70,8 @@ def prepare_result(i, info, answers, rt, acc, exp):
             acc["left"], acc["right"], acc["left"] and acc["right"],
             # "LEFT_RT", "RIGHT_RT",
             rt["left"], rt["right"],
-            #'RT'
-            round(max(rt["left"], rt["right"]),3) if rt["left"] and rt["right"] else None]
+            # 'RT'
+            round(max(rt["left"], rt["right"]), 3) if rt["left"] and rt["right"] else None]
 
 
 config = load_config("config.yaml", concatenate=True)
