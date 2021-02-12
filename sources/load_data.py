@@ -8,7 +8,7 @@ import random
 def load_config(file_name="config.yaml", concatenate=False):
     try:
         with open(file_name) as yaml_file:
-            doc = yaml.load(yaml_file, Loader=yaml.FullLoader)
+            doc = yaml.safe_load(yaml_file)
         if concatenate:
             doc = {**doc[1], **doc[2], **doc[3], **doc[4]}
         return doc
