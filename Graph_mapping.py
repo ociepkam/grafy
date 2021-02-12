@@ -46,6 +46,7 @@ def save_results():
     mean_rt = 0
     if n_of_exp_trials_applied > 0:
         percent_correct = round(n_of_correct_exp_trials/n_of_exp_trials_applied, 3)
+    if n_of_trials_with_answer > 0:
         mean_rt = round(RT_sum/n_of_trials_with_answer, 3)
     SUMMARY_RESULTS.append([part_id, part_sex, part_age, date,
                             n_of_exp_trials_applied, n_of_trials_with_answer, n_of_correct_exp_trials, percent_correct,
