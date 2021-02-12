@@ -1,18 +1,21 @@
 import os
-import pandas as pd
+import csv
 import glob
 
 
-def read(f):
-    data = pd.read_csv(f, sep=";")
-    data["FILE_NAME"] = [f.split("/")[-1]]*len(data)
-    return data
+def new_v(files_path, output_name):
+    interesting_files = glob.glob(os.path.join(files_path, "*.csv"))
+    result = None
+    for filename in interesting_files:
+        with open(filename) as fin:
+            data = csv.reader(fin, delimiter=';')
+            if result is None:
+                result = ([list(data)[0]])
+            result += list(data)[1:]
+    with open(output_name, 'w', newline='') as out:
+        write = csv.writer(out, delimiter=';')
+        write.writerows(result)
 
 
-def all_to_one_file(files_path, file_name):
-    df = pd.concat(map(read, glob.glob(os.path.join(files_path, "*.csv"))))
-    df.to_csv(file_name + ".csv", sep=";")
-
-
-all_to_one_file('raw_results', 'raw_results')
-all_to_one_file('summary_results', 'summary_results')
+new_v('raw_results', 'raw_results.csv')
+new_v('summary_results', 'summary_results.csv')
