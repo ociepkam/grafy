@@ -25,7 +25,7 @@ def read_text_from_file(file_name, insert=''):
     return ''.join(msg)
 
 
-def show_info(win, file_name, text_size, screen_width, insert='', key='f7', color='black'):
+def show_info(win, file_name, text_size, screen_width, insert='', key='q', color='black'):
     hello_msg = read_text_from_file(os.path.join(file_name), insert=insert)
     hello_msg = visual.TextStim(win=win, antialias=True, font=u'Arial',
                                 text=hello_msg, height=text_size,
@@ -40,7 +40,7 @@ def show_info(win, file_name, text_size, screen_width, insert='', key='f7', colo
     win.flip()
 
 
-def show_image(win, file_name, size, key='f7'):
+def show_image(win, file_name, size, key='q'):
     image = visual.ImageStim(win=win, image=os.path.join('images', file_name), interpolate=True, size=size)
     image.draw()
     win.flip()
