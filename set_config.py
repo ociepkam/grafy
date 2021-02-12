@@ -30,7 +30,7 @@ if __name__ == "__main__":
     while True:
         try:
             information[actual_page]
-        except KeyError:
+        except:
             information[actual_page] = None
         page_result = run_page(actual_page, information[actual_page])
         if page_result == "close":
