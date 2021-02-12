@@ -8,10 +8,10 @@ def new_v(files_path, output_name):
     result = None
     for filename in interesting_files:
         with open(filename) as fin:
-            data = csv.reader(fin, delimiter=';')
+            data = list(csv.reader(fin, delimiter=';'))
             if result is None:
-                result = ([list(data)[0]])
-            result += list(data)[1:]
+                result = ([data[0]])
+            result += data[1:]
     with open(output_name, 'w', newline='') as out:
         write = csv.writer(out, delimiter=';')
         write.writerows(result)
