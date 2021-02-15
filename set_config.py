@@ -18,7 +18,7 @@ def run_page(page_n, info=None):
 
 def create_new_config(info, config_name="config.yaml"):
     f = open(config_name, 'w+')
-    yaml.safe_dump(info, f, allow_unicode=True, sort_keys=False)
+    yaml.safe_dump(info, f, allow_unicode=True)
 
 
 if __name__ == "__main__":
