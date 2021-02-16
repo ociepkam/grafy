@@ -48,4 +48,6 @@ if __name__ == "__main__":
         else:
             exit()
 
+    old_config = load_config("config.yaml")
+    create_new_config(old_config, "config_last_version.yaml")
     create_new_config(information, "config.yaml")
