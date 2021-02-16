@@ -10,6 +10,7 @@ from sources.screen import get_screen_res
 from sources.show_info import show_info, show_image
 from sources.trial import trial
 from sources.randomized_experiment import prepare_randomized_experiment
+from sources.edit_image import convert_mouse_colors
 
 part_id, part_sex, part_age, date = experiment_info()
 NAME = "{}_{}_{}".format(part_id, part_sex[:1], part_age)
@@ -88,7 +89,8 @@ else:
     clock_image = None
 
 if config["show_mouse_buttons"]:
-    mouse_info = visual.ImageStim(win=window, image=join('images', 'mouse_info.PNG'), interpolate=True,
+    convert_mouse_colors(config["left_button_color"], config["right_button_color"])
+    mouse_info = visual.ImageStim(win=window, image=join('images', 'mouse_info_2.PNG'), interpolate=True,
                                   size=config["mouse_buttons_size"],
                                   pos=[config["mouse_buttons_position_x"], config["mouse_buttons_position_y"]])
 else:
