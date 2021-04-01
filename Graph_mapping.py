@@ -191,7 +191,6 @@ for info in data_exp:
     answers, rt, acc, A_to_B_relation = trial(window, config, answers_colors, info,
                                               mouse, clock_image, feedb, mouse_info, idx_info)
     RESULTS.append(prepare_result(i, info, answers, rt, acc, "exp"))
-    i += 1
 
     n_of_exp_trials_applied += 1
     if config["one_target"]:
@@ -203,9 +202,11 @@ for info in data_exp:
         RT_sum += max(rt["left"], rt["right"]) if rt["left"] and rt["right"] else 0
         n_of_trials_with_answer += 1 if rt["left"] and rt["right"] else 0
 
-    if i == config['break_after_n_trials']:
+    if i % config['break_after_n_trials'] == 0:
         show_info(window, join('.', 'texts', "break.txt"), text_size=config['text_size'] + 25,
                   screen_width=SCREEN_RES[0], key="q", color=config['text_color'])
+
+    i += 1
 
 show_info(window, join('.', 'texts', "end.txt"), text_size=config['text_size'],
           screen_width=SCREEN_RES[0], color=config['text_color'])

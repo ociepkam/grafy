@@ -1,4 +1,2 @@
 ID;GENDER;AGE;DATE;ORDER;NR;EXPERIMENT;Nodes_A;Edges_A;Nodes_B;Edges_B;Left_button_targets;Right_button_targets;Number_of_nodes;Number_of_edges;Type;Crossed_edges;LEFT_ANS;RIGHT_ANS;LEFT_CORRECT;RIGHT_CORRECT;CORRECT;LEFT_RT;RIGHT_RT;RT
-;M;;2021-02-12 11:59;1;1;train;[0, 3];[(3, 0)];[0, 3];[(0, 3)];[3, 0];[0, 3];2;1;;;0;3;True;True;True;1.2005454000318423;1.76942190004047;1.769
-;M;;2021-02-12 11:59;2;2;train;[0, 3];[(3, 0)];[1, 3];[(1, 3)];[3, 1];[0, 3];2;1;;;1;3;True;True;True;0.6578495999565348;1.2583222000394017;1.258
-;M;;2021-02-12 11:59;3;3;train;[0, 4];[(0, 4)];[1, 3];[(3, 1)];[0, 3];[4, 1];2;1;;;3;1;True;True;True;0.9081464000046253;1.475886300089769;1.476
+;M;;2021-02-17 12:22;1;1;exp;[0, 1, 3];[(3, 0), (0, 1), (3, 1)];[0, 3, 4];[(4, 3), (4, 0), (3, 0)];[3, 4];[1, 0];3;3;1;;4;3;True;False;False;6.532215000013821;7.542610500007868;7.543
