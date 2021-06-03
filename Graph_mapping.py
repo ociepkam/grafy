@@ -202,7 +202,7 @@ for info in data_exp:
         RT_sum += max(rt["left"], rt["right"]) if rt["left"] and rt["right"] else 0
         n_of_trials_with_answer += 1 if rt["left"] and rt["right"] else 0
 
-    if i % config['break_after_n_trials'] == 0:
+    if config['break_after_n_trials'] > 0 and i % config['break_after_n_trials'] == 0:
         show_info(window, join('.', 'texts', "break.txt"), text_size=config['text_size'] + 25,
                   screen_width=SCREEN_RES[0], key="q", color=config['text_color'])
 
